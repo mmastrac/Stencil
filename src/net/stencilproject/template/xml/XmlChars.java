@@ -1,9 +1,14 @@
 package net.stencilproject.template.xml;
 
+/**
+ * Determines the XML character class of a character.
+ */
 public class XmlChars {
 	public static boolean isNameStart(int c) {
-		// [4] NameStartChar ::= ":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] |
-		// [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] |
+		// [4] NameStartChar ::= ":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] |
+		// [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] |
+		// [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF]
+		// | [#x3001-#xD7FF] | [#xF900-#xFDCF] |
 		// [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
 		return c == ':' || (c >= 'A' && c <= 'Z') || c == '_' || (c >= 'a' && c <= 'z') || (c >= 0xC0 && c <= 0xD6)
 				|| (c >= 0xD8 && c <= 0xF6) || (c >= 0xF8 && c <= 0x2FF) || (c >= 0x370 && c <= 0x37D) || (c >= 0x37F && c <= 0x1FFF)
@@ -18,7 +23,8 @@ public class XmlChars {
 	}
 
 	public static boolean isName(int c) {
-		// [4a] NameChar ::= NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
+		// [4a] NameChar ::= NameStartChar | "-" | "." | [0-9] | #xB7 |
+		// [#x0300-#x036F] | [#x203F-#x2040]
 		return isNameStart(c) || c == '-' || c == '.' || (c >= '0' && c <= '9') || c == 0xB7 || (c >= 0x0300 && c <= 0x036F)
 				|| (c >= 0x203F && c <= 0x2040);
 	}

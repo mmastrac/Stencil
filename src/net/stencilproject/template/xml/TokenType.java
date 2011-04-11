@@ -1,15 +1,21 @@
 package net.stencilproject.template.xml;
 
+/**
+ * The current token type, modified by {@link Mode}.
+ */
 public enum TokenType {
-	/** Value for PCDATA, attribute value, CDATA, comment, etc. Use the mode to determine which node type it was. */
+	/**
+	 * Value for PCDATA, attribute value, CDATA, comment, etc. Use the mode to
+	 * determine which node type it was.
+	 */
 	VALUE,
 
 	/** Optional whitespace (may be omitted entirely */
 	OPTIONAL_WS,
 
 	/**
-	 * Required whitespace (one whitespace character required, any additional characters may be collapsed to a single
-	 * character)
+	 * Required whitespace (one whitespace character required, any additional
+	 * characters may be collapsed to a single character)
 	 */
 	REQUIRED_WS,
 

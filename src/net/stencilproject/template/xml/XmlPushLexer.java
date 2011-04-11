@@ -4,7 +4,10 @@ import java.util.Stack;
 
 import net.stencilproject.template.util.ArrayUtils;
 
-
+/**
+ * XML lexer than consumes a single character at a time and outputs events to an
+ * {@link XmlTokenHandler}.
+ */
 public class XmlPushLexer {
 	private static final boolean LOG_EVENTS = false;
 

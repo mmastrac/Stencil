@@ -1,5 +1,10 @@
 package net.stencilproject.template.xml;
 
+/**
+ * Hand-coded XML state machine that works one character at a time. This allows
+ * us to closely track the current state the of XML state machine to deal with
+ * escaping rules.
+ */
 enum State {
 
 	// [^&<]
