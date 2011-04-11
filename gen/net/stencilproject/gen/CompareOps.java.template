@@ -40,7 +40,7 @@ public final class CompareOps {
 	}
 
 	private static final int internalCompare(TemplateContext ctx, long l1, long l2) {
-		return Long.compare(l1, l2);
+		return (l1 < l2) ? -1 : ((l1 == l2) ? 0 : 1);
 	}
 
 	private static final int internalCompare(TemplateContext ctx, double d1, double d2) {
@@ -48,7 +48,7 @@ public final class CompareOps {
 	}
 	
 	private static final int internalCompare(TemplateContext ctx, boolean b1, boolean b2) {
-		return Boolean.compare(b1, b2);
+		return (b1 == b2) ? 0 : (b1 ? 1 : -1);
 	}
 
 	private static final int internalCompare(TemplateContext ctx, Comparable<?> value1, Comparable<?> value2) {
