@@ -1,0 +1,21 @@
+{% 
+  ='.'; 
+  if flag:
+    ='.'; 
+    for x in data: 
+      ='<1', x, '>'; 
+    else:
+      ='[1empty]';
+    end;
+    ='.';
+  else: 
+    ='.'; 
+    for x in data: 
+      ='<2', x, '>'; 
+    else: 
+      ='[2empty]';
+    end;
+    ='.'; 
+  end; 
+  ='.';
+%}

@@ -1,0 +1,1012 @@
+<html>
+<link type="text/css" rel="stylesheet" href="css/style.css"></link>
+<body>
+<h1>Stencil: Simple Templating for Java</h1>
+
+<ol>
+	<li><a href="#introduction">Introduction</a></li>
+	<li><a href="#basics">Basics</a></li>
+	<ol>
+		<li><a href="#print-blocks">Print blocks</a></li>
+		<li><a href="#statement-blocks">Statement blocks</a></li>
+		<li><a href="#comment-blocks">Comment blocks</a></li>
+		<li><a href="#escaping">Escaping</a></li>
+	</ol>
+	<li><a href="#xml">XML Templates</a></li>
+	<li><a href="#expressions">Expressions</a></li>
+	<ol>
+		<li><a href="#numbers">Numbers</a></li>
+		<li><a href="#strings">Strings</a></li>
+		<li><a href="#lists">Lists</a></li>
+		<li><a href="#maps">Maps</a></li>
+		<li><a href="#ranges">Ranges</a></li>
+		<li><a href="#properties">Properties</a></li>
+		<li><a href="#filters">Filters</a></li>
+		<li><a href="#math-operators">Math Operators</a></li>
+		<li><a href="#boolean-operators">Boolean Operators</a></li>
+		<li><a href="#bitwise-operators">Bitwise Operators</a></li>
+		<li><a href="#comparison-operators">Comparison Operators</a></li>
+		<li><a href="#conditional-operator">Conditional Operator</a></li>
+		<li><a href="#in-operator">In Operator</a></li>
+	</ol>
+	<li><a href="#statements">Statements</a></li>
+	<ol>
+		<li><a href="#if">if</a></li>
+		<li><a href="#for">for</a></li>
+		<li><a href="#var">var</a></li>
+		<li><a href="#assignment">Assignment</a></li>
+		<li><a href="#print">Print</a></li>
+	</ol>
+	<li><a href="#variables">Variables</a></li>
+</ol>
+
+<h2 id="introduction">Introduction</h2>
+
+
+<p>Stencil is a modern templating language for webby things,
+inspired heavily by Django Templates, the Twig Project, the Python
+language and others.</p>
+
+<p>Stencil templates can either be raw text or XML. XML templates
+can target XML, HTML or mail messages (through a custom XML format).</p>
+
+<p>The goals of Stencil are ease-of-use, predictable behavior and
+syntax and readability.</p>
+
+<h2 id="basics">Basics</h2>
+
+<p>The code that generates the output from a Stencil template <strong>binds</strong>
+a set of objects to a set of global names. These globally-bound objects
+and their fields can then be rendered by the template.</p>
+
+<p>A Stencil template contains text or XML content alongside
+commands in specially delimited blocks. There are four kinds of blocks:
+</p>
+
+<ol>
+	<li><a href="#print-blocks">Print blocks</a>, surrounded by <code>{{</code>
+	and <code>}}</code>, which are used to print values into the output.</li>
+	<li><a href="#statement-blocks">Statement blocks</a>, surrounded
+	by <code>{%</code> and <code>%}</code>, which are used to control the
+	flow of execution in the template.</li>
+	<li><a href="#comment-blocks">Comment blocks</a>, surrounded by <code>{#</code>
+	and <code>#}</code>, which are ignored in the final output.</li>
+	<li><a href="#escaping">Escape blocks</a>, surrounded by <code>{%%%</code>
+	and <code>%%%}</code>, which are used to escape blocks that contain
+	content that looks like special Stencil syntax</li>
+</ol>
+
+<h3 id="print-blocks">Print Blocks</h3>
+
+<p>You can output a value in a template by putting a reference to it
+directly in a print block.</p>
+
+<pre class="example">
+<pre class="source">
+2 + 2 = {{ 4 }}
+</pre>
+
+<pre class="output">
+2 + 2 = 4
+</pre>
+</pre>
+
+<p>A value can be any sort of <a href="#expressions">expression</a>:</p>
+
+<pre class="example">
+<pre class="source">
+2 + 2 = {{ 2 + 2 }}
+</pre>
+
+<pre class="output">
+2 + 2 = 4
+</pre>
+</pre>
+
+<p>A value can also be a reference to globally-bound object, or a
+field one of the globally-bound objects:</p>
+
+<pre class="example">
+<pre class="source">
+Hello, {{ person.name }}, you look {{ person.mood }} today!
+</pre>
+<pre class="output">
+Hello, Bob, you look happy today!
+</pre>
+</pre>
+
+<p>Occasionally you'll want to surround a printed value with
+something that looks like the template print delimiters, <code>{{</code>
+and <code>}}</code>. Stencil is smart enough to deal with this case
+without any special syntax:</p>
+
+<pre class="example">
+<pre class="source">
+{{ person.age }} {{{ person.age }}} {{{{ person.age }}}}
+</pre>
+<pre class="output">
+1 {1} {{1}} 
+</pre>
+</pre>
+
+<h3 id="statement-blocks">Statement Blocks</h3>
+
+<p>Statement blocks are used to control the flow of executing in the
+template.</p>
+
+<p>A statement block can contain one or more <a href="#statements">
+statements</a>, like if and for.</p>
+
+<pre class="example">
+<pre class="source">
+{%
+    if person.mood == 'happy':
+        ='great!';
+    else:
+        ='uh-oh!';
+    end;
+%}
+</pre>
+<pre class="output">
+great!
+</pre>
+</pre>
+
+<h3 id="escaping">Escaping</h3>
+
+<p>If you want to specify something that looks like template syntax,
+like <code>{{ something }}</code> or <code>{% something %}</code>, you
+can either print the first few characters with a template print block,
+or use the raw template markers, <code>{%%%</code> and <code>%%%}</code>:</p>
+
+<pre class="example">
+<pre class="source">
+This is an example of Stencil formatting: {{ '{{' }} x }}
+
+{%%%
+This is an example of Stencil formatting: {{ x }}
+%%%}
+</pre>
+<pre class="output">
+This is an example of Stencil formatting: {{ x }}
+
+This is an example of Stencil formatting: {{ x }}
+</pre>
+</pre>
+
+<h2 id="xml-templates">XML Templates</h2>
+
+TODO
+
+<h2 id="expressions">Expressions</h2>
+
+TODO: prose
+
+
+<h3 id="numbers">Numbers</h3>
+
+<p>Numbers in Stencil are either integers or floats. If a number
+starts with 0x, it is interpreted as a hexadecimal integer. If a number
+in a template has a decimal point, it is interpreted as a float,
+otherwise it is interpreted as an integer.</p>
+
+<pre class="example">
+<pre class="source">
+1234
+0x1234
+1234.0
+</pre>
+</pre>
+
+<h3 id="strings">Strings</h3>
+
+<p>Strings in Stencil are always immutable and support UTF-16
+unicode (characters from \u0000-\uffff).</p>
+
+<p>Strings are written as they are in Javascript and Python:</p>
+
+<pre class="example">
+<pre class="source">
+"This is a string"
+'This is also a string!'
+</pre>
+</pre>
+
+<p>You can escape quote characters within a string with a backslash,
+<code>\</code>. A single quote doesn't need to be escaped when double
+quotes are used for the string and vice-versa:</p>
+
+<pre class="example">
+<pre class="source">
+"\"He said that, didn't he?\" said Chuck."
+'"He said that, didn\'t he?" said Chuck.'
+</pre>
+</pre>
+
+<p>Other characters can be specified with their hex equivalent (via
+<code>\xAB</code>) or their unicode hex equivalent (via <code>\uABCD</code>):</p>
+
+<pre class="example">
+<pre class="source">
+"Non-breaking space: \u00a0."
+"The lowercase letter f: \x66"
+</pre>
+</pre>
+
+<p>Any character may be escaped with a backslash, including the
+backslash itself:</p>
+
+<table>
+	<tr>
+		<th>Escape Code</th>
+		<th>Equivalent</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>\\</td>
+		<td>\</td>
+		<td>Backslash</td>
+	</tr>
+	<tr>
+		<td>\"</td>
+		<td>"</td>
+		<td>Double quote</td>
+	</tr>
+	<tr>
+		<td>\'</td>
+		<td>'</td>
+		<td>Single quote</td>
+	</tr>
+</table>
+
+
+<p>Control characters may also be specified using shortcuts:</p>
+
+<table>
+	<tr>
+		<th>Escape Code</th>
+		<th>Equivalent</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>\b</td>
+		<td>\u0008</td>
+		<td>Horizontal backspace</td>
+	</tr>
+	<tr>
+		<td>\t</td>
+		<td>\u0009</td>
+		<td>Horizontal tab</td>
+	</tr>
+	<tr>
+		<td>\n</td>
+		<td>\u000a</td>
+		<td>Linefeed</td>
+	</tr>
+	<tr>
+		<td>\f</td>
+		<td>\u000c</td>
+		<td>Form feed</td>
+	</tr>
+	<tr>
+		<td>\r</td>
+		<td>\u000d</td>
+		<td>Carriage return</td>
+	</tr>
+</table>
+
+<p>Strings containing many escape characters may use the alternative
+syntax. If you start a string with """ or ''', the string continues
+until the matching """ or ''' is encountered. No escape characters are
+processed inside of these strings:</p>
+
+<pre class="example">
+<pre class="source">
+{{ """foo\n""
+bar""" }}
+{{ '''foo"""bar''' }}
+</pre>
+<pre class="output">
+foo\n""
+bar
+foo"""bar
+</pre>
+</pre>
+
+<p>Strings can be sliced as they can in Python by specifying the
+start, end and stride. If the start is omitted, the start is assumed to
+be the beginning of the string. If the end is omitted, the end is
+assumed to be the end of the string. If the stride is omitted, it is
+assumed to be <code>1</code>.</p>
+
+<p>The slice operator uses the form <code>[start:end:stride]</code>.
+It is not an error to specify an index that isn't valid. The beginning
+and end index will always be clamped to the beginning and end of the
+string if it is out of bounds.</p>
+
+<pre class="example">
+<pre class="source">
+"0123456789"[2] -> "2"
+"0123456789"[:2] -> "01"
+"0123456789"[:-2] -> "01234567"
+"0123456789"[-1] -> "9"
+"0123456789"[2:11] -> "23456789"
+"0123456789"[2:10] -> "23456789"
+"0123456789"[2:10:2] -> "2468"
+"0123456789"[2:4] -> "23"
+"0123456789"[2:-2] -> "234567"
+"0123456789"[-11:2] -> "01"
+</pre>
+</pre>
+
+<h3 id="lists">Lists</h3>
+
+<p>Lists in Stencil may be provided by an object property or
+specified inline in the template as a literal.</p>
+
+<p>You can access individual list elements using the index operator.
+Negative indexes are relative to the end of the array (-1 is the last
+element):</p>
+
+<pre class="example">
+<pre class="source">
+{{ x[0] }} 
+{{ x[1] }} 
+{{ x[2] }}
+{{ x[-1] }}
+{{ x[-2] }}
+</pre>
+<pre class="output">
+Item at index 0
+Item at index 1
+Item at index 2
+Item at index 2
+Item at index 1
+</pre>
+</pre>
+
+<p>Lists can also be sliced with the slice operator. The slice
+operator uses the form <code>[start:end:stride]</code>. It is not an
+error to specify an index that isn't valid. The beginning and end index
+will always be clamped to the beginning and end of the string if it is
+out of bounds:</p>
+
+<pre class="example">
+<pre class="source">
+{% for y in x[2:] %}{{ y }}{% end %} 
+</pre>
+<pre class="output">
+Item at index 2
+Item at index 3
+Item at index 4
+...
+</pre>
+</pre>
+
+<p>Stencil allows you to specify a list literal directly in the code
+using the list syntax. The list literals can be used with the <a
+	href="#for">for</a> statement:</p>
+
+<pre class="example">
+<pre class="source">
+{% for x in [1,2,3] %}
+{{ x }}
+{% end %}
+</pre>
+<pre class="output">
+1
+2
+3
+</pre>
+</pre>
+
+<h3 id="maps">Maps</h3>
+
+<p>Maps in Stencil may be provided by an object property.</p>
+
+<h4>Accessing a single item in the map</h4>
+
+<p>Use <code>x.blah</code> or <code>x["blah"]</code></p>
+
+<h4>Iterating a map</h4>
+
+<p>Each step in the for loop will return a pair of key and value in an array, like so:</p>
+
+<pre class="example">
+<pre class="source">
+{% for x in map %}
+key = {{ x[0] }}, value = {{ x[1] }}
+{% end %}</code>
+</pre>
+<pre class="output">
+key = a, value = 1
+key = b, value = 2
+</pre>
+</pre>
+
+<h3 id="ranges">Ranges</h3>
+
+<p>Ranges in Stencil allow iteration between two numeric values. A range is indicated by
+the <code>to</code> keyword:</p>
+
+<pre class="example">
+<pre class="source">
+{% for i in 1 to 10 %}{{ i }} {% end %}
+{% for i in 10 to 1 %}{{ i }} {% end %}
+</pre>
+<pre class="output">
+1 2 3 4 5 6 7 8 9 10
+10 9 8 7 6 5 4 3 2 1
+</pre>
+</pre>
+
+<p>Ranges automatically choose +1 or -1 as the stride, depending on the relative values of the
+start and end. If you want to override this, use the <code>by</code> keyword:</p>
+
+<pre class="example">
+<pre class="source">
+{% for i in 1 to 10 by 2 %}{{ i }} {% end %}
+{% for i in 10 to 1 by -2 %}{{ i }} {% end %}
+</pre>
+<pre class="output">
+1 3 5 7 9
+10 8 6 4 2
+</pre>
+</pre>
+
+<p>The start number in a range is always printed. The end number in a range is printed if the iteration falls
+on it exactly:</p>
+
+<pre class="example">
+<pre class="source">
+{% for i in 1 to 9 by 2 %}{{ i }} {% end %}
+{% for i in 1 to 10 by 2 %}{{ i }} {% end %}
+{% for i in 1 to 11 by 2 %}{{ i }} {% end %}
+</pre>
+<pre class="output">
+1 3 5 7 9
+1 3 5 7 9
+1 3 5 7 9 11
+</pre>
+</pre>
+
+<h3 id="properties">Properties</h3>
+
+<p>You can retrieve properties from an object using the dot operator:</p>
+
+<pre class="example">
+<pre class="source">
+person.name
+</pre>
+<pre class="output">
+Bob
+</pre>
+</pre>
+
+<p>If the left-hand side of the dot operator doesn't exist, the operator returns
+null and prints a warning. To avoid the warning in this case, use the ?. operator:</p>
+
+<pre class="example">
+<pre class="source">
+noperson.name
+</pre>
+<pre class="output">
+<i>no output, returns a warning</i>
+</pre>
+</pre>
+
+<pre class="example">
+<pre class="source">
+noperson?.name
+</pre>
+<pre class="output">
+<i>no output, no warning</i>
+</pre>
+</pre>
+
+<h3 id="filters">Filters</h3>
+
+<p>Filters transform output, much like unix pipe commands. A filter
+is invoked using the filter operator |, followed by the name of the
+filter to invoke.</p>
+
+<p>The built-in filters offer ways to convert between types, format
+strings and more.</p>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Example</th>
+	</tr>
+	<tr>
+		<td>raw</td>
+		<td>Converts the input into a raw string, bypassing HTML escaping</td>
+		<td><code>"&amp;nbsp;"|raw</code></td>
+	</tr>
+	<tr>
+		<td>escape</td>
+		<td>Converts the input into a raw string, HTML escaping along the
+		way</td>
+		<td><code>"&lt;div&gt;"|escape</code></td>
+	</tr>
+	<tr>
+		<td>urlencode</td>
+		<td>URL-encodes the given string</td>
+		<td><code>'urlunsafe%#'|urlencode</code></td>
+	</tr>
+	<tr>
+		<td>string</td>
+		<td>Converts the input into a regular string</td>
+		<td><code>1234|string</code></td>
+	</tr>
+	<tr>
+		<td>int</td>
+		<td>Converts the input into an integer, or null if it can't be
+		converted</td>
+		<td><code>"1234"|int</code></td>
+	</tr>
+	<tr>
+		<td>float</td>
+		<td>Converts the input into a float, or null if it can't be
+		converted</td>
+		<td><code>"1234.1"|float</code></td>
+	</tr>
+	<tr>
+		<td>size</td>
+		<td>Retrieves the size of the input (string or array length)</td>
+		<td><code>[1,2,3]|size</code></td>
+	</tr>
+	<tr>
+		<td>join</td>
+		<td>Joins a collection of items together</td>
+		<td><code>[1,2,3]|join</code></td>
+	</tr>
+	<tr>
+		<td>format</td>
+		<td>Formats a string from the passed array or singular object
+		using the <a
+			href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Formatter.html">Java
+		formatting rules</a></td>
+		<td><code>[1,2,'a']|format("%d/%d: %s")</code></td>
+	</tr>
+</table>
+
+<h3 id="math-operators">Math Operators</h3>
+
+<p>Stencil provides a set of math operators for common operations.</p>
+
+TODO
+
+<h3 id="boolean-operators">Boolean Operators</h3>
+
+<p>Boolean operators coerce their operand(s) to a boolean before
+performing the operations.</p>
+
+<table>
+	<tr>
+		<th>Symbol</th>
+		<th>Description</th>
+		<th>Example</th>
+	</tr>
+	<tr>
+		<td>and</td>
+		<td>Boolean AND</td>
+		<td>true and true</td>
+	</tr>
+	<tr>
+		<td>or</td>
+		<td>Boolean OR</td>
+		<td>true or false</td>
+	</tr>
+	<tr>
+		<td>^</td>
+		<td>Boolean XOR</td>
+		<td>true ^ false</td>
+	</tr>
+	<tr>
+		<td>not</td>
+		<td>Boolean NOT</td>
+		<td>not false</td>
+	</tr>
+</table>
+
+<h3 id="bitwise-operators">Bitwise Operators</h3>
+
+<p>Bitwise operators coerce their operand(s) to integer before
+performing the operations.</p>
+
+<table>
+	<tr>
+		<th>Symbol</th>
+		<th>Description</th>
+		<th>Example</th>
+	</tr>
+	<tr>
+		<td>and</td>
+		<td>Bitwise AND</td>
+		<td>1234 and 7</td>
+	</tr>
+	<tr>
+		<td>or</td>
+		<td>Bitwise OR</td>
+		<td>1234 or 7</td>
+	</tr>
+	<tr>
+		<td>^</td>
+		<td>Bitwise XOR</td>
+		<td>1234 ^ 7</td>
+	</tr>
+	<tr>
+		<td>~</td>
+		<td>Bitwise ones-compliment</td>
+		<td>~1234</td>
+	</tr>
+	<tr>
+		<td>&lt;&lt;</td>
+		<td>Bitwise left-shift</td>
+		<td>1234 &lt;&lt; 2</td>
+	</tr>
+	<tr>
+		<td>&gt;&gt;</td>
+		<td>Bitwise right-shift</td>
+		<td>1234 &gt;&gt; 2</td>
+	</tr>
+</table>
+
+
+<h3 id="comparison-operators">Comparison Operators</h3>
+
+<p>Stencil provides a set of common operators for comparing two
+values. For all comparisons, a set of conversions will happen
+internally:</p>
+
+<ul>
+	<li>A null value will always compare less than any other value and
+	equal to another null value</li>
+	<li>If one of the arguments is a string, the two arguments are
+	compared using their string equivalents</li>
+	<li>Otherwise, the two arguments are compared as floats</li>
+</ul>
+
+<table>
+	<tr>
+		<th>Symbol</th>
+		<th>Description</th>
+		<th>Example</th>
+	</tr>
+	<tr>
+		<td>&lt;</td>
+		<td>Less-than</td>
+		<td>2 &lt; 3</td>
+	</tr>
+	<tr>
+		<td>&gt;</td>
+		<td>Greater-than</td>
+		<td>3 &gt; 2</td>
+	</tr>
+	<tr>
+		<td>==</td>
+		<td>Equals</td>
+		<td>2 == 2</td>
+	</tr>
+	<tr>
+		<td>==</td>
+		<td>Not-equals</td>
+		<td>3 != 2</td>
+	</tr>
+</table>
+
+<h3 id="conditional-operator">Conditional Operator</h3>
+
+<p>Stencil offers a conditional operator that, depending on the
+boolean value of its first argument, will return either the second or
+third argument. If the first argument is true, it returns the second
+argument. If the first argument is false, it returns the third argument.</p>
+
+<p>The first argument is coerced to boolean before being evaluated.</p>
+
+<pre class="example">
+<pre class="source">
+{{ person.mood == 'happy' ? 'Yay!' : 'Boo!' }}
+{{ person.emailAddresses 
+    ? "You've set up email" 
+    : "You haven't set up email" }}
+</pre>
+<pre class="output">
+Yay!
+You haven't set up email
+</pre>
+</pre>
+
+<h3 id="in-operator">In Operator</h3>
+
+<p>The <code>in</code> operator tests whether the left-hand-side argument
+is contained within the right-hand-side argument.</p>
+
+<p>If the right-hand-side argument is a string, Stencil tests for the
+left-hand-side argument within it:</p>
+
+<pre class="example">
+<pre class="source">
+"cab" in "death cab"
+1 in "1stop"
+"bar" in "foo"
+</pre>
+<pre class="output">
+true
+true
+false
+</pre>
+</pre>
+
+<p>If the right-hand-side is a list, array, range or iterable, Stencil tests for
+the element within it:</p>
+
+<pre class="example">
+<pre class="source">
+"cab" in ["car", "bus", "cab"]
+1 in [1,2,3]
+10 in 1 to 100
+</pre>
+<pre class="output">
+true
+true
+true
+</pre>
+</pre>
+
+<p>If the right-hand-side is a map, Stencil tests for the element as a key
+within the map, using the standard map lookup rules:</p>
+
+<pre class="example">
+<pre class="source">
+<i>(assuming map = {"cab":1})</i>
+"cab" in map
+"car" in map
+</pre>
+<pre class="output">
+true
+false
+</pre>
+</pre>
+
+<h2 id="control-blocks">Control Statements</h2>
+
+<p>Templates can contain control statements that affect the flow of
+execution of the template based on values of the input.</p>
+
+<h3 id="if">if</h3>
+
+<p>An <code>if</code> block will optionally render a part of the
+template, based on a condition expression. The result of the condition
+expression is coerced to a boolean.</p>
+
+<pre class="example">
+<pre class="source">
+{% if person.mood == "happy" %}
+     Glad to see you!
+{% end %}
+
+{% if person.mood == "sad" %}
+     What's wrong?
+{% end %}
+</pre>
+<pre class="output">
+Glad to see you!
+</pre>
+</pre>
+
+<p>You can also specify an <code>else</code> block that will be
+executed if the condition evaluates to <code>false</code>:</p>
+
+<pre class="example">
+<pre class="source">
+{% if person.mood == "happy" %}
+     Glad to see you!
+{% else %}
+     What's wrong?
+{% end %}
+</pre>
+<pre class="output">
+Glad to see you!
+</pre>
+</pre>
+
+<p>If you have a number of <code>if</code> blocks and only want one
+to execute, you can use <code>elif</code>:</p>
+
+
+<pre class="example">
+<pre class="source">
+{% if person.mood == "happy" %}
+    Glad to see you!
+{% elif person.mood == "mad" %}
+    Whoa, calm down!
+{% elif person.mood == "sad" %}
+    What's wrong?
+{% else %}
+    I can't read you!
+{% end %}
+</pre>
+<pre class="output">
+What's wrong?
+</pre>
+</pre>
+
+<h2 id="for">for</h2>
+
+<p>A <code>for</code> block can be used to loop over a collection of
+objects.</p>
+
+Syntax:
+<pre class="syntax">
+{% for <span class="placeholder">id</span> in <span class="placeholder">collection</span> 
+    [where <span class="placeholder">where_expression</span>] 
+    [order by <span class="placeholder">order_expression</span>] 
+    [limit <span class="placeholder">limit_expression</span>] %}
+</pre>
+
+<pre class="example">
+<pre class="source">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+{% for x in person.emailAddresses %}
+     &lt;li&gt;{{ x }}&lt;/li&gt;
+{% end %}
+&lt;/ul&gt;
+</pre>
+<pre class="output">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+     &lt;li&gt;bobs@yeruncle.com&lt;/li&gt;
+     &lt;li&gt;bob@example.com&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+</pre>
+
+<p>If you pass a string as the loop object, you can loop over its
+characters:</p>
+
+<pre class="example">
+<pre class="source">
+Hello, {% for x in person.name %}[{{ x }}]{% end %}!
+</pre>
+<pre class="output">
+Hello, [B][o][b]!
+</pre>
+</pre>
+
+<p>You can specify an <code>else</code> block to a <code>for</code>
+loop that will be executed if there are no items in the collection:</p>
+
+<pre class="example">
+<pre class="source">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+{% for x in person.emailAddresses %}
+     &lt;li&gt;{{ x }}&lt;/li&gt;
+{% else %}
+     &lt;li&gt;Nothing!&lt;/li&gt;
+{% end %}
+&lt;/ul&gt;
+</pre>
+<pre class="output">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+     &lt;li&gt;Nothing!&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+</pre>
+
+<p>A <code>for</code> loop may also have a limit. The limit is
+evaluated at run-time, so it may be any numeric expression:</p>
+
+<pre class="example">
+<pre class="source">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+{% for x in person.emailAddresses limit person.emailAddressesToShow %}
+     &lt;li&gt;{{ x }}&lt;/li&gt;
+{% end %}
+&lt;/ul&gt;
+</pre>
+<pre class="output">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+     &lt;li&gt;bobs@yeruncle.com&lt;/li&gt;
+     &lt;li&gt;bob@example.com&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+</pre>
+
+
+<p>You can force a <code>for</code> loop to continue to the next
+item with the <code>continue</code> command:</p>
+
+<pre class="example">
+<pre class="source">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+{% for x in person.emailAddresses %}
+    {% if x.hidden: continue; end; %}
+    &lt;li&gt;{{ x.address }}&lt;/li&gt;
+{% end %}
+&lt;/ul&gt;
+</pre>
+<pre class="output">
+&lt;p&gt;Your addresses:&lt;/p&gt;
+&lt;ul&gt;
+     &lt;li&gt;bob@example.com&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+</pre>
+
+<h2 id="variables">Variables</h2>
+
+<p>Stencil templates allow you to define and assign to local
+variables to implement simple counters and logic:</p>
+
+<pre class="example">
+<pre class="source">
+{% var x = 1 %}
+x is now {{ x }}
+{% x = x + 1 %}
+x is now {{ x }}
+</pre>
+<pre class="output">
+x is now 1
+x is now 2
+</pre>
+</pre>
+
+<p>Variables are scoped, meaning that the assignment operator will
+assign to the variable with the given name in the closest matching scope
+and accessing the variable by name will access the variable in the
+closed scope. When the block ends, the variable is torn down and no
+longer exists:</p>
+
+<pre class="example">
+<pre class="source">
+{% var x = 1 %}
+x is now {{ x }}
+{% if true %}
+    {% var x = 10 %}
+    x is now {{ x }}
+    {% x = x + 1 %}
+    x is now {{ x }}
+{% end %}
+{% x = x + 1 %}
+x is now {{ x }}
+</pre>
+<pre class="output">
+x is now 1
+x is now 10
+x is now 11
+x is now 2
+</pre>
+</pre>
+
+<h2 id="type-coercion">Type Coercion</h2>
+
+TODO
+
+<h3 id="to-boolean">To Boolean</h3>
+
+TODO
+
+<h3 id="to-integer">To Integer</h3>
+
+TODO
+
+<h3 id="to-float">To Float</h3>
+
+TODO
+
+<h3 id="to-string">To String</h3>
+
+TODO
+
+
+</body>
+</html>

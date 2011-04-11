@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="net.stencilproject.template">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.5" />
+	<property name="source" value="1.5" />
+	<fileset id="net.stencilproject.template.classpath" dir="libs/">
+	</fileset>
+	<target name="init">
+		<mkdir dir="bin" />
+		<mkdir dir="bin/core" />
+		<mkdir dir="bin/test/internal" />
+		<mkdir dir="bin/test/public" />
+		<mkdir dir="dist" />
+		<mkdir dir="output/javadoc" />
+		<mkdir dir="output/test" />
+		<copy includeemptydirs="false" todir="bin/core">
+			<fileset dir="src" excludes="**/*.launch, **/*.g, **/*.java" />
+		</copy>
+		<copy includeemptydirs="false" todir="bin/test/internal">
+			<fileset dir="test/internal" excludes="**/*.launch, **/*.g, **/*.java" />
+		</copy>
+		<copy includeemptydirs="false" todir="bin/test/public">
+			<fileset dir="test/public" excludes="**/*.launch, **/*.g, **/*.java" />
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="bin" />
+		<delete dir="dist" />
+	</target>
+	<target depends="build-core,build-test" name="build">
+	</target>
+	<target depends="compile-core" name="build-core">
+		<jar jarfile="dist/stencil-core.jar">
+			<fileset dir="bin/core" />
+		</jar>
+	</target>
+	<target depends="build-test-internal,build-test-public" name="build-test" />
+	<target depends="compile-test-internal" name="build-test-internal">
+		<jar jarfile="dist/stencil-test-internal.jar">
+			<fileset dir="bin/test/internal" />
+		</jar>
+	</target>
+	<target depends="compile-test-public" name="build-test-public">
+		<jar jarfile="dist/stencil-test-public.jar">
+			<fileset dir="bin/test/public" />
+		</jar>
+	</target>
+	<target depends="init" name="compile-core">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/core" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath>
+				<fileset refid="net.stencilproject.template.classpath" />
+			</classpath>
+		</javac>
+	</target>
+	<target depends="compile-core" name="compile-test-public">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/test/public" source="${source}" target="${target}">
+			<src path="test/public" />
+			<classpath>
+				<fileset refid="net.stencilproject.template.classpath" />
+				<pathelement location="bin/core" />
+			</classpath>
+		</javac>
+	</target>
+	<target depends="compile-core" name="compile-test-internal">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/test/internal" source="${source}" target="${target}">
+			<src path="test/internal" />
+			<classpath>
+				<fileset refid="net.stencilproject.template.classpath" />
+				<pathelement location="bin/core" />
+			</classpath>
+		</javac>
+	</target>
+	<target depends="build-core,build-test" name="build-standalone">
+		<taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="build/jarjar-1.0.jar" />
+		<jarjar jarfile="dist/stencil-standalone.jar" basedir="bin/core">
+			<zipfileset src="libs/guava-r07.jar" />
+			<zipfileset src="libs/antlr-3.2.jar" excludes="org/antlr/grammar/**,org/antlr/stringtemplate/**,antr/**,META-INF/**,**/*.stg,**/*.st,**/*.png" />
+			<zipfileset src="libs/commons-lang-2.4.jar" excludes="META-INF/**" />
+			<zipfileset src="libs/commons-io-1.4.jar" excludes="META-INF/**" />
+			<zipfileset src="libs/servlet-api-2.5.jar" excludes="**/*.dtd,**/*.xsd,**/*.properties" />
+			<rule pattern="com.google.**" result="jarjar.com.google.@1" />
+			<rule pattern="org.antlr.**" result="jarjar.org.antlr.@1" />
+			<rule pattern="antlr.**" result="jarjar.antlr.@1" />
+			<rule pattern="org.apache.**" result="jarjar.org.apache.@1" />
+			<rule pattern="javax.**" result="jarjar.javax.@1" />
+			<keep pattern="org.apache.commons.lang.StringEscapeUtils" />
+			<keep pattern="org.antlr.runtime.**" />
+			<keep pattern="net.stencilproject.**" />
+		</jarjar>
+	</target>
+	<target depends="build" name="test">
+		<junit haltonfailure="yes">
+			<classpath>
+				<pathelement location="dist/stencil-core.jar" />
+				<pathelement location="dist/stencil-test-internal.jar" />
+				<pathelement location="dist/stencil-test-public.jar" />
+				<fileset refid="net.stencilproject.template.classpath" />
+			</classpath>
+            <formatter type="plain" usefile="false" unless="env.HUDSON_URL" />
+            <formatter type="xml" />
+            <batchtest todir="output/test">
+				<zipfileset src="dist/stencil-test-public.jar" includes="**/Test*.class" excludes="**/Test*$*.class" />
+				<zipfileset src="dist/stencil-test-internal.jar" includes="**/Test*.class" excludes="**/Test*$*.class" />
+			</batchtest>
+		</junit>
+	</target>
+	<target depends="build-standalone" name="test-standalone">
+		<junit haltonfailure="yes">
+			<classpath>
+				<pathelement location="dist/stencil-standalone.jar" />
+				<pathelement location="dist/stencil-test-public.jar" />
+				<fileset refid="net.stencilproject.template.classpath" />
+			</classpath>
+			<formatter type="plain" usefile="false" unless="env.HUDSON_URL" />
+			<formatter type="xml" />
+			<batchtest todir="output/test">
+				<zipfileset src="dist/stencil-test-public.jar" includes="**/Test*.class" excludes="**/Test*$*.class" />
+			</batchtest>
+		</junit>
+	</target>
+	<target name="javadoc">
+		<javadoc destdir="output/javadoc" overview="docs/index.html" author="true" version="true" use="true" failonerror="true" windowtitle="Stencil API" doctitle="Stencil API" maxmemory="512m" sourcepath="src">
+			<classpath>
+				<fileset refid="net.stencilproject.template.classpath" />
+			</classpath>
+			<link href="http://java.sun.com/javase/6/docs/api/" />
+			<link href="http://kentbeck.github.com/junit/javadoc/latest/" />
+		</javadoc>
+	</target>
+</project>

@@ -1,0 +1,64 @@
+ - add automatic traversal over nested collections:
+
+for x in blah.users.groups.members
+	
+- add support for json-like literals
+
+x = { a: 1 }
+
+- destructuring assignment
+
+{ name: x, [y] } = blah
+
+- destructuring iteration
+
+for { name: x, [y] } in blah.users.groups.members
+
+- iteration over map key/value
+
+for x,y in map
+
+- iteration over list member/index
+
+for x,index in list
+  ** alternatively, automatic loop variable access like twig  (loop.index)
+  ** or loop1 = for x in list (lets you "break loop1") 
+
+- optimize the string constants using one single pool
+
+- Full unicode long character:
+
+"\U0010FFFF"
+
+ - regroup operation like django
+ 
+ - range operator 0..9, 0...9, 'a'..'z', etc
+ 
+ - multiply on strings (like Python) - be careful about memory here
+ 
+ - add mathy-constants (infinity/nan/etc)
+ 
+ - range comparisons 1 < x < 2
+ 
+ - conditional value x ?? "default" -> x|default('default')
+ 
+ - integrate with markdown somehow - either have a markdown formatted template, or markdown-style includes.  Would be nice to be able to integrate them
+ all into one big template.
+ 
+ {%%%markdown
+ 
+  * This is a markdown list
+ 
+ %%%}
+ 
+ - target a variable with output of an internal template:
+ 
+     x = template text "{{ y }}"
+     
+     
+ - Improve support for http request
+ 
+ - Instance filters
+ 
+ - Transparent bignum support (?)
+  

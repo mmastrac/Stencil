@@ -1,0 +1,11 @@
+JSON mode
+
+{ result: {{ x }} }
+
+x = "a"   { result: "a" }
+x = 1     { result: 1 }
+x = [1]   { result: [1] }
+x = {...} { result: {...} }
+x = null  { result: null }
+x = other { result: null }  + warning ?
+

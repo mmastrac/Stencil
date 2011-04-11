@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block 'a.nested' %}
+In a.nested
+{% end %}
+
+{% block 'b' %}
+In b
+{% block 'b.nested' %}{% end %}
+End of b
+{% end %}
+
+{% block 'b.nested' %}
+In b.nested
+{% end %}

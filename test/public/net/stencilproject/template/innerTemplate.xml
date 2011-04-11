@@ -1,0 +1,1 @@
+<inner>Whoa: {% for y in item.data %}{{ y }}{% else %}no data{% end %}</inner>

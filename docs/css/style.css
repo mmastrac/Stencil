@@ -1,0 +1,64 @@
+body {
+	margin: 0 auto;
+	width: 600px;
+	padding-top: 1em;
+}
+
+.syntax .placeholder {
+	font-style: italic;
+}
+
+code {
+	background-color: #eee;
+}
+
+.example {
+	font-family: monospace;
+	margin-top: 1em;
+	border: 1px solid #ddd;
+	position: relative;
+	white-space: normal;
+}
+
+.example .source, .example .output {
+	display: block;
+	background-color: #eee;
+	padding: 1em;
+	position: relative;
+	margin: 0px;
+}
+
+.example .source:before {
+	content: "Source";
+	display: block;
+	font-size: 9px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
+}
+
+.example .output:before {
+	content: "Output";
+	display: block;
+	font-size: 9px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
+}
+
+.example .source {
+	border-bottom: 1px dashed #333;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table td, table th {
+	border: 1px solid black;
+	padding: 0.4em 0.7em;
+}
+
+table th {
+	background-color: #eee;
+}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}new title{% end %}
+
+{% block 'contents' %}
+{% for i in 1 to 10 %}{{ i }},{% end %}
+{% end %}

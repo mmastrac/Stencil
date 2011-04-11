@@ -1,0 +1,76 @@
+eq,boolean,false
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+String,,STRING_EQ,X,X,STRING_EQ,X,X,X
+Integral,,,INTEGRAL_EQ,DOUBLE_EQ,INTEGRAL_EQ,BOOLEAN_EQ,X,X
+Double,,,,DOUBLE_EQ,INTEGRAL_EQ,BOOLEAN_EQ,X,X
+Enum,,,,,EQUALS_EQ,X,X,X
+Boolean,,,,,,BOOLEAN_EQ,X,X
+Comparable,,,,,,,COMPARABLE_COMPARE == 0,EQUALS_EQ
+Object,,,,,,,,EQUALS_EQ
+
+neq,boolean,false
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
+String,,STRING_NEQ,X,X,STRING_NEQ,X,X,X
+Integral,,,INTEGRAL_NEQ,DOUBLE_NEQ,INTEGRAL_NEQ,BOOLEAN_NEQ,X,X
+Double,,,,DOUBLE_NEQ,INTEGRAL_NEQ,BOOLEAN_NEQ,X,X
+Enum,,,,,EQUALS_NEQ,X,X,X
+Boolean,,,,,,BOOLEAN_NEQ,X,X
+Comparable,,,,,,,COMPARABLE_COMPARE != 0,EQUALS_NEQ
+Object,,,,,,,,EQUALS_NEQ
+
+lt,boolean,false
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
+String,,STRING_COMPARE < 0,X,X,X,X,X,X
+Integral,,,INTEGRAL_LT,DOUBLE_LT,X,BOOLEAN_LT,X,X
+Double,,,,DOUBLE_LT,X,BOOLEAN_LT,X,X
+Enum,,,,,COMPARABLE_COMPARE < 0,X,X,X
+Boolean,,,,,,BOOLEAN_LT,X,X
+Comparable,,,,,,,COMPARABLE_COMPARE < 0,X
+Object,,,,,,,,X
+
+lte,boolean,false
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
+String,,STRING_COMPARE <= 0,X,X,X,X,X,X
+Integral,,,INTEGRAL_LTE,DOUBLE_LTE,X,TRUE,X,X
+Double,,,,DOUBLE_LTE,X,TRUE,X,X
+Enum,,,,,COMPARABLE_COMPARE <= 0,X,X,X
+Boolean,,,,,,TRUE,X,X
+Comparable,,,,,,,COMPARABLE_COMPARE <= 0,X
+Object,,,,,,,,X
+
+gt,boolean,false
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+String,,STRING_COMPARE > 0,X,X,X,X,X,X
+Integral,,,INTEGRAL_GT,DOUBLE_GT,X,BOOLEAN_GT,X,X
+Double,,,,DOUBLE_GT,X,BOOLEAN_GT,X,X
+Enum,,,,,COMPARABLE_COMPARE > 0,X,X,X
+Boolean,,,,,,BOOLEAN_GT,X,X
+Comparable,,,,,,,COMPARABLE_COMPARE > 0,X
+Object,,,,,,,,X
+
+gte,boolean,false
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+String,,STRING_COMPARE >= 0,X,X,X,X,X,X
+Integral,,,INTEGRAL_GTE,DOUBLE_GTE,X,TRUE,X,X
+Double,,,,DOUBLE_GTE,X,TRUE,X,X
+Enum,,,,,COMPARABLE_COMPARE >= 0,X,X,X
+Boolean,,,,,,TRUE,X,X
+Comparable,,,,,,,COMPARABLE_COMPARE >= 0,X
+Object,,,,,,,,X
+
+compare,int,0
+,Null,String,Integral,Double,Enum,Boolean,Comparable,Object
+Null,0,-1,-1,-1,-1,-1,-1,-1
+String,1,STRING_COMPARE,X,X,X,X,X,X
+Integral,1,,INTEGRAL_COMPARE,DOUBLE_COMPARE,X,BOOLEAN_COMPARE,X,X
+Double,1,,,DOUBLE_COMPARE,X,BOOLEAN_COMPARE,X,X
+Enum,1,,,,COMPARABLE_COMPARE,X,X,X
+Boolean,1,,,,,BOOLEAN_COMPARE,X,X
+Comparable,1,,,,,,COMPARABLE_COMPARE,X
+Object,1,,,,,,,X
