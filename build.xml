@@ -9,19 +9,15 @@
 	<target name="init">
 		<mkdir dir="bin" />
 		<mkdir dir="bin/core" />
-		<mkdir dir="bin/test/internal" />
-		<mkdir dir="bin/test/public" />
+		<mkdir dir="bin/test" />
 		<mkdir dir="dist" />
 		<mkdir dir="output/javadoc" />
 		<mkdir dir="output/test" />
 		<copy includeemptydirs="false" todir="bin/core">
 			<fileset dir="src" excludes="**/*.launch, **/*.g, **/*.java" />
 		</copy>
-		<copy includeemptydirs="false" todir="bin/test/internal">
-			<fileset dir="test/internal" excludes="**/*.launch, **/*.g, **/*.java" />
-		</copy>
-		<copy includeemptydirs="false" todir="bin/test/public">
-			<fileset dir="test/public" excludes="**/*.launch, **/*.g, **/*.java" />
+		<copy includeemptydirs="false" todir="bin/test">
+			<fileset dir="test" excludes="**/*.launch, **/*.g, **/*.java" />
 		</copy>
 	</target>
 	<target name="clean">
@@ -35,15 +31,10 @@
 			<fileset dir="bin/core" />
 		</jar>
 	</target>
-	<target depends="build-test-internal,build-test-public" name="build-test" />
-	<target depends="compile-test-internal" name="build-test-internal">
-		<jar jarfile="dist/stencil-test-internal.jar">
-			<fileset dir="bin/test/internal" />
-		</jar>
-	</target>
+	<target depends="build-test-public" name="build-test" />
 	<target depends="compile-test-public" name="build-test-public">
 		<jar jarfile="dist/stencil-test-public.jar">
-			<fileset dir="bin/test/public" />
+			<fileset dir="bin/test" />
 		</jar>
 	</target>
 	<target depends="init" name="compile-core">
@@ -57,18 +48,8 @@
 	</target>
 	<target depends="compile-core" name="compile-test-public">
 		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/test/public" source="${source}" target="${target}">
-			<src path="test/public" />
-			<classpath>
-				<fileset refid="net.stencilproject.template.classpath" />
-				<pathelement location="bin/core" />
-			</classpath>
-		</javac>
-	</target>
-	<target depends="compile-core" name="compile-test-internal">
-		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/test/internal" source="${source}" target="${target}">
-			<src path="test/internal" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/test" source="${source}" target="${target}">
+			<src path="test" />
 			<classpath>
 				<fileset refid="net.stencilproject.template.classpath" />
 				<pathelement location="bin/core" />
@@ -97,7 +78,6 @@
 		<junit haltonfailure="yes">
 			<classpath>
 				<pathelement location="dist/stencil-core.jar" />
-				<pathelement location="dist/stencil-test-internal.jar" />
 				<pathelement location="dist/stencil-test-public.jar" />
 				<fileset refid="net.stencilproject.template.classpath" />
 			</classpath>
@@ -105,7 +85,6 @@
             <formatter type="xml" />
             <batchtest todir="output/test">
 				<zipfileset src="dist/stencil-test-public.jar" includes="**/Test*.class" excludes="**/Test*$*.class" />
-				<zipfileset src="dist/stencil-test-internal.jar" includes="**/Test*.class" excludes="**/Test*$*.class" />
 			</batchtest>
 		</junit>
 	</target>
