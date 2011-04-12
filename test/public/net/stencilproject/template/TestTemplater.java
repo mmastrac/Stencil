@@ -8,12 +8,12 @@ import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.CharBuffer;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.zip.ZipEntry;
 
 import net.stencilproject.template.types.Raw;
-import net.stencilproject.template.util.ArrayUtils;
 
 import org.junit.Test;
 
@@ -179,10 +179,11 @@ public class TestTemplater {
 	@Test
 	public void testListIndex() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{ x.data[1] }} {{ x.data[-1] }} {{ x.data[-2] }} {{ x.data[-3] }} [{{ x.data[-4] }}] [{{ x.data[4] }}]");
+		Template template = templater
+				.parse("{{ x.data[1] }} {{ x.data[-1] }} {{ x.data[-2] }} {{ x.data[-3] }} [{{ x.data[-4] }}] [{{ x.data[4] }}]");
 
 		HashMap<String, Object> mapModelInner = Maps.newHashMap();
-		mapModelInner.put("data", ArrayUtils.asList("a", "b", "c"));
+		mapModelInner.put("data", Arrays.asList("a", "b", "c"));
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", mapModelInner);
 		assertEquals("b c b a [] []", template.process(mapModel));
@@ -205,7 +206,7 @@ public class TestTemplater {
 		Template template = templater.parse(templateString);
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
+		mapModel.put("x", Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
 		assertEquals(resultString, template.process(mapModel));
 		mapModel.put("x", new Character[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' });
 		assertEquals(resultString, template.process(mapModel));
@@ -217,9 +218,9 @@ public class TestTemplater {
 		Template template = templater.parse("{{not not listempty}} {{not not justnull}} {{not not oneitem}}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("listempty", ArrayUtils.asList());
+		mapModel.put("listempty", Arrays.asList());
 		mapModel.put("justnull", null);
-		mapModel.put("oneitem", ArrayUtils.asList("a"));
+		mapModel.put("oneitem", Arrays.asList("a"));
 		assertEquals("false false true", template.process(mapModel));
 	}
 
@@ -253,7 +254,8 @@ public class TestTemplater {
 	@Test
 	public void testComparisons() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{x1 > y1}} {{x1 > y2}} {{x2 > y1}} {{x2 > y2}} {{x1 < y1}} {{x1 < y2}} {{x2 < y1}} {{x2 < y2}}");
+		Template template = templater
+				.parse("{{x1 > y1}} {{x1 > y2}} {{x2 > y1}} {{x2 > y2}} {{x1 < y1}} {{x1 < y2}} {{x2 < y1}} {{x2 < y2}}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x1", 1);
@@ -266,7 +268,8 @@ public class TestTemplater {
 	@Test
 	public void testComparisons2() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{x1 >= y1}} {{x1 >= y2}} {{x2 >= y1}} {{x2 >= y2}} {{x1 <= y1}} {{x1 <= y2}} {{x2 <= y1}} {{x2 <= y2}}");
+		Template template = templater
+				.parse("{{x1 >= y1}} {{x1 >= y2}} {{x2 >= y1}} {{x2 >= y2}} {{x1 <= y1}} {{x1 <= y2}} {{x2 <= y1}} {{x2 <= y2}}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x1", 1);
@@ -277,7 +280,8 @@ public class TestTemplater {
 	}
 
 	/**
-	 * Tests that string comparisons work across all string-like things (CharSequences and chars).
+	 * Tests that string comparisons work across all string-like things
+	 * (CharSequences and chars).
 	 */
 	@Test
 	public void testStringComparisons() throws TemplateParserException {
@@ -335,7 +339,11 @@ public class TestTemplater {
 	@Test
 	public void testConditional() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Object[][] tests = new Object[][] { { "zeroString", true }, // "0" is true, since it's not empty
+		Object[][] tests = new Object[][] { { "zeroString", true }, // "0" is
+																	// true,
+																	// since
+																	// it's not
+																	// empty
 				{ "oneString", true }, // "1" is true, since it's not empty
 				{ "zeroInt", false }, // 0 is false
 				{ "oneInt", true }, // 1 is true
@@ -360,7 +368,8 @@ public class TestTemplater {
 	}
 
 	/**
-	 * Makes sure that the warning count for null.a is 1 (required for the short-circuit tests to be valid).
+	 * Makes sure that the warning count for null.a is 1 (required for the
+	 * short-circuit tests to be valid).
 	 */
 	@Test
 	public void testWarningCount() throws TemplateParserException, IOException {
@@ -382,7 +391,8 @@ public class TestTemplater {
 	@Test
 	public void testAndOrShortCircuit() throws TemplateParserException, IOException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{ (x and x.a)|bool }} {{ not x or not x.a }} {% if x and x.a %}yes{% else %}no{% end %} {% if not x or not x.a %}yes{% else %}no{% end %}");
+		Template template = templater
+				.parse("{{ (x and x.a)|bool }} {{ not x or not x.a }} {% if x and x.a %}yes{% else %}no{% end %} {% if not x or not x.a %}yes{% else %}no{% end %}");
 
 		StringWriter writer = new StringWriter();
 		HashMap<String, Object> mapModel = Maps.newHashMap();
@@ -416,8 +426,9 @@ public class TestTemplater {
 	@Test
 	public void testAndOrXorPrecedence() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{ true or true and false }} {{ false and true or true }} {{ true and true ^ false and false }} {{ true or true ^ true or false }} "
-				+ "{{ 1 or 1 and 0 }} {{ 0 and 1 or 1 }} {{ 1 and 1 ^ 0 and 0 }} {{ 1 or 1 ^ 1 or 0 }}");
+		Template template = templater
+				.parse("{{ true or true and false }} {{ false and true or true }} {{ true and true ^ false and false }} {{ true or true ^ true or false }} "
+						+ "{{ 1 or 1 and 0 }} {{ 0 and 1 or 1 }} {{ 1 and 1 ^ 0 and 0 }} {{ 1 or 1 ^ 1 or 0 }}");
 		// Template template = templater.parse("${var x}x = '{{ x }}'${x = 1}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
@@ -431,7 +442,7 @@ public class TestTemplater {
 		Template template = templater.parse("{% var x %}x = '{{ x }}'{% x = 1 %} x = '{{ x }}'");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("y", ArrayUtils.asList(1, 2, 3));
+		mapModel.put("y", Arrays.asList(1, 2, 3));
 
 		assertEquals("x = '' x = '1'", template.process(mapModel));
 	}
@@ -442,7 +453,7 @@ public class TestTemplater {
 		Template template = templater.parse("{% var x = 1 %}x = '{{ x }}'{% x = 2 %} x = '{{ x }}'");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("y", ArrayUtils.asList(1, 2, 3));
+		mapModel.put("y", Arrays.asList(1, 2, 3));
 
 		assertEquals("x = '1' x = '2'", template.process(mapModel));
 	}
@@ -450,11 +461,12 @@ public class TestTemplater {
 	@Test
 	public void testVariables3() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{% var x %}x = '{{ x }}'{% x = 1 %} x = '{{ x }}' {% for z in y %}{% x = z %}x = '{{ x }}' {% end %}x = '{{ x }}'");
+		Template template = templater
+				.parse("{% var x %}x = '{{ x }}'{% x = 1 %} x = '{{ x }}' {% for z in y %}{% x = z %}x = '{{ x }}' {% end %}x = '{{ x }}'");
 		// Template template = templater.parse("${var x}x = '{{ x }}'${x = 1}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("y", ArrayUtils.asList(1, 2, 3));
+		mapModel.put("y", Arrays.asList(1, 2, 3));
 
 		assertEquals("x = '' x = '1' x = '1' x = '2' x = '3' x = '3'", template.process(mapModel));
 	}
@@ -462,11 +474,12 @@ public class TestTemplater {
 	@Test
 	public void testVariableWithAssignment() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{% var x = true %}x = '{{ x }}'{% x = 1 %} x = '{{ x }}' {% for z in y %}{% x = z %}x = '{{ x }}' {% end %}x = '{{ x }}'");
+		Template template = templater
+				.parse("{% var x = true %}x = '{{ x }}'{% x = 1 %} x = '{{ x }}' {% for z in y %}{% x = z %}x = '{{ x }}' {% end %}x = '{{ x }}'");
 		// Template template = templater.parse("${var x}x = '{{ x }}'${x = 1}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("y", ArrayUtils.asList(1, 2, 3));
+		mapModel.put("y", Arrays.asList(1, 2, 3));
 
 		assertEquals("x = 'true' x = '1' x = '1' x = '2' x = '3' x = '3'", template.process(mapModel));
 	}
@@ -474,7 +487,8 @@ public class TestTemplater {
 	@Test
 	public void testAllIntegerOperators() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{x + 1}} {{x - 1}} {{x * 2}} {{x / 2}} {{-x}} {{+x}} {{~x}} {{not x}} {{x << 1}} {{x >> 1}} {{x ^ 1}} {{x and 1}} {{x or 1}} {{x iand 14}} {{ x ior 1 }}");
+		Template template = templater
+				.parse("{{x + 1}} {{x - 1}} {{x * 2}} {{x / 2}} {{-x}} {{+x}} {{~x}} {{not x}} {{x << 1}} {{x >> 1}} {{x ^ 1}} {{x and 1}} {{x or 1}} {{x iand 14}} {{ x ior 1 }}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", 10);
@@ -501,7 +515,8 @@ public class TestTemplater {
 	@Test
 	public void testAllDoubleOperators() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{x + 1}} {{x - 1}} {{x * 2}} {{x / 2}} {{-x}} {{+x}} {{~x}} {{not x}} {{x << 1}} {{x >> 1}} {{x ^ 1}} {{x and 1}} {{x or 1}}");
+		Template template = templater
+				.parse("{{x + 1}} {{x - 1}} {{x * 2}} {{x / 2}} {{-x}} {{+x}} {{~x}} {{not x}} {{x << 1}} {{x >> 1}} {{x ^ 1}} {{x and 1}} {{x or 1}}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", 6.5);
@@ -550,12 +565,13 @@ public class TestTemplater {
 	@Test
 	public void testComplex() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse(".{% if flag %}.{% for x in data %}<1{{ x }}>{% else %}[1empty]{% end %}.{% else %}.{% for x in data %}<2{{ x }}>{% else %}[2empty]{% end %}.{% end %}.");
+		Template template = templater
+				.parse(".{% if flag %}.{% for x in data %}<1{{ x }}>{% else %}[1empty]{% end %}.{% else %}.{% for x in data %}<2{{ x }}>{% else %}[2empty]{% end %}.{% end %}.");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 
 		mapModel.put("flag", true);
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c"));
+		mapModel.put("data", Arrays.asList("a", "b", "c"));
 		assertEquals("..<1a><1b><1c>..", template.process(mapModel));
 
 		mapModel.put("flag", true);
@@ -563,7 +579,7 @@ public class TestTemplater {
 		assertEquals("..[1empty]..", template.process(mapModel));
 
 		mapModel.put("flag", false);
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c"));
+		mapModel.put("data", Arrays.asList("a", "b", "c"));
 		assertEquals("..<2a><2b><2c>..", template.process(mapModel));
 
 		mapModel.put("flag", false);
@@ -579,7 +595,7 @@ public class TestTemplater {
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 
 		mapModel.put("flag", true);
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c"));
+		mapModel.put("data", Arrays.asList("a", "b", "c"));
 		assertEquals("..<1a><1b><1c>..", template.process(mapModel));
 
 		mapModel.put("flag", true);
@@ -587,7 +603,7 @@ public class TestTemplater {
 		assertEquals("..[1empty]..", template.process(mapModel));
 
 		mapModel.put("flag", false);
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c"));
+		mapModel.put("data", Arrays.asList("a", "b", "c"));
 		assertEquals("..<2a><2b><2c>..", template.process(mapModel));
 
 		mapModel.put("flag", false);
@@ -611,16 +627,17 @@ public class TestTemplater {
 		Template template = templater.parse("{{ x|join('[', ']') }}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(1, 2, 3));
+		mapModel.put("x", Arrays.asList(1, 2, 3));
 		assertEquals("[1][2][3]", template.process(mapModel));
 	}
 
 	@Test
 	public void testFilters() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parseXml(
-				false,
-				"<body>{{ x|raw }} {{ '<'|escape }} {{ x|size }} {{ '123'|size }} {{ [1,2,3]|size }} {{ '1.5'|float + 1 }} {{ '1'|int + 1 }} {{ 1|bool }} {{ 0|bool }} {{ true|bool }} {{ false|bool }} {{ 'http://test?c=SPORTSHEADS&url=http%3A%2F%2Fhosted2%2Eap%2E'|urlencode }}</body>");
+		Template template = templater
+				.parseXml(
+						false,
+						"<body>{{ x|raw }} {{ '<'|escape }} {{ x|size }} {{ '123'|size }} {{ [1,2,3]|size }} {{ '1.5'|float + 1 }} {{ '1'|int + 1 }} {{ 1|bool }} {{ 0|bool }} {{ true|bool }} {{ false|bool }} {{ 'http://test?c=SPORTSHEADS&url=http%3A%2F%2Fhosted2%2Eap%2E'|urlencode }}</body>");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", "&lt;");
@@ -633,9 +650,10 @@ public class TestTemplater {
 	@Test
 	public void testFormatFilter() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parseXml(
-				false,
-				"{{ array|format('%d/%d') }} {{ array2|format('%d/%d') }} {{ array3|format('%d/%d') }} {{ array4|format('%d/%d') }} {{ array5|format('%d/%d') }} {{ list|format('%d/%d') }} {{ [1,2]|format('%d/%d') }} {{ 123|format('%d') }}");
+		Template template = templater
+				.parseXml(
+						false,
+						"{{ array|format('%d/%d') }} {{ array2|format('%d/%d') }} {{ array3|format('%d/%d') }} {{ array4|format('%d/%d') }} {{ array5|format('%d/%d') }} {{ list|format('%d/%d') }} {{ [1,2]|format('%d/%d') }} {{ 123|format('%d') }}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("array", new int[] { 1, 2 });
@@ -643,7 +661,7 @@ public class TestTemplater {
 		mapModel.put("array3", new Object[] { 1, 2 });
 		mapModel.put("array4", new short[] { 1, 2 });
 		mapModel.put("array5", new Short[] { 1, 2 });
-		mapModel.put("list", ArrayUtils.asList(1, 2));
+		mapModel.put("list", Arrays.asList(1, 2));
 
 		assertEquals("1/2 1/2 1/2 1/2 1/2 1/2 1/2 123", template.process(mapModel));
 	}
@@ -651,10 +669,11 @@ public class TestTemplater {
 	@Test
 	public void testJoinFilter() throws TemplateParserException {
 		Templater templater = createTemplater();
-		Template template = templater.parse("{{ x|join }} {{ x|join(',') }} {{ x|join('[', ']') }} {{ x|join('[', ',', ']') }} {{ x|join('', '[', ',', ']', '') }} {{ x|join('{', '[', ']', '}') }} {{ x|join('{', '[', ',', ']', '}') }}");
+		Template template = templater
+				.parse("{{ x|join }} {{ x|join(',') }} {{ x|join('[', ']') }} {{ x|join('[', ',', ']') }} {{ x|join('', '[', ',', ']', '') }} {{ x|join('{', '[', ']', '}') }} {{ x|join('{', '[', ',', ']', '}') }}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(1, 2, 3));
+		mapModel.put("x", Arrays.asList(1, 2, 3));
 		assertEquals("123 1,2,3 [1][2][3] [1,2,3] [1],[2],[3] {[1][2][3]} {[1],[2],[3]}", template.process(mapModel));
 	}
 
@@ -689,8 +708,9 @@ public class TestTemplater {
 	@Test
 	public void testXmlEscaping() throws TemplateParserException, IOException {
 		Templater templater = createTemplater();
-		Template template = templater.parseXml(false,
-				"<body>{% if x %}&amp;&lt;&gt;\"'<x value='&lt;&gt;\"&amp;&#39;' value2=\"&lt;&gt;&quot;&amp;'\" value3=\"{{ y }}\" />{% end %}</body>");
+		Template template = templater
+				.parseXml(false,
+						"<body>{% if x %}&amp;&lt;&gt;\"'<x value='&lt;&gt;\"&amp;&#39;' value2=\"&lt;&gt;&quot;&amp;'\" value3=\"{{ y }}\" />{% end %}</body>");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", true);
@@ -703,15 +723,16 @@ public class TestTemplater {
 	@Test
 	public void testXmlAsHtml() throws TemplateParserException, IOException {
 		Templater templater = createTemplater();
-		Template template = templater.parseXml(
-				true,
-				"<body><div id='header' />{% if x %}<code>x</code> is     <img src='true.png' />true{% else %}<code>x</code> is <img src='false.png' />false{% end %}<br />the end</body>");
+		Template template = templater
+				.parseXml(
+						true,
+						"<body><div id='header' />{% if x %}<code>x</code> is     <img src='true.png' />true{% else %}<code>x</code> is <img src='false.png' />false{% end %}<br />the end</body>");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", true);
 		mapModel.put("y", "<>\"&'");
-		assertEquals("<body><div id='header' /><code>x</code> is <img src='true.png' />true<br />the end</body>",
-				template.process(mapModel));
+		assertEquals("<body><div id='header' /><code>x</code> is <img src='true.png' />true<br />the end</body>", template
+				.process(mapModel));
 	}
 
 	@Test
@@ -732,13 +753,13 @@ public class TestTemplater {
 		Template template = templater.parseXml(true, TemplateFile.fromResource(getClass(), "outerTemplate.xml"));
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
-		innerMap.put("data", ArrayUtils.asList("a", "b", "c"));
+		innerMap.put("data", Arrays.asList("a", "b", "c"));
 
 		HashMap<String, Object> innerMap2 = Maps.newHashMap();
 		innerMap2.put("data", Collections.EMPTY_LIST);
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(innerMap, innerMap2));
+		mapModel.put("x", Arrays.asList(innerMap, innerMap2));
 
 		assertEquals("<template><inner>Whoa: abc</inner><inner>Whoa: no data</inner></template>", template.process(mapModel));
 	}

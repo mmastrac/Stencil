@@ -2,13 +2,12 @@ package net.stencilproject.template;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import net.stencilproject.template.util.ArrayUtils;
 
 import org.junit.Test;
 
@@ -28,7 +27,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data %}{{ x }}{% end %}.");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c", "d"));
+		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
 		assertEquals("Check out this list: abcd.", template.process(mapModel));
 	}
 
@@ -38,7 +37,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c", "d"));
+		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
 		assertEquals("Check out this list: abcd", template.process(mapModel));
 	}
 
@@ -74,7 +73,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data order by x %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("d", "b", "c", "a"));
+		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
 		assertEquals("Check out this list: abcd", template.process(mapModel));
 	}
 
@@ -84,7 +83,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data order by -x %}{{ x }}{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList(4, 2, 1, 3));
+		mapModel.put("data", Arrays.asList(4, 2, 1, 3));
 		assertEquals("Check out this list: 4321", template.process(mapModel));
 	}
 
@@ -94,7 +93,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data order by x limit 2 %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("d", "b", "c", "a"));
+		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
 		assertEquals("Check out this list: ab", template.process(mapModel));
 	}
 
@@ -104,7 +103,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data order by x limit 6 %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("d", "b", "c", "a"));
+		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
 		assertEquals("Check out this list: abcd", template.process(mapModel));
 	}
 
@@ -147,7 +146,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data limit lim %}{{x}}{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c", "d"));
+		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
 		mapModel.put("lim", 2);
 		assertEquals("Check out this list: ab", template.process(mapModel));
 
@@ -161,7 +160,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data limit null %}{{x}}{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c", "d"));
+		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
 		assertEquals("Check out this list: ", template.process(mapModel));
 	}
 
@@ -171,7 +170,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {{x}}{% for x in data %}{{x}}{% end %}{{x}}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c", "d"));
+		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
 		mapModel.put("x", "x");
 		assertEquals("Check out this list: xabcdx", template.process(mapModel));
 	}
@@ -184,13 +183,13 @@ public class TestFor {
 				.parse("{% for item in x %}Whoa: {% for y in item.data %}{{ y }}{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
-		innerMap.put("data", ArrayUtils.asList("a", "b", "c"));
+		innerMap.put("data", Arrays.asList("a", "b", "c"));
 
 		HashMap<String, Object> innerMap2 = Maps.newHashMap();
 		innerMap2.put("data", Collections.EMPTY_LIST);
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(innerMap, innerMap2));
+		mapModel.put("x", Arrays.asList(innerMap, innerMap2));
 
 		assertEquals("Whoa: abc. Whoa: no data. ", template.process(mapModel));
 	}
@@ -203,13 +202,13 @@ public class TestFor {
 				.parse("{% for item in x %}Whoa: {% for y in item.data %}{% if y == 'b' %}{% continue %}{% end %}{{y}}{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
-		innerMap.put("data", ArrayUtils.asList("a", "b", "c"));
+		innerMap.put("data", Arrays.asList("a", "b", "c"));
 
 		HashMap<String, Object> innerMap2 = Maps.newHashMap();
 		innerMap2.put("data", Collections.EMPTY_LIST);
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(innerMap, innerMap2));
+		mapModel.put("x", Arrays.asList(innerMap, innerMap2));
 
 		assertEquals("Whoa: ac. Whoa: no data. ", template.process(mapModel));
 	}
@@ -226,13 +225,13 @@ public class TestFor {
 				.parse("{% for item in x %}Whoa: {% for y in item.data %}>{% if y == 'b' %}{% continue %}{% end %}{{y}}<{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
-		innerMap.put("data", ArrayUtils.asList("a", "b", "c"));
+		innerMap.put("data", Arrays.asList("a", "b", "c"));
 
 		HashMap<String, Object> innerMap2 = Maps.newHashMap();
 		innerMap2.put("data", Collections.EMPTY_LIST);
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(innerMap, innerMap2));
+		mapModel.put("x", Arrays.asList(innerMap, innerMap2));
 
 		assertEquals("Whoa: >a<>>c<. Whoa: no data. ", template.process(mapModel));
 	}
@@ -244,13 +243,13 @@ public class TestFor {
 		Template template = templater.parse("{% for item in x %}Whoa: {% for y in item.data %}{{y}}{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
-		innerMap.put("data", ArrayUtils.asList("a", "b", "c"));
+		innerMap.put("data", Arrays.asList("a", "b", "c"));
 
 		HashMap<String, Object> innerMap2 = Maps.newHashMap();
 		innerMap2.put("data", Collections.EMPTY_LIST);
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		mapModel.put("x", ArrayUtils.asList(innerMap, innerMap2, innerMap, innerMap2));
+		mapModel.put("x", Arrays.asList(innerMap, innerMap2, innerMap, innerMap2));
 
 		assertEquals("Whoa: abc. Whoa: no data. Whoa: abc. Whoa: no data. ", template.process(mapModel));
 	}
@@ -271,7 +270,7 @@ public class TestFor {
 		Template template = templater.parse("Check out this list: {% for x in data %}{{x}}{% else %}empty{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
-		mapModel.put("data", ArrayUtils.asList("a", "b", "c", "d"));
+		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
 		assertEquals("Check out this list: abcd", template.process(mapModel));
 	}
 }

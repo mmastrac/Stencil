@@ -69,6 +69,7 @@ public class ArrayUtilsTest {
 
 	@Test
 	public void testToString() {
+		assertEquals("null", ArrayUtils.toString(null));
 		assertEquals("[]", ArrayUtils.toString(new Object[] {}));
 		assertEquals("[1]", ArrayUtils.toString(new Object[] { 1 }));
 		assertEquals("[1, 2]", ArrayUtils.toString(new Object[] { 1, 2 }));
