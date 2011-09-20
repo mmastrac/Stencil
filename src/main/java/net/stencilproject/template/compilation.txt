@@ -1,0 +1,99 @@
+for x in y
+  <item>
+end
+
+ITERATOR y
+HAS_NEXT
+BRANCH_FALSE else:
+GOTO loopstart:
+startloop:
+HAS_NEXT 
+BRANCH_FALSE endloop
+PRINT
+GOTO startloop
+endloop:
+
+
+for x in y
+  <item>
+else
+  <empty>
+end
+
+ITERATOR y
+HAS_NEXT
+BRANCH_FALSE else:
+GOTO loopstart:
+loop:
+HAS_NEXT
+BRANCH_FALSE end:
+loopstart:
+PRINT <item>
+GOTO loop
+else:
+PRINT <empty>
+end:
+
+
+if x
+  <if>
+end
+
+SCOPE_LOOKUP x
+BRANCH_FALSE label0
+PRINT <if>
+label0:
+
+
+if x
+  <if>
+else
+  <else>
+end
+
+IF x ELSE label0
+PRINT <if>
+GOTO label1
+label0:
+PRINT <else>
+label1:
+  
+
+if x
+  <if>
+elif y
+  <elify>
+else 
+  <else>
+end
+
+IF x ELSE label0
+PRINT <if>
+GOTO label2
+label0:
+IF y ELSE label1
+PRINT <elify>
+GOTO label2
+label1:
+PRINT <else>
+label2:
+
+
+
+
+if x
+  <ifx>
+else
+if y
+  <ify>
+end
+end
+
+IF x ELSE label0
+PRINT <ifx>
+GOTO label2
+label0:
+IF y ELSE label1
+PRINT <ify>
+label1:
+label2:

@@ -1,0 +1,1 @@
+<template>{% for item in x %}{% include "innerTemplate.xml" %}{% end %}</template>
