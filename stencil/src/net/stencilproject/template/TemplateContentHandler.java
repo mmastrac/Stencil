@@ -18,9 +18,10 @@ import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.Tree;
 
 /**
- * Parses a template, passing back the structure to an EventHandler.
+ * Parses the contents of a {@link TemplateFile}, passing back the structure to
+ * an EventHandler.
  */
-class TemplateTreeBuilder extends BaseParser {
+class TemplateContentHandler extends BaseParser {
 	private StringBuilder builder = new StringBuilder();
 	private final TemplateBuilderEvents eventHandler;
 	private final TemplateMode mode;
@@ -35,7 +36,7 @@ class TemplateTreeBuilder extends BaseParser {
 		ESCAPE,
 	}
 
-	TemplateTreeBuilder(TemplateFileSourceInfo source, TemplateMode mode, TemplateBuilderEvents eventHandler) {
+	TemplateContentHandler(TemplateFileSourceInfo source, TemplateMode mode, TemplateBuilderEvents eventHandler) {
 		super(source);
 		this.mode = mode;
 		this.eventHandler = eventHandler;
@@ -72,7 +73,7 @@ class TemplateTreeBuilder extends BaseParser {
 			}
 
 			// Ignore CDATA begin/end tags in HTML mode
-			if (TemplateTreeBuilder.this.mode == TemplateMode.HTML) {
+			if (TemplateContentHandler.this.mode == TemplateMode.HTML) {
 				if (type == TokenType.CDATA_OPEN || type == TokenType.CDATA_CLOSE) {
 					return;
 				}
@@ -91,7 +92,7 @@ class TemplateTreeBuilder extends BaseParser {
 					consecutiveWhitespace = false;
 				}
 
-				if (TemplateTreeBuilder.this.mode == TemplateMode.HTML) {
+				if (TemplateContentHandler.this.mode == TemplateMode.HTML) {
 					// Ensure that we emit HTML-compatible empty elements
 					if (type == TokenType.START_ELEMENT_EMPTY_CLOSE && c == '/') {
 						emit(" /");
@@ -108,7 +109,7 @@ class TemplateTreeBuilder extends BaseParser {
 				} else {
 					if (lastOpenTag.equals("script")) {
 						emit(TextState.TEXT, (char) c);
-					} else if (TemplateTreeBuilder.this.mode == TemplateMode.HTML && type == TokenType.VALUE && mode == Mode.CDATA) {
+					} else if (TemplateContentHandler.this.mode == TemplateMode.HTML && type == TokenType.VALUE && mode == Mode.CDATA) {
 						emit(TextState.ESCAPE, (char) c);
 					} else {
 						emit(TextState.TEXT, (char) c);

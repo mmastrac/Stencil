@@ -1,9 +1,6 @@
 package net.stencilproject.template;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -14,16 +11,13 @@ import net.stencilproject.template.ProgramBuilder.Label;
 import net.stencilproject.template.TemplateParserException.TemplateError;
 
 import org.antlr.runtime.tree.Tree;
-import org.xml.sax.InputSource;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
-import com.google.common.io.CharStreams;
 
 /**
  * Builds a template from a given template file, invoking
- * {@link TemplateTreeBuilder} and handling {@link TemplateBuilderEvents} callbacks as
- * needed.
+ * {@link TemplateContentHandler} and handling {@link TemplateBuilderEvents}
+ * callbacks as needed.
  */
 public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents {
 	private ProgramBuilder program = new ProgramBuilder();
@@ -85,28 +79,13 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 		return templateParserBuilder;
 	}
 
-	public void parse() throws TemplateParserException, IOException {
+	private void parse() throws TemplateParserException, IOException {
 		start = System.nanoTime();
 
-		TemplateTreeBuilder treeBuilder = new TemplateTreeBuilder(new TemplateFileSourceInfo(templateFile, null), mode, this);
+		TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, null), mode, this);
 		treeBuilder.parse();
 
 		end = System.nanoTime();
-	}
-
-	protected String toString(InputSource source) throws TemplateParserException, IOException {
-		Reader reader = source.getCharacterStream();
-		if (reader == null) {
-			final InputStream inputStream = source.getByteStream();
-			if (inputStream == null) {
-				throwParserException(TemplateError.UNEXPECTED_ERROR, "No reader or stream in InputSource");
-				return null; // Not needed, but avoids warnings
-			}
-
-			reader = new InputStreamReader(inputStream, Charsets.UTF_8);
-		}
-
-		return CharStreams.toString(reader);
 	}
 
 	@Override
@@ -155,7 +134,7 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 			try {
 				URL url = new URL(parentUrl, include);
 				TemplateFile templateFile = TemplateFile.fromUrl(url);
-				TemplateTreeBuilder treeBuilder = new TemplateTreeBuilder(new TemplateFileSourceInfo(templateFile, new ParentSourceInfo(
+				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, new ParentSourceInfo(
 						source, tree.getLine(), tree.getCharPositionInLine())), mode, this);
 				treeBuilder.parse();
 			} catch (MalformedURLException e) {
@@ -176,7 +155,7 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 			try {
 				URL url = new URL(parentUrl, extendsTemplate);
 				TemplateFile templateFile = TemplateFile.fromUrl(url);
-				TemplateTreeBuilder treeBuilder = new TemplateTreeBuilder(new TemplateFileSourceInfo(templateFile, new ParentSourceInfo(
+				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, new ParentSourceInfo(
 						source, tree.getLine(), tree.getCharPositionInLine())), mode, this);
 				treeBuilder.parse();
 			} catch (MalformedURLException e) {

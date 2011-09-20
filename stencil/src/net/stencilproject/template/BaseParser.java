@@ -19,7 +19,7 @@ import com.google.common.io.Resources;
  * Base class for things involved in parsing. Contains useful methods for
  * throwing proper exceptions.
  */
-class BaseParser {
+abstract class BaseParser {
 	protected final TemplateFileSourceInfo source;
 	protected final TemplateFile templateFile;
 	protected final URL rootUrl;
