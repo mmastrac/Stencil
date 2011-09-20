@@ -14,10 +14,10 @@
 		<mkdir dir="output/javadoc" />
 		<mkdir dir="output/test" />
 		<copy includeemptydirs="false" todir="bin/core">
-			<fileset dir="src" excludes="**/*.launch, **/*.g, **/*.java" />
+			<fileset dir="src/main/java" excludes="**/*.launch, **/*.g, **/*.java" />
 		</copy>
 		<copy includeemptydirs="false" todir="bin/test">
-			<fileset dir="test" excludes="**/*.launch, **/*.g, **/*.java" />
+			<fileset dir="src/test/java" excludes="**/*.launch, **/*.g, **/*.java" />
 		</copy>
 	</target>
 	<target name="clean">
@@ -40,7 +40,7 @@
 	<target depends="init" name="compile-core">
 		<echo message="${ant.project.name}: ${ant.file}" />
 		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/core" source="${source}" target="${target}">
-			<src path="src" />
+			<src path="src/main/java" />
 			<classpath>
 				<fileset refid="net.stencilproject.template.classpath" />
 			</classpath>
@@ -49,7 +49,7 @@
 	<target depends="compile-core" name="compile-test-public">
 		<echo message="${ant.project.name}: ${ant.file}" />
 		<javac debug="true" debuglevel="${debuglevel}" destdir="bin/test" source="${source}" target="${target}">
-			<src path="test" />
+			<src path="src/test/java" />
 			<classpath>
 				<fileset refid="net.stencilproject.template.classpath" />
 				<pathelement location="bin/core" />
@@ -101,7 +101,7 @@
 		</junit>
 	</target>
 	<target name="javadoc">
-		<javadoc destdir="output/javadoc" overview="docs/index.html" author="true" version="true" use="true" failonerror="true" windowtitle="Stencil API" doctitle="Stencil API" maxmemory="512m" sourcepath="src">
+		<javadoc destdir="output/javadoc" overview="docs/index.html" author="true" version="true" use="true" failonerror="true" windowtitle="Stencil API" doctitle="Stencil API" maxmemory="512m" sourcepath="src/main/java">
 			<classpath>
 				<fileset refid="net.stencilproject.template.classpath" />
 			</classpath>
