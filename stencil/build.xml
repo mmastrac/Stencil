@@ -61,8 +61,6 @@
 		<jarjar jarfile="dist/stencil-standalone.jar" basedir="bin/core">
 			<zipfileset src="libs/guava-r07.jar" />
 			<zipfileset src="libs/antlr-3.2.jar" excludes="org/antlr/grammar/**,org/antlr/stringtemplate/**,antr/**,META-INF/**,**/*.stg,**/*.st,**/*.png" />
-			<zipfileset src="libs/commons-lang-2.4.jar" excludes="META-INF/**" />
-			<zipfileset src="libs/commons-io-1.4.jar" excludes="META-INF/**" />
 			<zipfileset src="libs/servlet-api-2.5.jar" excludes="**/*.dtd,**/*.xsd,**/*.properties" />
 			<rule pattern="com.google.**" result="jarjar.com.google.@1" />
 			<rule pattern="org.antlr.**" result="jarjar.org.antlr.@1" />
