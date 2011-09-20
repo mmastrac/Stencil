@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -111,37 +110,5 @@ abstract class TemplateFile {
 		}
 
 		return TemplateFile.fromUrl(resource);
-	}
-
-	/**
-	 * Returns a template file from the given Reader.
-	 */
-	public static TemplateFile fromReader(final Reader reader, URL url) {
-		if (reader == null) {
-			throw new NullPointerException("reader is null");
-		}
-
-		return new TemplateFile(url) {
-			@Override
-			public String read() throws IOException {
-				return CharStreams.toString(reader);
-			}
-		};
-	}
-
-	/**
-	 * Returns a template file from the given InputStream.
-	 */
-	public static TemplateFile fromInputStream(final InputStream stream, URL url) {
-		if (stream == null) {
-			throw new NullPointerException("inputStream is null");
-		}
-
-		return new TemplateFile(url) {
-			@Override
-			public String read() throws IOException {
-				return CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
-			}
-		};
 	}
 }

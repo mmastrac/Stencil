@@ -18,6 +18,13 @@ public class TemplateFactory {
 	}
 
 	public TemplateSource getTemplateSourceFromString(final TemplateMode mode, final String string) {
+		if (mode == null) {
+			throw new NullPointerException("mode is null");
+		}
+		if (string == null) {
+			throw new NullPointerException("string is null");
+		}
+
 		return new TemplateSource() {
 			@Override
 			public Template readTemplate(final TemplateRootScope rootScope) throws TemplateParserException, IOException {
@@ -58,7 +65,7 @@ public class TemplateFactory {
 		};
 	}
 
-	public TemplateSource getTemplateSource(TemplateMode mode, Class<?> clazz, String resourceName) {
+	public TemplateSource getTemplateSource(final TemplateMode mode, final Class<?> clazz, final String resourceName) {
 		if (mode == null) {
 			throw new NullPointerException("mode is null");
 		}
@@ -69,11 +76,12 @@ public class TemplateFactory {
 			throw new NullPointerException("resourceName is null");
 		}
 
-		URL resource = clazz.getResource(resourceName);
-		if (resource == null) {
-			return null;
-		}
-		return getTemplateSource(mode, resource);
+		return new TemplateSource() {
+			@Override
+			public Template readTemplate(final TemplateRootScope rootScope) throws TemplateParserException, IOException {
+				return readTemplateInternal(mode, rootScope, TemplateFile.fromResource(clazz, resourceName));
+			}
+		};
 	}
 
 	public Template parseString(TemplateMode mode, TemplateRootScope rootScope, String template) throws TemplateParserException {

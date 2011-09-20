@@ -37,15 +37,6 @@ public class TemplateOptions implements Cloneable {
 		return developmentMode;
 	}
 
-	@Deprecated
-	public void setWriteStats(boolean writeStats) {
-	}
-
-	@Deprecated
-	public boolean isWriteStats() {
-		return false;
-	}
-
 	public void setMaxInstructions(int maxInstructions) {
 		this.maxInstructions = maxInstructions;
 	}
