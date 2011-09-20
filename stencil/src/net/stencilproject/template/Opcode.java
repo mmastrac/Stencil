@@ -3,7 +3,7 @@
  */
 package net.stencilproject.template;
 
-enum Opcode2 {
+enum Opcode {
 	/**
 	 * Drops an item from the stack. (x -> )
 	 */

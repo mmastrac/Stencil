@@ -3,7 +3,7 @@ package net.stencilproject.template;
 import static org.junit.Assert.assertEquals;
 
 import net.stencilproject.template.Environment;
-import net.stencilproject.template.Opcode2;
+import net.stencilproject.template.Opcode;
 import net.stencilproject.template.Program;
 import net.stencilproject.template.ProgramBuilder;
 import net.stencilproject.template.TemplateContext;
@@ -24,10 +24,10 @@ public class TestProgram {
 	@Test
 	public void testSimpleProgram() {
 		ProgramBuilder p = new ProgramBuilder();
-		p.append(Opcode2.LITERAL_INT, 1);
-		p.append(Opcode2.LITERAL_INT, 2);
-		p.append(Opcode2.BINARY_PLUS);
-		p.append(Opcode2.PRINT);
+		p.append(Opcode.LITERAL_INT, 1);
+		p.append(Opcode.LITERAL_INT, 2);
+		p.append(Opcode.BINARY_PLUS);
+		p.append(Opcode.PRINT);
 		run("3", p);
 	}
 
@@ -36,14 +36,14 @@ public class TestProgram {
 		ProgramBuilder p = new ProgramBuilder();
 		Label labelEnd = p.createLabel();
 
-		p.append(Opcode2.LITERAL_STRING, "abc");
-		p.append(Opcode2.ITERATOR);
+		p.append(Opcode.LITERAL_STRING, "abc");
+		p.append(Opcode.ITERATOR);
 		Label labelLoopStart = p.createLabelHere();
-		p.append(Opcode2.ITERATOR_NEXT_OR_BRANCH, labelEnd);
-		p.append(Opcode2.PRINT_LITERAL, "(");
-		p.append(Opcode2.PRINT);
-		p.append(Opcode2.PRINT_LITERAL, ")");
-		p.append(Opcode2.GOTO, labelLoopStart);
+		p.append(Opcode.ITERATOR_NEXT_OR_BRANCH, labelEnd);
+		p.append(Opcode.PRINT_LITERAL, "(");
+		p.append(Opcode.PRINT);
+		p.append(Opcode.PRINT_LITERAL, ")");
+		p.append(Opcode.GOTO, labelLoopStart);
 		p.affixLabel(labelEnd);
 
 		run("(a)(b)(c)", p);
@@ -54,18 +54,18 @@ public class TestProgram {
 		ProgramBuilder p = new ProgramBuilder();
 		int x = p.localAllocator.allocate("x");
 		int y = p.localAllocator.allocate("y");
-		p.append(Opcode2.LITERAL_INT, 1);
-		p.append(Opcode2.LOCAL_STORE, x);
-		p.append(Opcode2.LITERAL_INT, 2);
-		p.append(Opcode2.LOCAL_STORE, y);
-		p.append(Opcode2.LOCAL_LOAD, x);
-		p.append(Opcode2.LOCAL_LOAD, y);
-		p.append(Opcode2.BINARY_PLUS);
-		p.append(Opcode2.PRINT);
-		p.append(Opcode2.LOCAL_LOAD, x);
-		p.append(Opcode2.LOCAL_LOAD, y);
-		p.append(Opcode2.BINARY_PLUS);
-		p.append(Opcode2.PRINT);
+		p.append(Opcode.LITERAL_INT, 1);
+		p.append(Opcode.LOCAL_STORE, x);
+		p.append(Opcode.LITERAL_INT, 2);
+		p.append(Opcode.LOCAL_STORE, y);
+		p.append(Opcode.LOCAL_LOAD, x);
+		p.append(Opcode.LOCAL_LOAD, y);
+		p.append(Opcode.BINARY_PLUS);
+		p.append(Opcode.PRINT);
+		p.append(Opcode.LOCAL_LOAD, x);
+		p.append(Opcode.LOCAL_LOAD, y);
+		p.append(Opcode.BINARY_PLUS);
+		p.append(Opcode.PRINT);
 		run("33", p);
 	}
 
@@ -73,15 +73,15 @@ public class TestProgram {
 	public void testPerformance() {
 		ProgramBuilder p = new ProgramBuilder();
 		Label end = p.createLabel();
-		p.append(Opcode2.LITERAL_INT, 0);
+		p.append(Opcode.LITERAL_INT, 0);
 		Label loop = p.createLabelHere();
-		p.append(Opcode2.DUP);
-		p.append(Opcode2.LITERAL_INT, 120000);
-		p.append(Opcode2.GT);
-		p.append(Opcode2.BRANCH_FALSE, end);
-		p.append(Opcode2.LITERAL_INT, 1);
-		p.append(Opcode2.BINARY_PLUS);
-		p.append(Opcode2.GOTO, loop);
+		p.append(Opcode.DUP);
+		p.append(Opcode.LITERAL_INT, 120000);
+		p.append(Opcode.GT);
+		p.append(Opcode.BRANCH_FALSE, end);
+		p.append(Opcode.LITERAL_INT, 1);
+		p.append(Opcode.BINARY_PLUS);
+		p.append(Opcode.GOTO, loop);
 		p.affixLabel(end);
 
 		TemplateOptions options = new TemplateOptions();

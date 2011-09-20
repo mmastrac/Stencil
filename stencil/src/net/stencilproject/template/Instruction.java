@@ -4,18 +4,18 @@ package net.stencilproject.template;
  * Instruction in a template program.
  */
 class Instruction implements SourceInfo {
-	final Opcode2 opcode;
+	final Opcode opcode;
 	Object literal;
 
 	final TemplateFileSourceInfo source;
 	final int line;
 	final int column;
 
-	public Instruction(TemplateFileSourceInfo templateFileSourceInfo, int line, int column, Opcode2 opcode) {
+	public Instruction(TemplateFileSourceInfo templateFileSourceInfo, int line, int column, Opcode opcode) {
 		this(templateFileSourceInfo, line, column, opcode, null);
 	}
 
-	public Instruction(TemplateFileSourceInfo source, int line, int column, Opcode2 opcode, Object literal) {
+	public Instruction(TemplateFileSourceInfo source, int line, int column, Opcode opcode, Object literal) {
 		this.source = source;
 		this.line = line;
 		this.column = column;
@@ -48,7 +48,7 @@ class Instruction implements SourceInfo {
 			return opcode + " " + '"' + literal + '"';
 		}
 
-		if (opcode == Opcode2.GOTO || opcode == Opcode2.BRANCH_FALSE) {
+		if (opcode == Opcode.GOTO || opcode == Opcode.BRANCH_FALSE) {
 			return opcode + " " + address((Integer) literal, addr);
 		}
 

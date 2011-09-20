@@ -123,7 +123,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 	public void text(TemplateFileSourceInfo source, String text) throws TemplateParserException {
 		// TODO: We should pull in the proper line info here
 		program.setSourceInformation(source, SourceInfo.NO_LINE, SourceInfo.NO_COLUMN);
-		program.append(Opcode2.PRINT_LITERAL, text);
+		program.append(Opcode.PRINT_LITERAL, text);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 			if (tree.getChildCount() == 2) {
 				appendTree(tree.getChild(1));
-				program.append(Opcode2.LOCAL_STORE, index);
+				program.append(Opcode.LOCAL_STORE, index);
 			}
 
 			break;
@@ -234,41 +234,41 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 			// Turn the collection into an iterator
 			appendTree(collection);
-			program.append(Opcode2.ITERATOR);
+			program.append(Opcode.ITERATOR);
 
 			// This is a bit hacky: we order the list as a mini-program inside
 			// the script
 			if (orderBy != null) {
 				Label end = program.createLabel();
-				program.append(Opcode2.ITERATOR_START_ORDER_BY);
+				program.append(Opcode.ITERATOR_START_ORDER_BY);
 				Label loop = program.createLabelHere();
-				program.append(Opcode2.ITERATOR_NEXT_OR_BRANCH, end);
-				program.append(Opcode2.DUP);
-				program.append(Opcode2.LOCAL_STORE, local);
+				program.append(Opcode.ITERATOR_NEXT_OR_BRANCH, end);
+				program.append(Opcode.DUP);
+				program.append(Opcode.LOCAL_STORE, local);
 				appendTree(orderBy);
-				program.append(Opcode2.ITERATOR_PROCESS_ORDER_BY);
-				program.append(Opcode2.GOTO, loop);
+				program.append(Opcode.ITERATOR_PROCESS_ORDER_BY);
+				program.append(Opcode.GOTO, loop);
 				program.affixLabel(end);
-				program.append(Opcode2.ITERATOR_END_ORDER_BY);
+				program.append(Opcode.ITERATOR_END_ORDER_BY);
 			}
 
 			if (limit != null) {
 				appendTree(limit);
-				program.append(Opcode2.ITERATOR_LIMIT);
+				program.append(Opcode.ITERATOR_LIMIT);
 			}
 
 			context.end = program.createLabel();
 			context.elseBlock = program.createLabel();
 			context.loopstart = program.createLabel();
 
-			program.append(Opcode2.ITERATOR_NEXT_OR_BRANCH, context.elseBlock);
-			program.append(Opcode2.GOTO, context.loopstart);
+			program.append(Opcode.ITERATOR_NEXT_OR_BRANCH, context.elseBlock);
+			program.append(Opcode.GOTO, context.loopstart);
 			context.loop = program.createLabelHere();
-			program.append(Opcode2.ITERATOR_NEXT_OR_BRANCH, context.end);
+			program.append(Opcode.ITERATOR_NEXT_OR_BRANCH, context.end);
 			program.affixLabel(context.loopstart);
 
 			// Store the value of the iterator as a local
-			program.append(Opcode2.LOCAL_STORE, local);
+			program.append(Opcode.LOCAL_STORE, local);
 
 			blockStack.push(context);
 			break;
@@ -287,7 +287,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 				return;
 			}
 
-			program.append(Opcode2.GOTO, forBlock.loop);
+			program.append(Opcode.GOTO, forBlock.loop);
 			break;
 		}
 		case TemplateParser.IF: {
@@ -296,7 +296,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 			context.end = program.createLabel();
 
 			appendTree(tree.getChild(0));
-			program.append(Opcode2.BRANCH_FALSE, context.elseBlock);
+			program.append(Opcode.BRANCH_FALSE, context.elseBlock);
 			blockStack.push(context);
 			program.localAllocator.startBlock();
 
@@ -316,7 +316,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 					throwParserException(TemplateError.FOR_DUPLICATE_ELSE, "FOR block already has an ELSE block", tree);
 				}
 
-				program.append(Opcode2.GOTO, forBlockContext.loop);
+				program.append(Opcode.GOTO, forBlockContext.loop);
 				program.affixLabel(forBlockContext.elseBlock);
 				break;
 			} else if (context instanceof IfBlockContext) {
@@ -325,7 +325,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 					throwParserException(TemplateError.IF_DUPLICATE_ELSE, "IF block already has an ELSE block", tree);
 				}
 
-				program.append(Opcode2.GOTO, ifBlockContext.end);
+				program.append(Opcode.GOTO, ifBlockContext.end);
 				program.affixLabel(ifBlockContext.elseBlock);
 				break;
 			} else {
@@ -347,13 +347,13 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 			program.localAllocator.restartBlock();
 
-			program.append(Opcode2.GOTO, ifBlockContext.end);
+			program.append(Opcode.GOTO, ifBlockContext.end);
 			program.affixLabel(ifBlockContext.elseBlock);
 			appendTree(tree.getChild(0));
 
 			// Replace the current else label
 			ifBlockContext.elseBlock = program.createLabel();
-			program.append(Opcode2.BRANCH_FALSE, ifBlockContext.elseBlock);
+			program.append(Opcode.BRANCH_FALSE, ifBlockContext.elseBlock);
 
 			break;
 		}
@@ -381,7 +381,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 				ForBlockContext forBlockContext = (ForBlockContext) context;
 
 				if (!forBlockContext.elseBlock.isAffixed()) {
-					program.append(Opcode2.GOTO, forBlockContext.loop);
+					program.append(Opcode.GOTO, forBlockContext.loop);
 				}
 
 				program.affixLabel(forBlockContext.end);
@@ -390,7 +390,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 				}
 
 				// Drop the iterator and the iterable
-				program.append(Opcode2.DROP, 2);
+				program.append(Opcode.DROP, 2);
 			} else {
 				assert false : "Unexpected block: " + context.getClass();
 			}
@@ -399,12 +399,12 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 		case TemplateParser.EQ:
 			appendTree(tree.getChild(1));
 			int lookup = program.localAllocator.lookup(tree.getChild(0).getText());
-			program.append(Opcode2.LOCAL_STORE, lookup);
+			program.append(Opcode.LOCAL_STORE, lookup);
 			break;
 		case TemplateParser.PRINT:
 			for (int i = 0; i < tree.getChildCount(); i++) {
 				appendTree(tree.getChild(i));
-				program.append(Opcode2.PRINT);
+				program.append(Opcode.PRINT);
 			}
 			break;
 		default:
@@ -423,7 +423,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 			if (tree.getChildCount() == 2) {
 				appendTree(tree.getChild(0));
 				appendTree(tree.getChild(1));
-				program.append(Opcode2.DOT);
+				program.append(Opcode.DOT);
 			} else {
 				int added = 0;
 
@@ -446,13 +446,13 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 				for (int i = 0; i < children.size(); i++) {
 					if (children.get(i) == null) {
-						program.append(Opcode2.NULL);
+						program.append(Opcode.NULL);
 					} else {
 						appendTree(children.get(i));
 					}
 				}
 
-				program.append(Opcode2.SLICE);
+				program.append(Opcode.SLICE);
 			}
 			return;
 		case TemplateParser.QUESTION:
@@ -460,9 +460,9 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 			Label falseLabel = program.createLabel();
 			Label endLabel = program.createLabel();
 			appendTree(tree.getChild(0));
-			program.append(Opcode2.BRANCH_FALSE, falseLabel);
+			program.append(Opcode.BRANCH_FALSE, falseLabel);
 			appendTree(tree.getChild(1));
-			program.append(Opcode2.GOTO, endLabel);
+			program.append(Opcode.GOTO, endLabel);
 			program.affixLabel(falseLabel);
 			appendTree(tree.getChild(2));
 			program.affixLabel(endLabel);
@@ -479,7 +479,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 		for (int i = 0; i < tree.getChildCount(); i++) {
 			if (i == 1 && isShortCircuitable) {
-				program.append(type == TemplateParser.AND ? Opcode2.DUP_BRANCH_FALSE : Opcode2.DUP_BRANCH_TRUE, shortCircuitLabel);
+				program.append(type == TemplateParser.AND ? Opcode.DUP_BRANCH_FALSE : Opcode.DUP_BRANCH_TRUE, shortCircuitLabel);
 			}
 
 			appendTree(tree.getChild(i));
@@ -487,126 +487,126 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 		switch (type) {
 		case TemplateParser.INT:
-			program.append(Opcode2.LITERAL_INT, Integer.valueOf(text));
+			program.append(Opcode.LITERAL_INT, Integer.valueOf(text));
 			break;
 		case TemplateParser.INT_HEX:
-			program.append(Opcode2.LITERAL_INT, Integer.valueOf(text.substring(2), 16));
+			program.append(Opcode.LITERAL_INT, Integer.valueOf(text.substring(2), 16));
 			break;
 		case TemplateParser.LIST:
-			program.append(Opcode2.LITERAL_INT, tree.getChildCount());
-			program.append(Opcode2.LITERAL_LIST);
+			program.append(Opcode.LITERAL_INT, tree.getChildCount());
+			program.append(Opcode.LITERAL_LIST);
 			break;
 		case TemplateParser.FLOAT:
-			program.append(Opcode2.LITERAL_FLOAT, Double.valueOf(text));
+			program.append(Opcode.LITERAL_FLOAT, Double.valueOf(text));
 			break;
 		case TemplateParser.STRING:
 		case TemplateParser.ID:
-			program.append(Opcode2.LITERAL_STRING, text);
+			program.append(Opcode.LITERAL_STRING, text);
 			break;
 		case TemplateParser.AND:
-			program.append(Opcode2.AND);
+			program.append(Opcode.AND);
 			break;
 		case TemplateParser.OR:
-			program.append(Opcode2.OR);
+			program.append(Opcode.OR);
 			break;
 		case TemplateParser.IAND:
-			program.append(Opcode2.IAND);
+			program.append(Opcode.IAND);
 			break;
 		case TemplateParser.IOR:
-			program.append(Opcode2.IOR);
+			program.append(Opcode.IOR);
 			break;
 		case TemplateParser.XOR:
-			program.append(Opcode2.XOR);
+			program.append(Opcode.XOR);
 			break;
 		case TemplateParser.TRUE:
-			program.append(Opcode2.TRUE);
+			program.append(Opcode.TRUE);
 			break;
 		case TemplateParser.FALSE:
-			program.append(Opcode2.FALSE);
+			program.append(Opcode.FALSE);
 			break;
 		case TemplateParser.NULL:
-			program.append(Opcode2.NULL);
+			program.append(Opcode.NULL);
 			break;
 		case TemplateParser.SCOPE_LOOKUP:
 			int lookup = program.localAllocator.lookup(text);
 			if (lookup == -1) {
-				program.append(Opcode2.SCOPE_LOOKUP, text);
+				program.append(Opcode.SCOPE_LOOKUP, text);
 			} else {
-				program.append(Opcode2.LOCAL_LOAD, lookup);
+				program.append(Opcode.LOCAL_LOAD, lookup);
 			}
 			break;
 		case TemplateParser.DOT:
-			program.append(Opcode2.DOT);
+			program.append(Opcode.DOT);
 			break;
 		case TemplateParser.QDOT:
-			program.append(Opcode2.QDOT);
+			program.append(Opcode.QDOT);
 			break;
 		case TemplateParser.UNARY_MINUS:
-			program.append(Opcode2.UNARY_MINUS);
+			program.append(Opcode.UNARY_MINUS);
 			break;
 		case TemplateParser.UNARY_PLUS:
-			program.append(Opcode2.UNARY_PLUS);
+			program.append(Opcode.UNARY_PLUS);
 			break;
 		case TemplateParser.PLUS:
-			program.append(Opcode2.BINARY_PLUS);
+			program.append(Opcode.BINARY_PLUS);
 			break;
 		case TemplateParser.MINUS:
-			program.append(Opcode2.BINARY_MINUS);
+			program.append(Opcode.BINARY_MINUS);
 			break;
 		case TemplateParser.MUL:
-			program.append(Opcode2.MUL);
+			program.append(Opcode.MUL);
 			break;
 		case TemplateParser.DIV:
-			program.append(Opcode2.DIV);
+			program.append(Opcode.DIV);
 			break;
 		case TemplateParser.TILDE:
-			program.append(Opcode2.BITWISE_NOT);
+			program.append(Opcode.BITWISE_NOT);
 			break;
 		case TemplateParser.NOT:
-			program.append(Opcode2.BOOLEAN_NOT);
+			program.append(Opcode.BOOLEAN_NOT);
 			break;
 		case TemplateParser.LSHIFT:
-			program.append(Opcode2.LSHIFT);
+			program.append(Opcode.LSHIFT);
 			break;
 		case TemplateParser.RSHIFT:
-			program.append(Opcode2.RSHIFT);
+			program.append(Opcode.RSHIFT);
 			break;
 		case TemplateParser.GT:
-			program.append(Opcode2.GT);
+			program.append(Opcode.GT);
 			break;
 		case TemplateParser.GTE:
-			program.append(Opcode2.GTE);
+			program.append(Opcode.GTE);
 			break;
 		case TemplateParser.LT:
-			program.append(Opcode2.LT);
+			program.append(Opcode.LT);
 			break;
 		case TemplateParser.LTE:
-			program.append(Opcode2.LTE);
+			program.append(Opcode.LTE);
 			break;
 		case TemplateParser.EQEQ:
-			program.append(Opcode2.EQEQ);
+			program.append(Opcode.EQEQ);
 			break;
 		case TemplateParser.NE:
-			program.append(Opcode2.NE);
+			program.append(Opcode.NE);
 			break;
 		case TemplateParser.PIPE:
 			// TODO: The filter name should be resolved in a separate opcode
-			program.append(Opcode2.LITERAL_INT, tree.getChildCount() - 2);
-			program.append(Opcode2.PIPE);
+			program.append(Opcode.LITERAL_INT, tree.getChildCount() - 2);
+			program.append(Opcode.PIPE);
 			break;
 		case TemplateParser.LPAREN:
-			program.append(Opcode2.LITERAL_INT, tree.getChildCount() - 2);
-			program.append(Opcode2.INVOKE);
+			program.append(Opcode.LITERAL_INT, tree.getChildCount() - 2);
+			program.append(Opcode.INVOKE);
 			break;
 		case TemplateParser.TO:
 			if (tree.getChildCount() == 2) {
-				program.append(Opcode2.NEW_RANGE);
+				program.append(Opcode.NEW_RANGE);
 			} else {
-				program.append(Opcode2.NEW_RANGE_BY);
+				program.append(Opcode.NEW_RANGE_BY);
 			}
 			break;
 		case TemplateParser.IN:
-			program.append(Opcode2.IN);
+			program.append(Opcode.IN);
 			break;
 		default:
 			throwParserException(TemplateError.PARSE_ERROR, "Parse successful. Found unimplemented token: " + tree.getText() + " (" + type

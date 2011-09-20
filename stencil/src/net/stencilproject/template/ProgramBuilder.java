@@ -59,11 +59,11 @@ class ProgramBuilder {
 		this.column = column;
 	}
 
-	public void append(Opcode2 opcode) {
+	public void append(Opcode opcode) {
 		instructions.add(new Instruction(source, line, column, opcode));
 	}
 
-	public void append(Opcode2 opcode, Object literal) {
+	public void append(Opcode opcode, Object literal) {
 		instructions.add(new Instruction(source, line, column, opcode, literal));
 	}
 
