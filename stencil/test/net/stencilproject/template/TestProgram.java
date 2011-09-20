@@ -1,18 +1,9 @@
 package net.stencilproject.template;
 
 import static org.junit.Assert.assertEquals;
-
-import net.stencilproject.template.Environment;
-import net.stencilproject.template.Opcode;
-import net.stencilproject.template.Program;
-import net.stencilproject.template.ProgramBuilder;
-import net.stencilproject.template.TemplateContext;
-import net.stencilproject.template.TemplateOptions;
-import net.stencilproject.template.TemplateRootScope;
 import net.stencilproject.template.ProgramBuilder.Label;
 
 import org.junit.Test;
-
 
 public class TestProgram {
 	@Test

@@ -3,8 +3,6 @@ package net.stencilproject.template;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-import net.stencilproject.template.Types;
-
 import org.junit.Test;
 
 /**

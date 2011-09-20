@@ -8,11 +8,10 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class TestErrorHandling {
+public class TestErrorHandling extends AbstractTemplateTest {
 	@Test
 	public void testNestedError() throws TemplateParserException, IOException {
-		TemplateFactory templater = createTemplater();
-		Template template = templater.parse(TemplateMode.TEXT, null, TestErrorHandling.class, "nestedErrorOuter.txt");
+		Template template = parseResource("nestedErrorOuter.txt");
 
 		ByteArrayOutputStream errStream = new ByteArrayOutputStream();
 
@@ -37,12 +36,5 @@ public class TestErrorHandling {
 		} finally {
 			System.setErr(oldErr);
 		}
-	}
-
-	private TemplateFactory createTemplater() {
-		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
-		return new TemplateFactory(options);
 	}
 }
