@@ -2,6 +2,7 @@ package net.stencilproject.gen;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,11 +17,12 @@ import net.stencilproject.template.TemplateParserException;
 import net.stencilproject.template.TemplateRootScope;
 import net.stencilproject.template.TemplateSource;
 
-import org.apache.commons.io.IOUtils;
 import org.xml.sax.SAXException;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.io.CharStreams;
 
 /**
  * Generates the matrix of compare operations from compare.html.
@@ -37,12 +39,11 @@ public class GenerateCompareOps {
 		System.out.println(template.process(model));
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<OpDefinition> readOps(InputStream in) throws IOException {
 		List<OpDefinition> ops = Lists.newArrayList();
 		boolean header = true;
 		OpDefinition currentOp = null;
-		for (String line : (List<String>) IOUtils.readLines(in)) {
+		for (String line : CharStreams.readLines(new InputStreamReader(in, Charsets.UTF_8))) {
 			if (line.isEmpty()) {
 				header = true;
 				continue;
@@ -67,7 +68,8 @@ public class GenerateCompareOps {
 		}
 
 		for (OpDefinition op : ops) {
-			// Mirror the entries across the diagonal, but only where they are missing
+			// Mirror the entries across the diagonal, but only where they are
+			// missing
 			List<List<String>> table = op.table;
 			for (int i = 0; i < table.size(); i++) {
 				List<String> row = table.get(i);
@@ -78,7 +80,8 @@ public class GenerateCompareOps {
 				}
 			}
 
-			// Optimize comparisons by X'ing out any constant sequence of items from the right-most edge
+			// Optimize comparisons by X'ing out any constant sequence of items
+			// from the right-most edge
 			for (List<String> row : op.table) {
 				String lastItem = row.get(row.size() - 1);
 				for (int i = row.size() - 2; i >= 0; i--) {

@@ -134,4 +134,26 @@ public class TestParseExceptions {
 			assertEquals(TemplateError.PARSE_ERROR, e.getError());
 		}
 	}
+
+	@Test
+	public void testEndDefaultBlock() {
+		Templater templater = createTemplater();
+		try {
+			templater.parse("{% end %}");
+			fail("Should have thrown exception");
+		} catch (TemplateParserException e) {
+			assertEquals(TemplateError.END_WITHOUT_BLOCK, e.getError());
+		}
+	}
+
+	@Test
+	public void testElseDefaultBlock() {
+		Templater templater = createTemplater();
+		try {
+			templater.parse("{% else %}");
+			fail("Should have thrown exception");
+		} catch (TemplateParserException e) {
+			assertEquals(TemplateError.ELSE_WITHOUT_BLOCK, e.getError());
+		}
+	}
 }

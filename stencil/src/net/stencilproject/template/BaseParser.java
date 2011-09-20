@@ -10,12 +10,14 @@ import net.stencilproject.template.TemplateParserException.TemplateError;
 import org.antlr.runtime.MismatchedTokenException;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
-import org.apache.commons.io.IOUtils;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
+import com.google.common.io.Resources;
 
 /**
- * Base class for things involved in parsing. Contains useful methods for throwing proper exceptions.
+ * Base class for things involved in parsing. Contains useful methods for
+ * throwing proper exceptions.
  */
 class BaseParser {
 	protected final TemplateFileSourceInfo source;
@@ -56,8 +58,7 @@ class BaseParser {
 	}
 
 	private Map<Integer, String> readTokens() throws IOException {
-		@SuppressWarnings("unchecked")
-		List<String> lines = IOUtils.readLines(getClass().getResourceAsStream("Template.tokens"));
+		List<String> lines = Resources.readLines(getClass().getResource("Template.tokens"), Charsets.UTF_8);
 		Map<Integer, String> tokens = Maps.newHashMap();
 		for (String token : lines) {
 			int split = token.lastIndexOf('=');

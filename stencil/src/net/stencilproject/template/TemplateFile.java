@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.commons.io.IOUtils;
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
 
 /**
  * Wraps one of many input sources for template data.
@@ -40,7 +42,7 @@ abstract class TemplateFile {
 				public String read() throws IOException {
 					InputStream stream = new FileInputStream(file);
 					try {
-						return IOUtils.toString(stream);
+						return CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
 					} finally {
 						stream.close();
 					}
@@ -81,7 +83,7 @@ abstract class TemplateFile {
 			public String read() throws IOException {
 				InputStream stream = url.openStream();
 				try {
-					return IOUtils.toString(stream);
+					return CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
 				} finally {
 					stream.close();
 				}
@@ -92,7 +94,8 @@ abstract class TemplateFile {
 	/**
 	 * Returns a template file from a class resource.
 	 * 
-	 * @return null if the resource could not be found, otherwise the TemplateFile
+	 * @return null if the resource could not be found, otherwise the
+	 *         TemplateFile
 	 */
 	public static TemplateFile fromResource(Class<?> clazz, String resourceName) {
 		if (clazz == null) {
@@ -121,7 +124,7 @@ abstract class TemplateFile {
 		return new TemplateFile(url) {
 			@Override
 			public String read() throws IOException {
-				return IOUtils.toString(reader);
+				return CharStreams.toString(reader);
 			}
 		};
 	}
@@ -129,17 +132,16 @@ abstract class TemplateFile {
 	/**
 	 * Returns a template file from the given InputStream.
 	 */
-	public static TemplateFile fromInputStream(final InputStream inputStream, URL url) {
-		if (inputStream == null) {
+	public static TemplateFile fromInputStream(final InputStream stream, URL url) {
+		if (stream == null) {
 			throw new NullPointerException("inputStream is null");
 		}
 
 		return new TemplateFile(url) {
 			@Override
 			public String read() throws IOException {
-				return IOUtils.toString(inputStream);
+				return CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
 			}
 		};
 	}
-
 }

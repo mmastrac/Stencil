@@ -236,7 +236,8 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 			appendTree(collection);
 			program.append(Opcode2.ITERATOR);
 
-			// This is a bit hacky: we order the list as a mini-program inside the script
+			// This is a bit hacky: we order the list as a mini-program inside
+			// the script
 			if (orderBy != null) {
 				Label end = program.createLabel();
 				program.append(Opcode2.ITERATOR_START_ORDER_BY);
@@ -357,11 +358,11 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 			break;
 		}
 		case TemplateParser.END: {
-			program.localAllocator.endBlock();
-
 			if (blockStack.isEmpty()) {
 				throwParserException(TemplateError.END_WITHOUT_BLOCK, "END without IF or FOR", tree);
 			}
+
+			program.localAllocator.endBlock();
 
 			BlockContext context = blockStack.pop();
 

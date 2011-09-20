@@ -15,14 +15,15 @@ import net.stencilproject.template.TemplateMode;
 import net.stencilproject.template.TemplateOptions;
 import net.stencilproject.template.TemplateParserException;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.io.Resources;
 
 /**
  * Tests full templates.
@@ -59,14 +60,7 @@ public class FullTemplateTest {
 		options.setDumpTemplate(false);
 		options.setTraceExecution(false);
 
-		String outputString;
-
-		InputStream output = FullTemplateTest.class.getResourceAsStream(name + "/output.html");
-		try {
-			outputString = IOUtils.toString(output);
-		} finally {
-			output.close();
-		}
+		String outputString = Resources.toString(FullTemplateTest.class.getResource(name + "/output.html"), Charsets.UTF_8);
 
 		StringWriter writer = new StringWriter();
 		Map<String, Object> model = Maps.newHashMap();

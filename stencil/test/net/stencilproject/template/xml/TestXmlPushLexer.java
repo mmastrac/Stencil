@@ -2,13 +2,6 @@ package net.stencilproject.template.xml;
 
 import java.util.ArrayList;
 
-import net.stencilproject.template.xml.Mode;
-import net.stencilproject.template.xml.NotWellFormedException;
-import net.stencilproject.template.xml.TokenType;
-import net.stencilproject.template.xml.XmlPushLexer;
-import net.stencilproject.template.xml.XmlTokenHandler;
-
-import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -400,6 +393,10 @@ public class TestXmlPushLexer {
 		Assert.assertEquals(toString(expected), toString(actual.toArray(new Object[actual.size()][])));
 	}
 
+	/**
+	 * Builds a Java representation of the object for comparison so we can
+	 * quickly generate test cases.
+	 */
 	private String toString(Object[][] array) {
 		if (array == null) {
 			return "null";
@@ -412,12 +409,28 @@ public class TestXmlPushLexer {
 			builder.append(x[0]);
 			builder.append(", ");
 			builder.append('"');
-			builder.append(StringEscapeUtils.escapeJava(x[1].toString()));
+			builder.append(escapeJava(x[1].toString()));
 			builder.append('"');
 			builder.append(" },\n");
 		}
 
 		builder.append("}");
 		return builder.toString();
+	}
+
+	/**
+	 * Escape any Java characters we might have used in the string.
+	 */
+	private String escapeJava(String string) {
+		StringBuilder escaped = new StringBuilder();
+		for (int i = 0; i < string.length(); i++) {
+			char c = string.charAt(i);
+			if (c == '"') {
+				escaped.append("\\\"");
+			} else {
+				escaped.append(c);
+			}
+		}
+		return escaped.toString();
 	}
 }
