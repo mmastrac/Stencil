@@ -46,12 +46,11 @@ class Program implements SourceInfo {
 
 	@Override
 	public TemplateFile getSource() {
-		return source.getTemplateFile();
+		return source.getSource();
 	}
 
 	@Override
 	public SourceInfo getParent() {
 		return source.getParent();
 	}
-
 }

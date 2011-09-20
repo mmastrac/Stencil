@@ -26,7 +26,7 @@ abstract class BaseParser {
 
 	public BaseParser(TemplateFileSourceInfo source) {
 		this.source = source;
-		this.templateFile = source.getTemplateFile();
+		this.templateFile = source.getSource();
 		this.rootUrl = templateFile.getUrl();
 	}
 

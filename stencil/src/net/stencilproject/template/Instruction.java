@@ -64,7 +64,7 @@ class Instruction implements SourceInfo {
 	};
 
 	public TemplateFile getSource() {
-		return source.getTemplateFile();
+		return source.getSource();
 	};
 
 	public SourceInfo getParent() {

@@ -64,7 +64,7 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 	}
 
 	private TemplateBuilder(TemplateRootScope rootScope, TemplateFile templateFile, TemplateMode mode, TemplateOptions options) {
-		super(new TemplateFileSourceInfo(templateFile, null));
+		super(new TemplateFileSourceInfo(templateFile));
 
 		this.rootScope = rootScope;
 		this.mode = mode;
@@ -82,7 +82,7 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 	private void parse() throws TemplateParserException, IOException {
 		start = System.nanoTime();
 
-		TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, null), mode, this);
+		TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile), mode, this);
 		treeBuilder.parse();
 
 		end = System.nanoTime();
@@ -129,13 +129,13 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 
 		switch (type) {
 		case TemplateParser.INCLUDE: {
-			URL parentUrl = source.getTemplateFile().getUrl();
+			URL parentUrl = source.getSource().getUrl();
 			String include = tree.getChild(0).getText();
 			try {
 				URL url = new URL(parentUrl, include);
 				TemplateFile templateFile = TemplateFile.fromUrl(url);
-				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, new ParentSourceInfo(
-						source, tree.getLine(), tree.getCharPositionInLine())), mode, this);
+				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, source, tree.getLine(),
+						tree.getCharPositionInLine()), mode, this);
 				treeBuilder.parse();
 			} catch (MalformedURLException e) {
 				throwParserException(TemplateError.BAD_IMPORT, "Invalid argument to import of " + include, e, tree);
@@ -150,13 +150,13 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 				throwParserException(TemplateError.EXTENDS_LOCATION, "extends must be the first instruction of a template");
 			}
 
-			URL parentUrl = source.getTemplateFile().getUrl();
+			URL parentUrl = source.getSource().getUrl();
 			String extendsTemplate = tree.getChild(0).getText();
 			try {
 				URL url = new URL(parentUrl, extendsTemplate);
 				TemplateFile templateFile = TemplateFile.fromUrl(url);
-				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, new ParentSourceInfo(
-						source, tree.getLine(), tree.getCharPositionInLine())), mode, this);
+				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, source, tree.getLine(),
+						tree.getCharPositionInLine()), mode, this);
 				treeBuilder.parse();
 			} catch (MalformedURLException e) {
 				throwParserException(TemplateError.BAD_EXTENDS, "Invalid argument to extends of " + extendsTemplate, e, tree);
