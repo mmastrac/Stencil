@@ -1,7 +1,7 @@
 package net.stencilproject.template.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.stencilproject.template.Template;
-import net.stencilproject.template.TemplateFactory;
+import net.stencilproject.template.TemplateFile;
+import net.stencilproject.template.TemplateMode;
 import net.stencilproject.template.TemplateOptions;
 import net.stencilproject.template.TemplateParserException;
 import net.stencilproject.template.TemplateRootScope;
-import net.stencilproject.template.TemplateSource;
 
 import com.google.common.collect.Maps;
 
@@ -25,21 +25,45 @@ public abstract class TemplateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected Template template;
-
-	protected TemplateFactory templateFactory;
+	protected TemplateOptions templateOptions;
 
 	public TemplateServlet() {
 	}
 
 	@Override
 	public void init() throws ServletException {
-		templateFactory = getTemplateFactory();
+		templateOptions = getTemplateOptions();
+
+		// If the options specify to eagerly load the template, load it now
+		// before it has been requested.
+		if (templateOptions.isEagerLoading()) {
+			getTemplate();
+		}
+	}
+
+	/**
+	 * Gets the current template, reloading if
+	 * {@link TemplateOptions#isDevelopmentMode()} is set.
+	 */
+	protected Template getTemplate() throws ServletException {
+		if (template != null && !templateOptions.isDevelopmentMode()) {
+			return template;
+		}
+
+		template = loadTemplate();
+		return template;
+	}
+
+	/**
+	 * Loads the {@link Template} from the {@link TemplateFile}.
+	 */
+	protected Template loadTemplate() throws ServletException {
 		try {
-			TemplateSource templateSource = getTemplateSource();
-			if (templateSource == null) {
-				throw new ServletException("No template source returned in " + getClass().getSimpleName());
+			TemplateFile templateFile = getTemplateFile();
+			if (templateFile == null) {
+				throw new ServletException("No template file returned in " + getClass().getSimpleName());
 			}
-			template = templateFactory.parse(templateSource, getRootScope());
+			return templateFile.readTemplate(getTemplateMode(), getRootScope(), getTemplateOptions());
 		} catch (TemplateParserException e) {
 			log("Error parsing template", e);
 			throw new ServletException(e);
@@ -53,14 +77,18 @@ public abstract class TemplateServlet extends HttpServlet {
 		return null;
 	}
 
-	protected abstract TemplateSource getTemplateSource();
-
-	protected TemplateFactory getTemplateFactory() {
-		return new TemplateFactory(getTemplateOptions());
+	protected TemplateMode getTemplateMode() {
+		return TemplateMode.HTML;
 	}
+
+	protected abstract TemplateFile getTemplateFile();
 
 	protected TemplateOptions getTemplateOptions() {
 		return new TemplateOptions();
+	}
+
+	protected String getContentType() {
+		return "text/html";
 	}
 
 	@Override
@@ -137,19 +165,20 @@ public abstract class TemplateServlet extends HttpServlet {
 		super.doPut(req, resp);
 	}
 
-	protected void writeTemplate(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	protected void writeTemplate(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws IOException,
+			ServletException {
 		// Don't render for redirects
-		if (resp.containsHeader("Location")) {
+		if (resp.containsHeader("Location") || resp.isCommitted()) {
 			return;
 		}
 
-		resp.setContentType("text/html");
+		resp.setContentType(getContentType());
 		resp.setCharacterEncoding("utf-8");
 
-		template.process(model, getWriter(req, resp));
+		getTemplate().process(model, getWriter(req, resp));
 	}
 
-	protected PrintWriter getWriter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	protected Writer getWriter(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		return resp.getWriter();
 	}
 }

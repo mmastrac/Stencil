@@ -66,8 +66,7 @@ public class FullTemplateTest {
 		Map<String, Object> model = Maps.newHashMap();
 
 		TemplateFactory templateFactory = new TemplateFactory(options);
-		Template template = templateFactory.getTemplateSource(TemplateMode.HTML, FullTemplateTest.class, name + "/input.html")
-				.readTemplate(null);
+		Template template = templateFactory.parse(TemplateMode.HTML, null, FullTemplateTest.class, name + "/input.html");
 		template.process(model, writer);
 
 		assertEquals(outputString, writer.toString());

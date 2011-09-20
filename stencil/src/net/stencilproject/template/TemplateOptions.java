@@ -4,9 +4,18 @@ public class TemplateOptions implements Cloneable {
 	private boolean developmentMode = false;
 	private boolean dumpTemplate = false;
 	private boolean traceExecution = false;
+	private boolean eagerLoading = true;
 	private int maxInstructions = 200000;
 
 	public TemplateOptions() {
+	}
+
+	public boolean isEagerLoading() {
+		return eagerLoading;
+	}
+
+	public void setEagerLoading(boolean eagerLoading) {
+		this.eagerLoading = eagerLoading;
 	}
 
 	public boolean getDumpTemplate() {

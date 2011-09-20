@@ -14,7 +14,7 @@ import com.google.common.io.CharStreams;
 /**
  * Wraps one of many input sources for template data.
  */
-abstract class TemplateFile {
+public abstract class TemplateFile {
 	private final URL url;
 
 	private TemplateFile(URL url) {
@@ -110,5 +110,10 @@ abstract class TemplateFile {
 		}
 
 		return TemplateFile.fromUrl(resource);
+	}
+
+	public Template readTemplate(TemplateMode mode, TemplateRootScope rootScope, TemplateOptions options) throws TemplateParserException,
+			IOException {
+		return TemplateBuilder.parse(rootScope, this, mode, options).toTemplate();
 	}
 }

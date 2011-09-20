@@ -14,8 +14,6 @@ import net.stencilproject.template.TemplateFactory;
 import net.stencilproject.template.TemplateMode;
 import net.stencilproject.template.TemplateOptions;
 import net.stencilproject.template.TemplateParserException;
-import net.stencilproject.template.TemplateRootScope;
-import net.stencilproject.template.TemplateSource;
 
 import org.xml.sax.SAXException;
 
@@ -30,8 +28,7 @@ import com.google.common.io.CharStreams;
 public class GenerateCompareOps {
 	public static void main(String[] args) throws IOException, SAXException, TemplateParserException {
 		TemplateFactory factory = new TemplateFactory(new TemplateOptions());
-		TemplateSource templateSource = factory.getTemplateSource(TemplateMode.TEXT, GenerateCompareOps.class, "CompareOps.java.template");
-		Template template = templateSource.readTemplate(new TemplateRootScope());
+		Template template = factory.parse(TemplateMode.TEXT, null, GenerateCompareOps.class, "CompareOps.java.template");
 
 		Map<String, Object> model = Maps.newHashMap();
 		model.put("compareOps", readOps(GenerateCompareOps.class.getResourceAsStream("compare.csv")));
