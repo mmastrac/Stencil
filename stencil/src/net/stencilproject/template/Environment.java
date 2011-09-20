@@ -79,7 +79,7 @@ class Environment {
 			return false;
 		}
 
-		Instruction2 ins = program.instructions[pc];
+		Instruction ins = program.instructions[pc];
 		Object literal = ins.literal;
 
 		if (traceExecution) {

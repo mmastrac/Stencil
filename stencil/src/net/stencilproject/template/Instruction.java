@@ -3,7 +3,7 @@ package net.stencilproject.template;
 /**
  * Instruction in a template program.
  */
-class Instruction2 implements SourceInfo {
+class Instruction implements SourceInfo {
 	final Opcode2 opcode;
 	Object literal;
 
@@ -11,11 +11,11 @@ class Instruction2 implements SourceInfo {
 	final int line;
 	final int column;
 
-	public Instruction2(TemplateFileSourceInfo templateFileSourceInfo, int line, int column, Opcode2 opcode) {
+	public Instruction(TemplateFileSourceInfo templateFileSourceInfo, int line, int column, Opcode2 opcode) {
 		this(templateFileSourceInfo, line, column, opcode, null);
 	}
 
-	public Instruction2(TemplateFileSourceInfo source, int line, int column, Opcode2 opcode, Object literal) {
+	public Instruction(TemplateFileSourceInfo source, int line, int column, Opcode2 opcode, Object literal) {
 		this.source = source;
 		this.line = line;
 		this.column = column;

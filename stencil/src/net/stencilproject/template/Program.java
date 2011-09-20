@@ -1,12 +1,12 @@
 package net.stencilproject.template;
 
 class Program implements SourceInfo {
-	Instruction2[] instructions;
+	Instruction[] instructions;
 	int localSize;
 	private final EscapingMode escapingMode;
 	private final TemplateFileSourceInfo source;
 
-	public Program(TemplateFileSourceInfo source, EscapingMode escapingMode, Instruction2[] instructions, int localSize) {
+	public Program(TemplateFileSourceInfo source, EscapingMode escapingMode, Instruction[] instructions, int localSize) {
 		this.source = source;
 		this.escapingMode = escapingMode;
 		this.instructions = instructions;
@@ -25,7 +25,7 @@ class Program implements SourceInfo {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		int index = 0;
-		for (Instruction2 instruction : instructions) {
+		for (Instruction instruction : instructions) {
 			final int addr = index++;
 			builder.append(addr + ": " + instruction.toString(addr));
 			builder.append('\n');

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.google.common.collect.Lists;
 
 class ProgramBuilder {
-	ArrayList<Instruction2> instructions = Lists.newArrayList();
+	ArrayList<Instruction> instructions = Lists.newArrayList();
 	LocalAllocator localAllocator = new LocalAllocator();
 	EscapingMode escapingMode = EscapingMode.TEXT;
 
@@ -60,17 +60,17 @@ class ProgramBuilder {
 	}
 
 	public void append(Opcode2 opcode) {
-		instructions.add(new Instruction2(source, line, column, opcode));
+		instructions.add(new Instruction(source, line, column, opcode));
 	}
 
 	public void append(Opcode2 opcode, Object literal) {
-		instructions.add(new Instruction2(source, line, column, opcode, literal));
+		instructions.add(new Instruction(source, line, column, opcode, literal));
 	}
 
 	public Program toProgram() {
-		Instruction2[] instructions = this.instructions.toArray(new Instruction2[this.instructions.size()]);
+		Instruction[] instructions = this.instructions.toArray(new Instruction[this.instructions.size()]);
 		for (int i = 0; i < instructions.length; i++) {
-			Instruction2 instruction = instructions[i];
+			Instruction instruction = instructions[i];
 			if (instruction.literal instanceof Label) {
 				Label label = (Label) instruction.literal;
 				if (label.index == -1) {
@@ -89,7 +89,7 @@ class ProgramBuilder {
 	}
 
 	public void addAll(Program program) {
-		for (Instruction2 instruction : program.instructions) {
+		for (Instruction instruction : program.instructions) {
 			instructions.add(instruction);
 		}
 	}
