@@ -1,6 +1,7 @@
 // $ANTLR 3.2 Sep 23, 2009 12:02:23 /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g 2010-12-06 14:34:39
 package net.stencilproject.template;
 
+
 import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;

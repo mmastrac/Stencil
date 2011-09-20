@@ -13,18 +13,10 @@ import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-public class TestFor {
-	private Templater createTemplater() {
-		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
-		return new Templater(null, options);
-	}
-
+public class TestFor extends AbstractTemplateTest {
 	@Test
 	public void testFor() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data %}{{ x }}{% end %}.");
+		Template template = parse("Check out this list: {% for x in data %}{{ x }}{% end %}.");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
@@ -33,8 +25,7 @@ public class TestFor {
 
 	@Test
 	public void testFor2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data %}{{ x }}{% end %}");
+		Template template = parse("Check out this list: {% for x in data %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
@@ -43,8 +34,7 @@ public class TestFor {
 
 	@Test
 	public void testForOverMap() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this map: {% for x in data %}{{ x[0] }} = {{ x[1] }},{% end %}.");
+		Template template = parse("Check out this map: {% for x in data %}{{ x[0] }} = {{ x[1] }},{% end %}.");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		TreeMap<String, Object> map = Maps.newTreeMap();
@@ -56,8 +46,7 @@ public class TestFor {
 
 	@Test
 	public void testForOverMapOrder() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this map: {% for x in data order by x[0] %}{{ x[0] }} = {{ x[1] }},{% end %}.");
+		Template template = parse("Check out this map: {% for x in data order by x[0] %}{{ x[0] }} = {{ x[1] }},{% end %}.");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		TreeMap<String, Object> map = Maps.newTreeMap();
@@ -69,8 +58,7 @@ public class TestFor {
 
 	@Test
 	public void testForOrder() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data order by x %}{{ x }}{% end %}");
+		Template template = parse("Check out this list: {% for x in data order by x %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
@@ -79,8 +67,7 @@ public class TestFor {
 
 	@Test
 	public void testForOrder2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data order by -x %}{{ x }}{% end %}");
+		Template template = parse("Check out this list: {% for x in data order by -x %}{{ x }}{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList(4, 2, 1, 3));
@@ -89,8 +76,7 @@ public class TestFor {
 
 	@Test
 	public void testForOrderAndLimit() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data order by x limit 2 %}{{ x }}{% end %}");
+		Template template = parse("Check out this list: {% for x in data order by x limit 2 %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
@@ -99,8 +85,7 @@ public class TestFor {
 
 	@Test
 	public void testForOrderAndLimit2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data order by x limit 6 %}{{ x }}{% end %}");
+		Template template = parse("Check out this list: {% for x in data order by x limit 6 %}{{ x }}{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
@@ -109,8 +94,7 @@ public class TestFor {
 
 	@Test
 	public void testForString() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("String chars: {% for x in data %}{{ x }},{% end %}");
+		Template template = parse("String chars: {% for x in data %}{{ x }},{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", "abcd");
@@ -119,8 +103,7 @@ public class TestFor {
 
 	@Test
 	public void testForArray() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Integers: {% for x in data %}{{ x }},{% end %}");
+		Template template = parse("Integers: {% for x in data %}{{ x }},{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", new int[] { 1, 2, 3, 4 });
@@ -129,8 +112,7 @@ public class TestFor {
 
 	@Test
 	public void testForMap() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Map: {% for x in data %}{{ x[0] }} == {{ x[1] }}, {% end %}");
+		Template template = parse("Map: {% for x in data %}{{ x[0] }} == {{ x[1] }}, {% end %}");
 
 		Map<String, Object> mapModel = Maps.newHashMap();
 		Map<String, String> map = Maps.newTreeMap();
@@ -142,8 +124,7 @@ public class TestFor {
 
 	@Test
 	public void testForLimit() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data limit lim %}{{x}}{% end %}");
+		Template template = parse("Check out this list: {% for x in data limit lim %}{{x}}{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
@@ -156,8 +137,7 @@ public class TestFor {
 
 	@Test
 	public void testForLimitNull() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data limit null %}{{x}}{% end %}");
+		Template template = parse("Check out this list: {% for x in data limit null %}{{x}}{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
@@ -166,8 +146,7 @@ public class TestFor {
 
 	@Test
 	public void testForScope() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {{x}}{% for x in data %}{{x}}{% end %}{{x}}");
+		Template template = parse("Check out this list: {{x}}{% for x in data %}{{x}}{% end %}{{x}}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));
@@ -178,9 +157,7 @@ public class TestFor {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testNestedFor() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater
-				.parse("{% for item in x %}Whoa: {% for y in item.data %}{{ y }}{% else %}no data{% end %}. {% end %}");
+		Template template = parse("{% for item in x %}Whoa: {% for y in item.data %}{{ y }}{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
 		innerMap.put("data", Arrays.asList("a", "b", "c"));
@@ -197,9 +174,7 @@ public class TestFor {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testNestedForContinue() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater
-				.parse("{% for item in x %}Whoa: {% for y in item.data %}{% if y == 'b' %}{% continue %}{% end %}{{y}}{% else %}no data{% end %}. {% end %}");
+		Template template = parse("{% for item in x %}Whoa: {% for y in item.data %}{% if y == 'b' %}{% continue %}{% end %}{{y}}{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
 		innerMap.put("data", Arrays.asList("a", "b", "c"));
@@ -220,9 +195,7 @@ public class TestFor {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testNestedForContinue2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater
-				.parse("{% for item in x %}Whoa: {% for y in item.data %}>{% if y == 'b' %}{% continue %}{% end %}{{y}}<{% else %}no data{% end %}. {% end %}");
+		Template template = parse("{% for item in x %}Whoa: {% for y in item.data %}>{% if y == 'b' %}{% continue %}{% end %}{{y}}<{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
 		innerMap.put("data", Arrays.asList("a", "b", "c"));
@@ -239,8 +212,7 @@ public class TestFor {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testNestedFor2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("{% for item in x %}Whoa: {% for y in item.data %}{{y}}{% else %}no data{% end %}. {% end %}");
+		Template template = parse("{% for item in x %}Whoa: {% for y in item.data %}{{y}}{% else %}no data{% end %}. {% end %}");
 
 		HashMap<String, Object> innerMap = Maps.newHashMap();
 		innerMap.put("data", Arrays.asList("a", "b", "c"));
@@ -256,8 +228,7 @@ public class TestFor {
 
 	@Test
 	public void testForElse1() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data %}{{x}}{% else %}empty{% end %}");
+		Template template = parse("Check out this list: {% for x in data %}{{x}}{% else %}empty{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("data", Collections.emptyList());
@@ -266,8 +237,7 @@ public class TestFor {
 
 	@Test
 	public void testForElse2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("Check out this list: {% for x in data %}{{x}}{% else %}empty{% end %}");
+		Template template = parse("Check out this list: {% for x in data %}{{x}}{% else %}empty{% end %}");
 
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("a", "b", "c", "d"));

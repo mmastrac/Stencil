@@ -4,11 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 
-import net.stencilproject.template.Template;
-import net.stencilproject.template.TemplateOptions;
-import net.stencilproject.template.TemplateParserException;
-import net.stencilproject.template.Templater;
-
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
@@ -16,18 +11,10 @@ import com.google.common.collect.Maps;
 /**
  * Tests the IF construct.
  */
-public class TestIf {
-	private Templater createTemplater() {
-		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
-		return new Templater(null, options);
-	}
-
+public class TestIf extends AbstractTemplateTest {
 	@Test
 	public void testIf1a() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("x{% if x %} = true{% end %}, y{% if y %} = true{% end %}");
+		Template template = parse("x{% if x %} = true{% end %}, y{% if y %} = true{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", true);
@@ -37,8 +24,7 @@ public class TestIf {
 
 	@Test
 	public void testIf1b() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("x{% if x %} = true{% end %}, y{% if y %} = true{% end %}");
+		Template template = parse("x{% if x %} = true{% end %}, y{% if y %} = true{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 		mapModel.put("x", false);
@@ -48,8 +34,7 @@ public class TestIf {
 
 	@Test
 	public void testIf2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("x{% if data.x %} = true{% end %}, y{% if data.y %} = true{% end %}");
+		Template template = parse("x{% if data.x %} = true{% end %}, y{% if data.y %} = true{% end %}");
 
 		HashMap<String, Object> mapModelInner = Maps.newHashMap();
 		mapModelInner.put("x", true);
@@ -61,8 +46,7 @@ public class TestIf {
 
 	@Test
 	public void testIfElse1() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("x{% if data.x %} = true{% else %} = false{% end %}, y{% if data.y %} = true{% else %} = false{% end %}");
+		Template template = parse("x{% if data.x %} = true{% else %} = false{% end %}, y{% if data.y %} = true{% else %} = false{% end %}");
 
 		HashMap<String, Object> mapModelInner = Maps.newHashMap();
 		mapModelInner.put("x", true);
@@ -74,8 +58,7 @@ public class TestIf {
 
 	@Test
 	public void testIfElse2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("x{% if data.x %} = true{% else %} = false{% end %}, y{% if data.y %} = true{% else %} = false{% end %}");
+		Template template = parse("x{% if data.x %} = true{% else %} = false{% end %}, y{% if data.y %} = true{% else %} = false{% end %}");
 
 		HashMap<String, Object> mapModelInner = Maps.newHashMap();
 		mapModelInner.put("x", false);
@@ -87,8 +70,7 @@ public class TestIf {
 
 	@Test
 	public void testIfElIf1() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("{% if x %}x = true{% elif y %}y = true{% else %}neither{% end %}");
+		Template template = parse("{% if x %}x = true{% elif y %}y = true{% else %}neither{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 
@@ -111,8 +93,7 @@ public class TestIf {
 
 	@Test
 	public void testIfElIf2() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("{% if x and y %}x&&y{% elif x %}x{% elif y %}y{% else %}!x&&!y{% end %}");
+		Template template = parse("{% if x and y %}x&&y{% elif x %}x{% elif y %}y{% else %}!x&&!y{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 
@@ -135,8 +116,7 @@ public class TestIf {
 
 	@Test
 	public void testIfElIf3() throws TemplateParserException {
-		Templater templater = createTemplater();
-		Template template = templater.parse("{% if x and y %}x&&y{% elif x or y %}x||y{% else %}!x&&!y{% end %}");
+		Template template = parse("{% if x and y %}x&&y{% elif x or y %}x||y{% else %}!x&&!y{% end %}");
 
 		HashMap<String, Object> mapModel = Maps.newHashMap();
 

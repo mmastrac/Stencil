@@ -11,8 +11,8 @@ import org.junit.Test;
 public class TestErrorHandling {
 	@Test
 	public void testNestedError() throws TemplateParserException, IOException {
-		Templater templater = createTemplater();
-		Template template = templater.parse(TemplateMode.TEXT, TemplateFile.fromResource(TestErrorHandling.class, "nestedErrorOuter.txt"));
+		TemplateFactory templater = createTemplater();
+		Template template = templater.parse(TemplateMode.TEXT, null, TestErrorHandling.class, "nestedErrorOuter.txt");
 
 		ByteArrayOutputStream errStream = new ByteArrayOutputStream();
 
@@ -39,10 +39,10 @@ public class TestErrorHandling {
 		}
 	}
 
-	private Templater createTemplater() {
+	private TemplateFactory createTemplater() {
 		TemplateOptions options = new TemplateOptions();
 		options.setDumpTemplate(true);
 		options.setTraceExecution(true);
-		return new Templater(null, options);
+		return new TemplateFactory(options);
 	}
 }

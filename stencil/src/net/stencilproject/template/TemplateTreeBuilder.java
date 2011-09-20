@@ -17,13 +17,12 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.Tree;
 
-
 /**
  * Parses a template, passing back the structure to an EventHandler.
  */
 class TemplateTreeBuilder extends BaseParser {
 	private StringBuilder builder = new StringBuilder();
-	private final EventHandler eventHandler;
+	private final TemplateBuilderEvents eventHandler;
 	private final TemplateMode mode;
 	private TextState textState = TextState.TEXT;
 
@@ -36,21 +35,13 @@ class TemplateTreeBuilder extends BaseParser {
 		ESCAPE,
 	}
 
-	TemplateTreeBuilder(TemplateFileSourceInfo source, TemplateMode mode, EventHandler eventHandler) {
+	TemplateTreeBuilder(TemplateFileSourceInfo source, TemplateMode mode, TemplateBuilderEvents eventHandler) {
 		super(source);
 		this.mode = mode;
 		this.eventHandler = eventHandler;
 	}
 
-	interface EventHandler {
-		void text(TemplateFileSourceInfo source, String text) throws TemplateParserException;
-
-		void tree(TemplateFileSourceInfo source, Tree tree) throws TemplateParserException;
-
-		void done() throws TemplateParserException;
-	}
-
-	private class TextEventHandler implements EventHandler {
+	private class TextEventHandler implements TemplateBuilderEvents {
 		@Override
 		public void text(TemplateFileSourceInfo source, String text) throws TemplateParserException {
 			emit(text);
@@ -66,7 +57,7 @@ class TemplateTreeBuilder extends BaseParser {
 		}
 	}
 
-	private class XmlEventHandler implements EventHandler, XmlTokenHandler {
+	private class XmlEventHandler implements TemplateBuilderEvents, XmlTokenHandler {
 		private XmlPushLexer pushLexer = new XmlPushLexer(this);
 		// TODO: Use something more efficient here
 		private ArrayList<Tree> trees = new ArrayList<Tree>();
@@ -165,7 +156,7 @@ class TemplateTreeBuilder extends BaseParser {
 		};
 	}
 
-	private void processTree(EventHandler eventHandler, Tree templateTree) throws TemplateParserException {
+	private void processTree(TemplateBuilderEvents eventHandler, Tree templateTree) throws TemplateParserException {
 		for (int i = 0; i < templateTree.getChildCount(); i++) {
 			Tree tree = templateTree.getChild(i);
 			switch (tree.getType()) {
@@ -196,7 +187,7 @@ class TemplateTreeBuilder extends BaseParser {
 		eventHandler.tree(source, tree);
 	}
 
-	private Tree parseTree(String string, EventHandler eventHandler) throws TemplateParserException {
+	private Tree parseTree(String string, TemplateBuilderEvents eventHandler) throws TemplateParserException {
 		final Exception[] stashed = new Exception[1];
 
 		final ANTLRStringStream stringStream = new ANTLRStringStream(string);
@@ -238,7 +229,7 @@ class TemplateTreeBuilder extends BaseParser {
 	}
 
 	public void parse() throws TemplateParserException, IOException {
-		EventHandler eventHandler = mode == TemplateMode.TEXT ? new TextEventHandler() : new XmlEventHandler();
+		TemplateBuilderEvents eventHandler = mode == TemplateMode.TEXT ? new TextEventHandler() : new XmlEventHandler();
 		Tree tree = parseTree(templateFile.read(), eventHandler);
 		processTree(eventHandler, tree);
 		flushText();

@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 class IteratorUtils {
 	/**
-	 * Returns the null iterator - one that has no values.
+	 * Represents the null iterator - one that has no values.
 	 */
 	public static final Iterator<Object> NULL_ITERATOR = new Iterator<Object>() {
 		@Override

@@ -6,22 +6,26 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.CharBuffer;
 import java.util.Date;
 import java.util.List;
 import java.util.Stack;
 
 import net.stencilproject.template.ProgramBuilder.Label;
 import net.stencilproject.template.TemplateParserException.TemplateError;
-import net.stencilproject.template.TemplateTreeBuilder.EventHandler;
 
 import org.antlr.runtime.tree.Tree;
 import org.xml.sax.InputSource;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
+import com.google.common.io.CharStreams;
 
-public class TemplateParserBuilder extends BaseParser implements EventHandler {
+/**
+ * Builds a template from a given template file, invoking
+ * {@link TemplateTreeBuilder} and handling {@link TemplateBuilderEvents} callbacks as
+ * needed.
+ */
+public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents {
 	private ProgramBuilder program = new ProgramBuilder();
 	private Stack<BlockContext> blockStack = new Stack<BlockContext>();
 	private final TemplateRootScope rootScope;
@@ -65,7 +69,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 
 	}
 
-	private TemplateParserBuilder(TemplateRootScope rootScope, TemplateFile templateFile, TemplateMode mode, TemplateOptions options) {
+	private TemplateBuilder(TemplateRootScope rootScope, TemplateFile templateFile, TemplateMode mode, TemplateOptions options) {
 		super(new TemplateFileSourceInfo(templateFile, null));
 
 		this.rootScope = rootScope;
@@ -74,9 +78,9 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 		program.setEscapingMode(mode == TemplateMode.TEXT ? EscapingMode.TEXT : EscapingMode.XML);
 	}
 
-	public static TemplateParserBuilder parse(TemplateRootScope rootScope, TemplateFile templateFile, TemplateMode mode,
-			TemplateOptions options) throws TemplateParserException, IOException {
-		TemplateParserBuilder templateParserBuilder = new TemplateParserBuilder(rootScope, templateFile, mode, options);
+	public static TemplateBuilder parse(TemplateRootScope rootScope, TemplateFile templateFile, TemplateMode mode, TemplateOptions options)
+			throws TemplateParserException, IOException {
+		TemplateBuilder templateParserBuilder = new TemplateBuilder(rootScope, templateFile, mode, options);
 		templateParserBuilder.parse();
 		return templateParserBuilder;
 	}
@@ -91,8 +95,6 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 	}
 
 	protected String toString(InputSource source) throws TemplateParserException, IOException {
-		StringBuilder builder = new StringBuilder();
-		CharBuffer buffer = CharBuffer.allocate(4096);
 		Reader reader = source.getCharacterStream();
 		if (reader == null) {
 			final InputStream inputStream = source.getByteStream();
@@ -104,14 +106,7 @@ public class TemplateParserBuilder extends BaseParser implements EventHandler {
 			reader = new InputStreamReader(inputStream, Charsets.UTF_8);
 		}
 
-		while (reader.read(buffer) > 0) {
-			buffer.flip();
-			builder.append(buffer);
-		}
-
-		reader.close();
-
-		return builder.toString();
+		return CharStreams.toString(reader);
 	}
 
 	@Override

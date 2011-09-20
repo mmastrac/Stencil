@@ -2,23 +2,20 @@ package net.stencilproject.template;
 
 import static org.junit.Assert.assertEquals;
 
-import net.stencilproject.template.Template;
-import net.stencilproject.template.TemplateParserException;
-import net.stencilproject.template.Templater;
+import java.io.IOException;
 
 import org.junit.Test;
 
 /**
  * Test some specific HTML mode issues.
  */
-public class TestHtmlOutput {
+public class TestHtmlOutput extends AbstractTemplateTest {
 	/**
 	 * br tags should be written using the compatible syntax: &lt;br /&gt;
 	 */
 	@Test
-	public void testBrTags() throws TemplateParserException {
-		Templater templater = new Templater();
-		Template template = templater.parseXml(true, "Break tags rock<br/>Just kidding");
+	public void testBrTags() throws TemplateParserException, IOException {
+		Template template = parseHtml("Break tags rock<br/>Just kidding");
 		System.out.println(template);
 
 		assertEquals("Break tags rock<br />Just kidding", template.process(null));
@@ -29,8 +26,7 @@ public class TestHtmlOutput {
 	 */
 	@Test
 	public void testScriptCDATAInHtml() throws TemplateParserException {
-		Templater templater = new Templater();
-		Template template = templater.parseXml(true, "<script><![CDATA[alert('a&b');]]></script>");
+		Template template = parseHtml("<script><![CDATA[alert('a&b');]]></script>");
 
 		System.out.println(template);
 
@@ -42,8 +38,7 @@ public class TestHtmlOutput {
 	 */
 	@Test
 	public void testCDATAInHtml() throws TemplateParserException {
-		Templater templater = new Templater();
-		Template template = templater.parseXml(true, "<p><![CDATA[a&b]]></p>");
+		Template template = parseHtml("<p><![CDATA[a&b]]></p>");
 
 		System.out.println(template);
 

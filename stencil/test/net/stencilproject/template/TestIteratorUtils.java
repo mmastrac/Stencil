@@ -11,13 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import net.stencilproject.template.IteratorUtils;
-import net.stencilproject.template.RunStatistics;
-import net.stencilproject.template.Template;
-import net.stencilproject.template.TemplateOptions;
-import net.stencilproject.template.TemplateParserException;
-import net.stencilproject.template.Templater;
-
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
@@ -25,7 +18,7 @@ import com.google.common.collect.Maps;
 /**
  * This tests {@link ConcurrentModificationException} in templates.
  */
-public class TestIteratorUtils {
+public class TestIteratorUtils extends AbstractTemplateTest {
 	@Test
 	public void testConcurrentModification() {
 		HashMap<String, String> map = Maps.newHashMap();
@@ -48,12 +41,7 @@ public class TestIteratorUtils {
 
 	@Test
 	public void testConcurrentModificationInTemplate() throws TemplateParserException, IOException {
-		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
-		Templater templater = new Templater(null, options);
-
-		Template template = templater.parse("{% for x in y %}{{ x }}{% end %}");
+		Template template = parse("{% for x in y %}{{ x }}{% end %}");
 		StringWriter writer = new StringWriter();
 
 		final HashMap<String, String> map = Maps.newHashMap();

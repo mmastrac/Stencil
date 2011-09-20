@@ -9,19 +9,11 @@ import org.junit.Test;
 /**
  * Tests for various parsing exceptions.
  */
-public class TestParseExceptions {
-	private Templater createTemplater() {
-		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
-		return new Templater(null, options);
-	}
-
+public class TestParseExceptions extends AbstractTemplateTest {
 	@Test
 	public void testErrorInvalidChar() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{{ ! }} <- bad token");
+			parse("{{ ! }} <- bad token");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.PARSE_ERROR, e.getError());
@@ -32,9 +24,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorReservedWord() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{{ foo.limit }} <- limit is a reserved word");
+			parse("{{ foo.limit }} <- limit is a reserved word");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.PARSE_ERROR, e.getError());
@@ -46,16 +37,15 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorIfWithoutEnd() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% if x %} <- missing end");
+			parse("{% if x %} <- missing end");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.IF_MISSING_END, e.getError());
 		}
 
 		try {
-			templater.parse("{% if x %} <- missing end {% else %}");
+			parse("{% if x %} <- missing end {% else %}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.IF_MISSING_END, e.getError());
@@ -64,16 +54,15 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorForWithoutEnd() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% for x in y %} <- missing end");
+			parse("{% for x in y %} <- missing end");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.FOR_MISSING_END, e.getError());
 		}
 
 		try {
-			templater.parse("{% for x in y %} <- missing end {% else %}");
+			parse("{% for x in y %} <- missing end {% else %}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.FOR_MISSING_END, e.getError());
@@ -82,9 +71,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorForDuplicateElse() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% for x in y %}{% else %}{% else %} <- duplicate else {% end %}");
+			parse("{% for x in y %}{% else %}{% else %} <- duplicate else {% end %}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.FOR_DUPLICATE_ELSE, e.getError());
@@ -93,9 +81,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorIfDuplicateElse() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% if x %}{% else %}{% else %} <- duplicate else {% end %}");
+			parse("{% if x %}{% else %}{% else %} <- duplicate else {% end %}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.IF_DUPLICATE_ELSE, e.getError());
@@ -104,9 +91,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorElifWithoutBlock() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% elif x %} <- missing a block");
+			parse("{% elif x %} <- missing a block");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.ELIF_WITHOUT_IF, e.getError());
@@ -115,9 +101,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorElifWithWrongBlock() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% for x in y %}{% elif x %} <- doesn't match for");
+			parse("{% for x in y %}{% elif x %} <- doesn't match for");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.ELIF_WITH_WRONG_BLOCK, e.getError());
@@ -126,9 +111,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testErrorInvalidExpression() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{{ 1 xor 1 }}");
+			parse("{{ 1 xor 1 }}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.PARSE_ERROR, e.getError());
@@ -137,9 +121,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testEndDefaultBlock() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% end %}");
+			parse("{% end %}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.END_WITHOUT_BLOCK, e.getError());
@@ -148,9 +131,8 @@ public class TestParseExceptions {
 
 	@Test
 	public void testElseDefaultBlock() {
-		Templater templater = createTemplater();
 		try {
-			templater.parse("{% else %}");
+			parse("{% else %}");
 			fail("Should have thrown exception");
 		} catch (TemplateParserException e) {
 			assertEquals(TemplateError.ELSE_WITHOUT_BLOCK, e.getError());

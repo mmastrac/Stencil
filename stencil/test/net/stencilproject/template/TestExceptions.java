@@ -8,17 +8,9 @@ import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-public class TestExceptions {
-	private Templater createTemplater() {
-		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
-		return new Templater(null, options);
-	}
-
+public class TestExceptions extends AbstractTemplateTest {
 	@Test
 	public void testExceptionInCalledMethod() throws TemplateParserException {
-		Templater templater = createTemplater();
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
@@ -26,7 +18,7 @@ public class TestExceptions {
 			}
 		};
 		HashMap<String, Object> mapModel = Maps.newHashMap();
-		Template template = templater.parse("{{ runnable.run() }}");
+		Template template = parse("{{ runnable.run() }}");
 		mapModel.put("runnable", runnable);
 		assertEquals("", template.process(mapModel));
 	}

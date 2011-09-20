@@ -4,15 +4,26 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import net.stencilproject.template.TemplateParserException.TemplateError;
+
 /**
- * Creates templates from various sources, allowing them to be re-read without restarting the application in development
- * mode.
+ * Creates templates from various sources, allowing them to be re-read without
+ * restarting the application in development mode.
  */
 public class TemplateFactory {
 	private final TemplateOptions options;
 
 	public TemplateFactory(TemplateOptions options) {
 		this.options = options.clone();
+	}
+
+	public TemplateSource getTemplateSourceFromString(final TemplateMode mode, final String string) {
+		return new TemplateSource() {
+			@Override
+			public Template readTemplate(final TemplateRootScope rootScope) throws TemplateParserException, IOException {
+				return readTemplateInternal(mode, rootScope, TemplateFile.fromString(string));
+			}
+		};
 	}
 
 	public TemplateSource getTemplateSource(final TemplateMode mode, final File file) {
@@ -65,6 +76,15 @@ public class TemplateFactory {
 		return getTemplateSource(mode, resource);
 	}
 
+	public Template parseString(TemplateMode mode, TemplateRootScope rootScope, String template) throws TemplateParserException {
+		try {
+			return parse(getTemplateSourceFromString(mode, template), rootScope);
+		} catch (IOException e) {
+			// This shouldn't happen
+			throw new TemplateParserException(TemplateError.UNEXPECTED_ERROR, e, null);
+		}
+	}
+
 	public Template parse(TemplateMode mode, TemplateRootScope rootScope, Class<?> clazz, String resourceName)
 			throws TemplateParserException, IOException {
 		return parse(getTemplateSource(mode, clazz, resourceName), rootScope);
@@ -86,12 +106,14 @@ public class TemplateFactory {
 
 	private Template readTemplateInternal(TemplateMode mode, TemplateRootScope rootScope, TemplateFile templateFile)
 			throws TemplateParserException, IOException {
-		Templater templater = new Templater(rootScope, options);
-
 		if (mode == TemplateMode.TEXT) {
-			return templater.parseText(templateFile);
+			TemplateBuilder templateParser = TemplateBuilder.parse(rootScope, templateFile, TemplateMode.TEXT, options);
+			return templateParser.toTemplate();
 		} else {
-			return templater.parseXml(mode == TemplateMode.HTML, templateFile);
+			TemplateBuilder templateParser = TemplateBuilder.parse(rootScope, templateFile, mode == TemplateMode.HTML ? TemplateMode.HTML
+					: TemplateMode.XML, options);
+
+			return templateParser.toTemplate();
 		}
 	}
 }
