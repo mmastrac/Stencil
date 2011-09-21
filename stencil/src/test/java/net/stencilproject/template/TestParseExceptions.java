@@ -138,4 +138,34 @@ public class TestParseExceptions extends AbstractTemplateTest {
 			assertEquals(TemplateError.ELSE_WITHOUT_BLOCK, e.getError());
 		}
 	}
+
+	@Test
+	public void testJoinDefaultBlock() {
+		try {
+			parse("{% join %}");
+			fail("Should have thrown exception");
+		} catch (TemplateParserException e) {
+			assertEquals(TemplateError.JOIN_WITHOUT_FOR, e.getError());
+		}
+	}
+
+	@Test
+	public void testDuplicateJoin() {
+		try {
+			parse("{% for x in y %}{% join %}{% join %}{% end %}");
+			fail("Should have thrown exception");
+		} catch (TemplateParserException e) {
+			assertEquals(TemplateError.FOR_DUPLICATE_JOIN, e.getError());
+		}
+	}
+
+	@Test
+	public void testForJoinElseOutOfOrder() {
+		try {
+			parse("{% for x in y %}{% else %}{% join %}{% end %}");
+			fail("Should have thrown exception");
+		} catch (TemplateParserException e) {
+			assertEquals(TemplateError.FOR_JOIN_AFTER_ELSE, e.getError());
+		}
+	}
 }

@@ -3,7 +3,6 @@ package net.stencilproject.template.full;
 import static junit.framework.Assert.assertEquals;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.Collection;
 import java.util.List;
@@ -39,16 +38,8 @@ public class FullTemplateTest {
 	@Parameters
 	public static Collection<Object[]> data() throws IOException {
 		List<Object[]> files = Lists.newArrayList();
-		for (int i = 0;; i++) {
-			String base = String.format("%03d", i);
-			InputStream is = FullTemplateTest.class.getResourceAsStream(base + "/input.html");
-
-			if (is != null) {
-				is.close();
-				files.add(new Object[] { base });
-			} else {
-				break;
-			}
+		for (String test : Resources.readLines(FullTemplateTest.class.getResource("tests.txt"), Charsets.UTF_8)) {
+			files.add(new Object[] { test });
 		}
 
 		return files;
@@ -60,15 +51,30 @@ public class FullTemplateTest {
 		options.setDumpTemplate(false);
 		options.setTraceExecution(false);
 
-		String outputString = Resources.toString(FullTemplateTest.class.getResource(name + "/output.html"), Charsets.UTF_8);
+		boolean isText = exists(name + "/input.txt");
+		String extension = isText ? "txt" : "html";
+		String output = name + "/output." + extension;
+		String input = name + "/input." + extension;
+
+		String outputString = Resources.toString(FullTemplateTest.class.getResource(output), Charsets.UTF_8);
 
 		StringWriter writer = new StringWriter();
 		Map<String, Object> model = Maps.newHashMap();
 
 		TemplateFactory templateFactory = new TemplateFactory(options);
-		Template template = templateFactory.parse(TemplateMode.HTML, null, FullTemplateTest.class, name + "/input.html");
+		Template template = templateFactory.parse(isText ? TemplateMode.TEXT : TemplateMode.HTML, null, FullTemplateTest.class, input);
 		template.process(model, writer);
 
 		assertEquals(outputString, writer.toString());
+	}
+
+	private boolean exists(String name) {
+		try {
+			Resources.toByteArray(FullTemplateTest.class.getResource(name));
+		} catch (Throwable t) {
+			return false;
+		}
+
+		return true;
 	}
 }

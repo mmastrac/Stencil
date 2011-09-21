@@ -33,6 +33,27 @@ public class TestFor extends AbstractTemplateTest {
 	}
 
 	@Test
+	public void testForOverList() throws TemplateParserException {
+		Template template = parse("Check out this list: {% for x in [1,2] %}{{ x }},{% end %}.");
+
+		assertEquals("Check out this list: 1,2,.", template.process(null));
+	}
+
+	@Test
+	public void testForOverListJoin() throws TemplateParserException {
+		Template template = parse("Check out this list: {% for x in [1,2] %}{{ x }}{% join %}, {% end %}.");
+
+		assertEquals("Check out this list: 1, 2.", template.process(null));
+	}
+
+	@Test
+	public void testForOverListJoinElse() throws TemplateParserException {
+		Template template = parse("Check out this list: {% for x in [1,2] %}{{ x }}{% join %}, {% else %}empty{% end %}.");
+
+		assertEquals("Check out this list: 1, 2.", template.process(null));
+	}
+
+	@Test
 	public void testForOverMap() throws TemplateParserException {
 		Template template = parse("Check out this map: {% for x in data %}{{ x[0] }} = {{ x[1] }},{% end %}.");
 
@@ -90,6 +111,15 @@ public class TestFor extends AbstractTemplateTest {
 		HashMap<String, List<String>> mapModel = Maps.newHashMap();
 		mapModel.put("data", Arrays.asList("d", "b", "c", "a"));
 		assertEquals("Check out this list: abcd", template.process(mapModel));
+	}
+
+	@Test
+	public void testForJoin() throws TemplateParserException {
+		Template template = parse("String chars: {% for x in data %}{{ x }}{% join %},{% end %}");
+
+		HashMap<String, Object> mapModel = Maps.newHashMap();
+		mapModel.put("data", "abcd");
+		assertEquals("String chars: a,b,c,d", template.process(mapModel));
 	}
 
 	@Test

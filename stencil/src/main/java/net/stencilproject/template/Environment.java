@@ -103,6 +103,8 @@ class Environment {
 			ctx.setSourceInfo(ins);
 
 			switch (ins.opcode) {
+			case NOP:
+				break;
 			case DROP:
 				for (int i = 0; i < (Integer) literal; i++) {
 					pop();

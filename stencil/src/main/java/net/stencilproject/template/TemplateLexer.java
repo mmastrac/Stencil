@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g 2010-12-06 14:34:39
+// $ANTLR 3.4 /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g 2011-09-20 19:49:25
 package net.stencilproject.template;
 
 import org.antlr.runtime.*;
@@ -6,114 +6,120 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings({"all", "warnings", "unchecked"})
 public class TemplateLexer extends Lexer {
-    public static final int DOLLAR=60;
-    public static final int EXPONENT=75;
-    public static final int LT=45;
-    public static final int LSQUARE=54;
-    public static final int ORDER=39;
-    public static final int LIMIT=26;
-    public static final int MOD=53;
-    public static final int GTE=48;
-    public static final int TEMPLATE_PRINT_END=17;
-    public static final int FOR=19;
-    public static final int DQUOTE=67;
-    public static final int TEMPLATE_PRINT_START=16;
-    public static final int FLOAT=76;
-    public static final int NOT=38;
-    public static final int SCOPE_LOOKUP=4;
-    public static final int ID=11;
-    public static final int AND=36;
     public static final int EOF=-1;
+    public static final int AND=4;
+    public static final int AS=5;
+    public static final int BLOCK=6;
+    public static final int BY=7;
+    public static final int COLON=8;
+    public static final int COMMA=9;
+    public static final int COMMENT=10;
+    public static final int CONTINUE=11;
+    public static final int DIV=12;
+    public static final int DOLLAR=13;
+    public static final int DOT=14;
+    public static final int DQUOTE=15;
+    public static final int ELIF=16;
+    public static final int ELSE=17;
+    public static final int END=18;
+    public static final int EQ=19;
+    public static final int EQEQ=20;
+    public static final int ESC_SEQ=21;
+    public static final int EXPONENT=22;
+    public static final int EXTENDS=23;
+    public static final int FALSE=24;
+    public static final int FLOAT=25;
+    public static final int FOR=26;
+    public static final int GT=27;
+    public static final int GTE=28;
+    public static final int HEX_DIGIT=29;
+    public static final int HEX_ESC=30;
+    public static final int IAND=31;
+    public static final int ID=32;
+    public static final int IF=33;
+    public static final int IN=34;
+    public static final int INCLUDE=35;
+    public static final int INT=36;
+    public static final int INT_HEX=37;
+    public static final int IOR=38;
+    public static final int JOIN=39;
+    public static final int LIMIT=40;
+    public static final int LIST=41;
+    public static final int LPAREN=42;
+    public static final int LSHIFT=43;
+    public static final int LSQUARE=44;
+    public static final int LT=45;
     public static final int LTE=46;
-    public static final int LPAREN=56;
-    public static final int UNARY_PLUS=8;
-    public static final int IF=18;
-    public static final int INT_HEX=74;
-    public static final int AS=21;
-    public static final int RPAREN=57;
-    public static final int ESC_SEQ=78;
-    public static final int IN=20;
-    public static final int CONTINUE=28;
-    public static final int COMMA=69;
-    public static final int INCLUDE=25;
-    public static final int TILDE=61;
-    public static final int PIPE=71;
-    public static final int PLUS=49;
-    public static final int VAR=27;
-    public static final int EQ=42;
-    public static final int COMMENT=77;
-    public static final int DOT=58;
-    public static final int RSHIFT=63;
-    public static final int EQEQ=43;
-    public static final int NE=44;
-    public static final int BY=40;
-    public static final int QDOT=59;
-    public static final int TEMPLATE_COMMENT=10;
-    public static final int XOR=64;
-    public static final int TO=41;
-    public static final int LSHIFT=62;
-    public static final int NULL=33;
-    public static final int UNICODE_ESC=81;
-    public static final int ELSE=22;
-    public static final int HEX_DIGIT=73;
-    public static final int UNARY_MINUS=9;
-    public static final int INT=72;
-    public static final int TEMPLATE_STATEMENT_START=14;
-    public static final int MINUS=50;
-    public static final int RSQUARE=55;
-    public static final int SQUOTE=66;
-    public static final int LIST=5;
-    public static final int TRUE=31;
-    public static final int MUL=51;
-    public static final int SEMI=68;
-    public static final int PRINT=7;
-    public static final int IAND=34;
-    public static final int COLON=65;
-    public static final int ELIF=23;
-    public static final int HEX_ESC=80;
-    public static final int TEMPLATE_RAW=13;
-    public static final int WS=12;
-    public static final int QUESTION=70;
-    public static final int BLOCK=30;
-    public static final int OR=37;
-    public static final int GT=47;
-    public static final int TEMPLATE_LITERAL=6;
-    public static final int IOR=35;
-    public static final int DIV=52;
-    public static final int END=24;
-    public static final int FALSE=32;
-    public static final int EXTENDS=29;
-    public static final int TEMPLATE_STATEMENT_END=15;
-    public static final int STRING=79;
+    public static final int MINUS=47;
+    public static final int MOD=48;
+    public static final int MUL=49;
+    public static final int NE=50;
+    public static final int NOT=51;
+    public static final int NULL=52;
+    public static final int OR=53;
+    public static final int ORDER=54;
+    public static final int PIPE=55;
+    public static final int PLUS=56;
+    public static final int PRINT=57;
+    public static final int QDOT=58;
+    public static final int QUESTION=59;
+    public static final int RPAREN=60;
+    public static final int RSHIFT=61;
+    public static final int RSQUARE=62;
+    public static final int SCOPE_LOOKUP=63;
+    public static final int SEMI=64;
+    public static final int SQUOTE=65;
+    public static final int STRING=66;
+    public static final int TEMPLATE_COMMENT=67;
+    public static final int TEMPLATE_LITERAL=68;
+    public static final int TEMPLATE_PRINT_END=69;
+    public static final int TEMPLATE_PRINT_START=70;
+    public static final int TEMPLATE_RAW=71;
+    public static final int TEMPLATE_STATEMENT_END=72;
+    public static final int TEMPLATE_STATEMENT_START=73;
+    public static final int TILDE=74;
+    public static final int TO=75;
+    public static final int TRUE=76;
+    public static final int UNARY_MINUS=77;
+    public static final int UNARY_PLUS=78;
+    public static final int UNICODE_ESC=79;
+    public static final int VAR=80;
+    public static final int WS=81;
+    public static final int XOR=82;
 
         boolean literalMode = true;
 
 
     // delegates
     // delegators
+    public Lexer[] getDelegates() {
+        return new Lexer[] {};
+    }
 
-    public TemplateLexer() {;} 
+    public TemplateLexer() {} 
     public TemplateLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
     public TemplateLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
-
     }
-    public String getGrammarFileName() { return "/Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g"; }
+    public String getGrammarFileName() { return "/Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g"; }
 
     // $ANTLR start "TEMPLATE_COMMENT"
     public final void mTEMPLATE_COMMENT() throws RecognitionException {
         try {
             int _type = TEMPLATE_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:23:2: ( '{#' ( options {greedy=false; } : . )* '#}' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:23:4: '{#' ( options {greedy=false; } : . )* '#}'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:23:2: ( '{#' ( options {greedy=false; } : . )* '#}' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:23:4: '{#' ( options {greedy=false; } : . )* '#}'
             {
             match("{#"); 
 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:23:9: ( options {greedy=false; } : . )*
+
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:23:9: ( options {greedy=false; } : . )*
             loop1:
             do {
                 int alt1=2;
@@ -125,20 +131,20 @@ public class TemplateLexer extends Lexer {
                     if ( (LA1_1=='}') ) {
                         alt1=2;
                     }
-                    else if ( ((LA1_1>='\u0000' && LA1_1<='|')||(LA1_1>='~' && LA1_1<='\uFFFF')) ) {
+                    else if ( ((LA1_1 >= '\u0000' && LA1_1 <= '|')||(LA1_1 >= '~' && LA1_1 <= '\uFFFF')) ) {
                         alt1=1;
                     }
 
 
                 }
-                else if ( ((LA1_0>='\u0000' && LA1_0<='\"')||(LA1_0>='$' && LA1_0<='\uFFFF')) ) {
+                else if ( ((LA1_0 >= '\u0000' && LA1_0 <= '\"')||(LA1_0 >= '$' && LA1_0 <= '\uFFFF')) ) {
                     alt1=1;
                 }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:23:37: .
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:23:37: .
             	    {
             	    matchAny(); 
 
@@ -150,7 +156,10 @@ public class TemplateLexer extends Lexer {
                 }
             } while (true);
 
+
             match("#}"); 
+
+
 
             literalMode = true;
 
@@ -160,6 +169,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEMPLATE_COMMENT"
@@ -169,29 +179,34 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TEMPLATE_RAW;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:28:2: ( '{%%%' ID ( WS )+ ( options {greedy=false; } : . )* '%%%}' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:28:4: '{%%%' ID ( WS )+ ( options {greedy=false; } : . )* '%%%}'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:28:2: ( '{%%%' ID ( WS )+ ( options {greedy=false; } : . )* '%%%}' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:28:4: '{%%%' ID ( WS )+ ( options {greedy=false; } : . )* '%%%}'
             {
             match("{%%%"); 
 
+
+
             mID(); 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:28:14: ( WS )+
+
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:28:14: ( WS )+
             int cnt2=0;
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>='\t' && LA2_0<='\n')||LA2_0=='\r'||LA2_0==' ') ) {
+                if ( ((LA2_0 >= '\t' && LA2_0 <= '\n')||LA2_0=='\r'||LA2_0==' ') ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:28:14: WS
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:28:14: WS
             	    {
             	    mWS(); 
+
 
             	    }
             	    break;
@@ -205,7 +220,8 @@ public class TemplateLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:28:18: ( options {greedy=false; } : . )*
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:28:18: ( options {greedy=false; } : . )*
             loop3:
             do {
                 int alt3=2;
@@ -223,32 +239,32 @@ public class TemplateLexer extends Lexer {
                             if ( (LA3_4=='}') ) {
                                 alt3=2;
                             }
-                            else if ( ((LA3_4>='\u0000' && LA3_4<='|')||(LA3_4>='~' && LA3_4<='\uFFFF')) ) {
+                            else if ( ((LA3_4 >= '\u0000' && LA3_4 <= '|')||(LA3_4 >= '~' && LA3_4 <= '\uFFFF')) ) {
                                 alt3=1;
                             }
 
 
                         }
-                        else if ( ((LA3_3>='\u0000' && LA3_3<='$')||(LA3_3>='&' && LA3_3<='\uFFFF')) ) {
+                        else if ( ((LA3_3 >= '\u0000' && LA3_3 <= '$')||(LA3_3 >= '&' && LA3_3 <= '\uFFFF')) ) {
                             alt3=1;
                         }
 
 
                     }
-                    else if ( ((LA3_1>='\u0000' && LA3_1<='$')||(LA3_1>='&' && LA3_1<='\uFFFF')) ) {
+                    else if ( ((LA3_1 >= '\u0000' && LA3_1 <= '$')||(LA3_1 >= '&' && LA3_1 <= '\uFFFF')) ) {
                         alt3=1;
                     }
 
 
                 }
-                else if ( ((LA3_0>='\u0000' && LA3_0<='$')||(LA3_0>='&' && LA3_0<='\uFFFF')) ) {
+                else if ( ((LA3_0 >= '\u0000' && LA3_0 <= '$')||(LA3_0 >= '&' && LA3_0 <= '\uFFFF')) ) {
                     alt3=1;
                 }
 
 
                 switch (alt3) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:28:46: .
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:28:46: .
             	    {
             	    matchAny(); 
 
@@ -260,7 +276,10 @@ public class TemplateLexer extends Lexer {
                 }
             } while (true);
 
+
             match("%%%}"); 
+
+
 
             literalMode = true;
 
@@ -270,6 +289,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEMPLATE_RAW"
@@ -279,10 +299,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TEMPLATE_STATEMENT_START;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:31:26: ( '{%' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:31:28: '{%'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:31:26: ( '{%' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:31:28: '{%'
             {
             match("{%"); 
+
 
 
             }
@@ -291,6 +312,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEMPLATE_STATEMENT_START"
@@ -300,10 +322,12 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TEMPLATE_STATEMENT_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:32:25: ( '%}' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:32:27: '%}'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:32:25: ( '%}' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:32:27: '%}'
             {
             match("%}"); 
+
+
 
             literalMode = true;
 
@@ -313,6 +337,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEMPLATE_STATEMENT_END"
@@ -322,10 +347,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TEMPLATE_PRINT_START;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:34:22: ( '{{' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:34:24: '{{'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:34:22: ( '{{' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:34:24: '{{'
             {
             match("{{"); 
+
 
 
             }
@@ -334,6 +360,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEMPLATE_PRINT_START"
@@ -343,10 +370,12 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TEMPLATE_PRINT_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:35:21: ( '}}' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:35:23: '}}'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:35:21: ( '}}' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:35:23: '}}'
             {
             match("}}"); 
+
+
 
             literalMode = true;
 
@@ -356,6 +385,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TEMPLATE_PRINT_END"
@@ -365,10 +395,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = IF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:38:5: ( 'if' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:38:8: 'if'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:38:5: ( 'if' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:38:8: 'if'
             {
             match("if"); 
+
 
 
             }
@@ -377,6 +408,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "IF"
@@ -386,10 +418,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = FOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:39:6: ( 'for' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:39:9: 'for'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:39:6: ( 'for' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:39:9: 'for'
             {
             match("for"); 
+
 
 
             }
@@ -398,6 +431,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "FOR"
@@ -407,10 +441,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = IN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:40:5: ( 'in' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:40:8: 'in'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:40:5: ( 'in' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:40:8: 'in'
             {
             match("in"); 
+
 
 
             }
@@ -419,6 +454,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "IN"
@@ -428,10 +464,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = AS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:41:5: ( 'as' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:41:8: 'as'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:41:5: ( 'as' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:41:8: 'as'
             {
             match("as"); 
+
 
 
             }
@@ -440,6 +477,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "AS"
@@ -449,10 +487,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = ELSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:42:7: ( 'else' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:42:10: 'else'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:42:7: ( 'else' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:42:10: 'else'
             {
             match("else"); 
+
 
 
             }
@@ -461,6 +500,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "ELSE"
@@ -470,10 +510,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = ELIF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:43:7: ( 'elif' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:43:10: 'elif'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:43:7: ( 'elif' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:43:10: 'elif'
             {
             match("elif"); 
+
 
 
             }
@@ -482,6 +523,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "ELIF"
@@ -491,10 +533,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:44:6: ( 'end' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:44:9: 'end'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:44:6: ( 'end' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:44:9: 'end'
             {
             match("end"); 
+
 
 
             }
@@ -503,6 +546,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "END"
@@ -512,10 +556,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = INCLUDE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:45:9: ( 'include' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:45:12: 'include'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:45:9: ( 'include' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:45:12: 'include'
             {
             match("include"); 
+
 
 
             }
@@ -524,6 +569,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "INCLUDE"
@@ -533,10 +579,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = LIMIT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:46:7: ( 'limit' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:46:10: 'limit'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:46:7: ( 'limit' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:46:10: 'limit'
             {
             match("limit"); 
+
 
 
             }
@@ -545,6 +592,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LIMIT"
@@ -554,10 +602,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = VAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:47:5: ( 'var' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:47:8: 'var'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:47:5: ( 'var' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:47:8: 'var'
             {
             match("var"); 
+
 
 
             }
@@ -566,6 +615,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "VAR"
@@ -575,10 +625,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = CONTINUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:48:9: ( 'continue' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:48:11: 'continue'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:48:9: ( 'continue' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:48:11: 'continue'
             {
             match("continue"); 
+
 
 
             }
@@ -587,6 +638,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "CONTINUE"
@@ -596,10 +648,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = EXTENDS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:49:9: ( 'extends' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:49:11: 'extends'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:49:9: ( 'extends' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:49:11: 'extends'
             {
             match("extends"); 
+
 
 
             }
@@ -608,6 +661,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "EXTENDS"
@@ -617,10 +671,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = BLOCK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:50:7: ( 'block' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:50:9: 'block'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:50:7: ( 'block' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:50:9: 'block'
             {
             match("block"); 
+
 
 
             }
@@ -629,19 +684,44 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "BLOCK"
+
+    // $ANTLR start "JOIN"
+    public final void mJOIN() throws RecognitionException {
+        try {
+            int _type = JOIN;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:51:6: ( 'join' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:51:8: 'join'
+            {
+            match("join"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "JOIN"
 
     // $ANTLR start "TRUE"
     public final void mTRUE() throws RecognitionException {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:52:6: ( 'true' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:52:8: 'true'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:53:6: ( 'true' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:53:8: 'true'
             {
             match("true"); 
+
 
 
             }
@@ -650,6 +730,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TRUE"
@@ -659,10 +740,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:53:7: ( 'false' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:53:9: 'false'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:54:7: ( 'false' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:54:9: 'false'
             {
             match("false"); 
+
 
 
             }
@@ -671,6 +753,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "FALSE"
@@ -680,10 +763,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = NULL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:54:6: ( 'null' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:54:8: 'null'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:55:6: ( 'null' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:55:8: 'null'
             {
             match("null"); 
+
 
 
             }
@@ -692,6 +776,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "NULL"
@@ -701,10 +786,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = IAND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:56:6: ( 'iand' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:56:8: 'iand'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:57:6: ( 'iand' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:57:8: 'iand'
             {
             match("iand"); 
+
 
 
             }
@@ -713,6 +799,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "IAND"
@@ -722,10 +809,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = IOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:57:5: ( 'ior' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:57:7: 'ior'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:58:5: ( 'ior' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:58:7: 'ior'
             {
             match("ior"); 
+
 
 
             }
@@ -734,6 +822,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "IOR"
@@ -743,10 +832,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:58:5: ( 'and' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:58:8: 'and'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:59:5: ( 'and' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:59:8: 'and'
             {
             match("and"); 
+
 
 
             }
@@ -755,6 +845,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "AND"
@@ -764,10 +855,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:59:4: ( 'or' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:59:7: 'or'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:60:4: ( 'or' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:60:7: 'or'
             {
             match("or"); 
+
 
 
             }
@@ -776,6 +868,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "OR"
@@ -785,10 +878,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = NOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:60:5: ( 'not' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:60:8: 'not'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:61:5: ( 'not' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:61:8: 'not'
             {
             match("not"); 
+
 
 
             }
@@ -797,6 +891,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "NOT"
@@ -806,10 +901,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = ORDER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:62:8: ( 'order' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:62:10: 'order'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:63:8: ( 'order' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:63:10: 'order'
             {
             match("order"); 
+
 
 
             }
@@ -818,6 +914,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "ORDER"
@@ -827,10 +924,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = BY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:63:4: ( 'by' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:63:6: 'by'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:64:4: ( 'by' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:64:6: 'by'
             {
             match("by"); 
+
 
 
             }
@@ -839,6 +937,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "BY"
@@ -848,10 +947,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:64:4: ( 'to' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:64:6: 'to'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:65:4: ( 'to' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:65:6: 'to'
             {
             match("to"); 
+
 
 
             }
@@ -860,6 +960,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TO"
@@ -869,8 +970,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = EQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:66:7: ( '=' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:66:11: '='
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:67:7: ( '=' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:67:11: '='
             {
             match('='); 
 
@@ -880,6 +981,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "EQ"
@@ -889,10 +991,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = EQEQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:67:7: ( '==' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:67:10: '=='
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:68:7: ( '==' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:68:10: '=='
             {
             match("=="); 
+
 
 
             }
@@ -901,6 +1004,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "EQEQ"
@@ -910,10 +1014,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = NE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:68:4: ( '!=' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:68:6: '!='
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:69:4: ( '!=' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:69:6: '!='
             {
             match("!="); 
+
 
 
             }
@@ -922,6 +1027,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "NE"
@@ -931,8 +1037,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = LT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:69:7: ( '<' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:69:10: '<'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:70:7: ( '<' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:70:10: '<'
             {
             match('<'); 
 
@@ -942,6 +1048,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LT"
@@ -951,10 +1058,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = LTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:70:5: ( '<=' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:70:7: '<='
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:71:5: ( '<=' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:71:7: '<='
             {
             match("<="); 
+
 
 
             }
@@ -963,6 +1071,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LTE"
@@ -972,8 +1081,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = GT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:71:5: ( '>' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:71:8: '>'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:72:5: ( '>' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:72:8: '>'
             {
             match('>'); 
 
@@ -983,6 +1092,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "GT"
@@ -992,10 +1102,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = GTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:72:5: ( '>=' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:72:7: '>='
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:73:5: ( '>=' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:73:7: '>='
             {
             match(">="); 
+
 
 
             }
@@ -1004,6 +1115,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "GTE"
@@ -1013,8 +1125,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:73:7: ( '+' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:73:10: '+'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:74:7: ( '+' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:74:10: '+'
             {
             match('+'); 
 
@@ -1024,6 +1136,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "PLUS"
@@ -1033,8 +1146,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:74:7: ( '-' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:74:10: '-'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:75:7: ( '-' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:75:10: '-'
             {
             match('-'); 
 
@@ -1044,6 +1157,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "MINUS"
@@ -1053,8 +1167,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = MUL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:75:5: ( '*' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:75:8: '*'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:76:5: ( '*' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:76:8: '*'
             {
             match('*'); 
 
@@ -1064,6 +1178,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "MUL"
@@ -1073,8 +1188,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = DIV;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:76:5: ( '/' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:76:8: '/'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:77:5: ( '/' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:77:8: '/'
             {
             match('/'); 
 
@@ -1084,6 +1199,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "DIV"
@@ -1093,8 +1209,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = MOD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:77:5: ( '%' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:77:7: '%'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:78:5: ( '%' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:78:7: '%'
             {
             match('%'); 
 
@@ -1104,6 +1220,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "MOD"
@@ -1113,8 +1230,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = LSQUARE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:78:9: ( '[' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:78:12: '['
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:79:9: ( '[' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:79:12: '['
             {
             match('['); 
 
@@ -1124,6 +1241,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LSQUARE"
@@ -1133,8 +1251,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = RSQUARE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:79:9: ( ']' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:79:12: ']'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:80:9: ( ']' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:80:12: ']'
             {
             match(']'); 
 
@@ -1144,6 +1262,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "RSQUARE"
@@ -1153,8 +1272,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = LPAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:80:8: ( '(' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:80:11: '('
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:81:8: ( '(' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:81:11: '('
             {
             match('('); 
 
@@ -1164,6 +1283,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LPAREN"
@@ -1173,8 +1293,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = RPAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:81:8: ( ')' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:81:11: ')'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:82:8: ( ')' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:82:11: ')'
             {
             match(')'); 
 
@@ -1184,6 +1304,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "RPAREN"
@@ -1193,8 +1314,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:82:6: ( '.' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:82:9: '.'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:83:6: ( '.' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:83:9: '.'
             {
             match('.'); 
 
@@ -1204,6 +1325,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "DOT"
@@ -1213,10 +1335,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = QDOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:83:6: ( '?.' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:83:8: '?.'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:84:6: ( '?.' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:84:8: '?.'
             {
             match("?."); 
+
 
 
             }
@@ -1225,6 +1348,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "QDOT"
@@ -1234,8 +1358,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = DOLLAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:84:8: ( '$' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:84:11: '$'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:85:8: ( '$' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:85:11: '$'
             {
             match('$'); 
 
@@ -1245,6 +1369,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "DOLLAR"
@@ -1254,8 +1379,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = TILDE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:85:7: ( '~' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:85:10: '~'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:86:7: ( '~' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:86:10: '~'
             {
             match('~'); 
 
@@ -1265,6 +1390,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "TILDE"
@@ -1274,10 +1400,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = LSHIFT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:86:8: ( '<<' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:86:11: '<<'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:87:8: ( '<<' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:87:11: '<<'
             {
             match("<<"); 
+
 
 
             }
@@ -1286,6 +1413,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "LSHIFT"
@@ -1295,10 +1423,11 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = RSHIFT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:87:8: ( '>>' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:87:11: '>>'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:88:8: ( '>>' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:88:11: '>>'
             {
             match(">>"); 
+
 
 
             }
@@ -1307,6 +1436,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "RSHIFT"
@@ -1316,8 +1446,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = XOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:88:5: ( '^' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:88:8: '^'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:89:5: ( '^' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:89:8: '^'
             {
             match('^'); 
 
@@ -1327,6 +1457,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "XOR"
@@ -1336,8 +1467,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = COLON;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:89:7: ( ':' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:89:10: ':'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:90:7: ( ':' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:90:10: ':'
             {
             match(':'); 
 
@@ -1347,6 +1478,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "COLON"
@@ -1356,8 +1488,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = SQUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:90:8: ( '\\'' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:90:11: '\\''
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:91:8: ( '\\'' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:91:11: '\\''
             {
             match('\''); 
 
@@ -1367,6 +1499,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "SQUOTE"
@@ -1376,8 +1509,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = DQUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:91:8: ( '\"' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:91:11: '\"'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:92:8: ( '\"' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:92:11: '\"'
             {
             match('\"'); 
 
@@ -1387,6 +1520,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "DQUOTE"
@@ -1396,8 +1530,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = SEMI;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:92:6: ( ';' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:92:8: ';'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:93:6: ( ';' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:93:8: ';'
             {
             match(';'); 
 
@@ -1407,6 +1541,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "SEMI"
@@ -1416,8 +1551,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:93:7: ( ',' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:93:9: ','
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:94:7: ( ',' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:94:9: ','
             {
             match(','); 
 
@@ -1427,6 +1562,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "COMMA"
@@ -1436,8 +1572,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = QUESTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:94:9: ( '?' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:94:11: '?'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:95:9: ( '?' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:95:11: '?'
             {
             match('?'); 
 
@@ -1447,6 +1583,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "QUESTION"
@@ -1456,8 +1593,8 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = PIPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:95:6: ( '|' )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:95:8: '|'
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:96:6: ( '|' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:96:8: '|'
             {
             match('|'); 
 
@@ -1467,6 +1604,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "PIPE"
@@ -1476,41 +1614,42 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:97:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:97:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:98:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:98:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
-
             }
             else {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
-                throw mse;}
+                throw mse;
+            }
 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:97:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:98:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop4:
             do {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( ((LA4_0>='0' && LA4_0<='9')||(LA4_0>='A' && LA4_0<='Z')||LA4_0=='_'||(LA4_0>='a' && LA4_0<='z')) ) {
+                if ( ((LA4_0 >= '0' && LA4_0 <= '9')||(LA4_0 >= 'A' && LA4_0 <= 'Z')||LA4_0=='_'||(LA4_0 >= 'a' && LA4_0 <= 'z')) ) {
                     alt4=1;
                 }
 
 
                 switch (alt4) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
-
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
-            	        throw mse;}
+            	        throw mse;
+            	    }
 
 
             	    }
@@ -1528,6 +1667,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "ID"
@@ -1537,26 +1677,34 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:100:5: ( ( '0' .. '9' )+ )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:100:7: ( '0' .. '9' )+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:101:5: ( ( '0' .. '9' )+ )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:101:7: ( '0' .. '9' )+
             {
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:100:7: ( '0' .. '9' )+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:101:7: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( ((LA5_0>='0' && LA5_0<='9')) ) {
+                if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
                     alt5=1;
                 }
 
 
                 switch (alt5) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:100:7: '0' .. '9'
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
             	    {
-            	    matchRange('0','9'); 
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
 
             	    }
             	    break;
@@ -1577,6 +1725,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "INT"
@@ -1586,28 +1735,38 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = INT_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:103:9: ( '0' 'x' ( HEX_DIGIT )+ )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:103:11: '0' 'x' ( HEX_DIGIT )+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:104:9: ( '0' 'x' ( HEX_DIGIT )+ )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:104:11: '0' 'x' ( HEX_DIGIT )+
             {
             match('0'); 
+
             match('x'); 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:103:19: ( HEX_DIGIT )+
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:104:19: ( HEX_DIGIT )+
             int cnt6=0;
             loop6:
             do {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( ((LA6_0>='0' && LA6_0<='9')||(LA6_0>='A' && LA6_0<='F')||(LA6_0>='a' && LA6_0<='f')) ) {
+                if ( ((LA6_0 >= '0' && LA6_0 <= '9')||(LA6_0 >= 'A' && LA6_0 <= 'F')||(LA6_0 >= 'a' && LA6_0 <= 'f')) ) {
                     alt6=1;
                 }
 
 
                 switch (alt6) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:103:19: HEX_DIGIT
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
             	    {
-            	    mHEX_DIGIT(); 
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
 
             	    }
             	    break;
@@ -1628,6 +1787,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "INT_HEX"
@@ -1637,30 +1797,38 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:108:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
             int alt13=3;
             alt13 = dfa13.predict(input);
             switch (alt13) {
                 case 1 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:108:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
                     {
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:9: ( '0' .. '9' )+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:108:9: ( '0' .. '9' )+
                     int cnt7=0;
                     loop7:
                     do {
                         int alt7=2;
                         int LA7_0 = input.LA(1);
 
-                        if ( ((LA7_0>='0' && LA7_0<='9')) ) {
+                        if ( ((LA7_0 >= '0' && LA7_0 <= '9')) ) {
                             alt7=1;
                         }
 
 
                         switch (alt7) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:10: '0' .. '9'
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                    	        input.consume();
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;
+                    	    }
+
 
                     	    }
                     	    break;
@@ -1674,23 +1842,33 @@ public class TemplateLexer extends Lexer {
                         cnt7++;
                     } while (true);
 
+
                     match('.'); 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:25: ( '0' .. '9' )*
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:108:25: ( '0' .. '9' )*
                     loop8:
                     do {
                         int alt8=2;
                         int LA8_0 = input.LA(1);
 
-                        if ( ((LA8_0>='0' && LA8_0<='9')) ) {
+                        if ( ((LA8_0 >= '0' && LA8_0 <= '9')) ) {
                             alt8=1;
                         }
 
 
                         switch (alt8) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:26: '0' .. '9'
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                    	        input.consume();
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;
+                    	    }
+
 
                     	    }
                     	    break;
@@ -1700,7 +1878,8 @@ public class TemplateLexer extends Lexer {
                         }
                     } while (true);
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:37: ( EXPONENT )?
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:108:37: ( EXPONENT )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1709,9 +1888,10 @@ public class TemplateLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:107:37: EXPONENT
+                            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:108:37: EXPONENT
                             {
                             mEXPONENT(); 
+
 
                             }
                             break;
@@ -1722,26 +1902,35 @@ public class TemplateLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:108:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:109:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
                     {
                     match('.'); 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:108:13: ( '0' .. '9' )+
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:109:13: ( '0' .. '9' )+
                     int cnt10=0;
                     loop10:
                     do {
                         int alt10=2;
                         int LA10_0 = input.LA(1);
 
-                        if ( ((LA10_0>='0' && LA10_0<='9')) ) {
+                        if ( ((LA10_0 >= '0' && LA10_0 <= '9')) ) {
                             alt10=1;
                         }
 
 
                         switch (alt10) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:108:14: '0' .. '9'
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                    	        input.consume();
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;
+                    	    }
+
 
                     	    }
                     	    break;
@@ -1755,7 +1944,8 @@ public class TemplateLexer extends Lexer {
                         cnt10++;
                     } while (true);
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:108:25: ( EXPONENT )?
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:109:25: ( EXPONENT )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1764,9 +1954,10 @@ public class TemplateLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:108:25: EXPONENT
+                            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:109:25: EXPONENT
                             {
                             mEXPONENT(); 
+
 
                             }
                             break;
@@ -1777,25 +1968,33 @@ public class TemplateLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:109:9: ( '0' .. '9' )+ EXPONENT
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:110:9: ( '0' .. '9' )+ EXPONENT
                     {
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:109:9: ( '0' .. '9' )+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:110:9: ( '0' .. '9' )+
                     int cnt12=0;
                     loop12:
                     do {
                         int alt12=2;
                         int LA12_0 = input.LA(1);
 
-                        if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+                        if ( ((LA12_0 >= '0' && LA12_0 <= '9')) ) {
                             alt12=1;
                         }
 
 
                         switch (alt12) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:109:10: '0' .. '9'
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+                    	        input.consume();
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;
+                    	    }
+
 
                     	    }
                     	    break;
@@ -1809,7 +2008,9 @@ public class TemplateLexer extends Lexer {
                         cnt12++;
                     } while (true);
 
+
                     mEXPONENT(); 
+
 
                     }
                     break;
@@ -1819,6 +2020,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "FLOAT"
@@ -1828,7 +2030,7 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:113:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:114:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1846,6 +2048,7 @@ public class TemplateLexer extends Lexer {
                         new NoViableAltException("", 17, 1, input);
 
                     throw nvae;
+
                 }
             }
             else {
@@ -1853,36 +2056,39 @@ public class TemplateLexer extends Lexer {
                     new NoViableAltException("", 17, 0, input);
 
                 throw nvae;
+
             }
             switch (alt17) {
                 case 1 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:113:11: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:114:11: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
                     {
                     match("//"); 
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:113:16: (~ ( '\\n' | '\\r' ) )*
+
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:114:16: (~ ( '\\n' | '\\r' ) )*
                     loop14:
                     do {
                         int alt14=2;
                         int LA14_0 = input.LA(1);
 
-                        if ( ((LA14_0>='\u0000' && LA14_0<='\t')||(LA14_0>='\u000B' && LA14_0<='\f')||(LA14_0>='\u000E' && LA14_0<='\uFFFF')) ) {
+                        if ( ((LA14_0 >= '\u0000' && LA14_0 <= '\t')||(LA14_0 >= '\u000B' && LA14_0 <= '\f')||(LA14_0 >= '\u000E' && LA14_0 <= '\uFFFF')) ) {
                             alt14=1;
                         }
 
 
                         switch (alt14) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:113:16: ~ ( '\\n' | '\\r' )
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
                     	    {
-                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
+                    	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
                     	        input.consume();
-
                     	    }
                     	    else {
                     	        MismatchedSetException mse = new MismatchedSetException(null,input);
                     	        recover(mse);
-                    	        throw mse;}
+                    	        throw mse;
+                    	    }
 
 
                     	    }
@@ -1893,7 +2099,8 @@ public class TemplateLexer extends Lexer {
                         }
                     } while (true);
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:113:30: ( '\\r' )?
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:114:30: ( '\\r' )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -1902,7 +2109,7 @@ public class TemplateLexer extends Lexer {
                     }
                     switch (alt15) {
                         case 1 :
-                            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:113:30: '\\r'
+                            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:114:30: '\\r'
                             {
                             match('\r'); 
 
@@ -1911,17 +2118,21 @@ public class TemplateLexer extends Lexer {
 
                     }
 
+
                     match('\n'); 
+
                     _channel=HIDDEN;
 
                     }
                     break;
                 case 2 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:114:11: '/*' ( options {greedy=false; } : . )* '*/'
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:115:11: '/*' ( options {greedy=false; } : . )* '*/'
                     {
                     match("/*"); 
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:114:16: ( options {greedy=false; } : . )*
+
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:115:16: ( options {greedy=false; } : . )*
                     loop16:
                     do {
                         int alt16=2;
@@ -1933,20 +2144,20 @@ public class TemplateLexer extends Lexer {
                             if ( (LA16_1=='/') ) {
                                 alt16=2;
                             }
-                            else if ( ((LA16_1>='\u0000' && LA16_1<='.')||(LA16_1>='0' && LA16_1<='\uFFFF')) ) {
+                            else if ( ((LA16_1 >= '\u0000' && LA16_1 <= '.')||(LA16_1 >= '0' && LA16_1 <= '\uFFFF')) ) {
                                 alt16=1;
                             }
 
 
                         }
-                        else if ( ((LA16_0>='\u0000' && LA16_0<=')')||(LA16_0>='+' && LA16_0<='\uFFFF')) ) {
+                        else if ( ((LA16_0 >= '\u0000' && LA16_0 <= ')')||(LA16_0 >= '+' && LA16_0 <= '\uFFFF')) ) {
                             alt16=1;
                         }
 
 
                         switch (alt16) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:114:44: .
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:115:44: .
                     	    {
                     	    matchAny(); 
 
@@ -1958,7 +2169,10 @@ public class TemplateLexer extends Lexer {
                         }
                     } while (true);
 
+
                     match("*/"); 
+
+
 
                     _channel=HIDDEN;
 
@@ -1970,6 +2184,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "COMMENT"
@@ -1979,17 +2194,18 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:117:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:117:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:118:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:118:9: ( ' ' | '\\t' | '\\r' | '\\n' )
             {
-            if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
+            if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();
-
             }
             else {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
-                throw mse;}
+                throw mse;
+            }
+
 
             _channel=HIDDEN;
 
@@ -1999,6 +2215,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "WS"
@@ -2008,7 +2225,7 @@ public class TemplateLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:125:5: ( '\"\"\"' ( options {greedy=false; } : . )* '\"\"\"' | '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\'' | ( '\"' ( ESC_SEQ | ~ ( '\\\\' | '\"' ) )* '\"' ) | ( '\\'' ( ESC_SEQ | ~ ( '\\\\' | '\\'' ) )* '\\'' ) )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:126:5: ( '\"\"\"' ( options {greedy=false; } : . )* '\"\"\"' | '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\'' | ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' ) | ( '\\'' ( ESC_SEQ |~ ( '\\\\' | '\\'' ) )* '\\'' ) )
             int alt22=4;
             int LA22_0 = input.LA(1);
 
@@ -2022,9 +2239,10 @@ public class TemplateLexer extends Lexer {
                         alt22=1;
                     }
                     else {
-                        alt22=3;}
+                        alt22=3;
+                    }
                 }
-                else if ( ((LA22_1>='\u0000' && LA22_1<='!')||(LA22_1>='#' && LA22_1<='\uFFFF')) ) {
+                else if ( ((LA22_1 >= '\u0000' && LA22_1 <= '!')||(LA22_1 >= '#' && LA22_1 <= '\uFFFF')) ) {
                     alt22=3;
                 }
                 else {
@@ -2032,6 +2250,7 @@ public class TemplateLexer extends Lexer {
                         new NoViableAltException("", 22, 1, input);
 
                     throw nvae;
+
                 }
             }
             else if ( (LA22_0=='\'') ) {
@@ -2044,9 +2263,10 @@ public class TemplateLexer extends Lexer {
                         alt22=2;
                     }
                     else {
-                        alt22=4;}
+                        alt22=4;
+                    }
                 }
-                else if ( ((LA22_2>='\u0000' && LA22_2<='&')||(LA22_2>='(' && LA22_2<='\uFFFF')) ) {
+                else if ( ((LA22_2 >= '\u0000' && LA22_2 <= '&')||(LA22_2 >= '(' && LA22_2 <= '\uFFFF')) ) {
                     alt22=4;
                 }
                 else {
@@ -2054,6 +2274,7 @@ public class TemplateLexer extends Lexer {
                         new NoViableAltException("", 22, 2, input);
 
                     throw nvae;
+
                 }
             }
             else {
@@ -2061,14 +2282,17 @@ public class TemplateLexer extends Lexer {
                     new NoViableAltException("", 22, 0, input);
 
                 throw nvae;
+
             }
             switch (alt22) {
                 case 1 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:125:10: '\"\"\"' ( options {greedy=false; } : . )* '\"\"\"'
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:126:10: '\"\"\"' ( options {greedy=false; } : . )* '\"\"\"'
                     {
                     match("\"\"\""); 
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:125:16: ( options {greedy=false; } : . )*
+
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:126:16: ( options {greedy=false; } : . )*
                     loop18:
                     do {
                         int alt18=2;
@@ -2083,26 +2307,26 @@ public class TemplateLexer extends Lexer {
                                 if ( (LA18_3=='\"') ) {
                                     alt18=2;
                                 }
-                                else if ( ((LA18_3>='\u0000' && LA18_3<='!')||(LA18_3>='#' && LA18_3<='\uFFFF')) ) {
+                                else if ( ((LA18_3 >= '\u0000' && LA18_3 <= '!')||(LA18_3 >= '#' && LA18_3 <= '\uFFFF')) ) {
                                     alt18=1;
                                 }
 
 
                             }
-                            else if ( ((LA18_1>='\u0000' && LA18_1<='!')||(LA18_1>='#' && LA18_1<='\uFFFF')) ) {
+                            else if ( ((LA18_1 >= '\u0000' && LA18_1 <= '!')||(LA18_1 >= '#' && LA18_1 <= '\uFFFF')) ) {
                                 alt18=1;
                             }
 
 
                         }
-                        else if ( ((LA18_0>='\u0000' && LA18_0<='!')||(LA18_0>='#' && LA18_0<='\uFFFF')) ) {
+                        else if ( ((LA18_0 >= '\u0000' && LA18_0 <= '!')||(LA18_0 >= '#' && LA18_0 <= '\uFFFF')) ) {
                             alt18=1;
                         }
 
 
                         switch (alt18) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:125:44: .
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:126:44: .
                     	    {
                     	    matchAny(); 
 
@@ -2114,17 +2338,21 @@ public class TemplateLexer extends Lexer {
                         }
                     } while (true);
 
+
                     match("\"\"\""); 
+
 
 
                     }
                     break;
                 case 2 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:126:10: '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\''
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:127:10: '\\'\\'\\'' ( options {greedy=false; } : . )* '\\'\\'\\''
                     {
                     match("'''"); 
 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:126:19: ( options {greedy=false; } : . )*
+
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:127:19: ( options {greedy=false; } : . )*
                     loop19:
                     do {
                         int alt19=2;
@@ -2139,26 +2367,26 @@ public class TemplateLexer extends Lexer {
                                 if ( (LA19_3=='\'') ) {
                                     alt19=2;
                                 }
-                                else if ( ((LA19_3>='\u0000' && LA19_3<='&')||(LA19_3>='(' && LA19_3<='\uFFFF')) ) {
+                                else if ( ((LA19_3 >= '\u0000' && LA19_3 <= '&')||(LA19_3 >= '(' && LA19_3 <= '\uFFFF')) ) {
                                     alt19=1;
                                 }
 
 
                             }
-                            else if ( ((LA19_1>='\u0000' && LA19_1<='&')||(LA19_1>='(' && LA19_1<='\uFFFF')) ) {
+                            else if ( ((LA19_1 >= '\u0000' && LA19_1 <= '&')||(LA19_1 >= '(' && LA19_1 <= '\uFFFF')) ) {
                                 alt19=1;
                             }
 
 
                         }
-                        else if ( ((LA19_0>='\u0000' && LA19_0<='&')||(LA19_0>='(' && LA19_0<='\uFFFF')) ) {
+                        else if ( ((LA19_0 >= '\u0000' && LA19_0 <= '&')||(LA19_0 >= '(' && LA19_0 <= '\uFFFF')) ) {
                             alt19=1;
                         }
 
 
                         switch (alt19) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:126:47: .
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:127:47: .
                     	    {
                     	    matchAny(); 
 
@@ -2170,19 +2398,22 @@ public class TemplateLexer extends Lexer {
                         }
                     } while (true);
 
+
                     match("'''"); 
+
 
 
                     }
                     break;
                 case 3 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:127:10: ( '\"' ( ESC_SEQ | ~ ( '\\\\' | '\"' ) )* '\"' )
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:128:10: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
                     {
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:127:10: ( '\"' ( ESC_SEQ | ~ ( '\\\\' | '\"' ) )* '\"' )
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:127:11: '\"' ( ESC_SEQ | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:128:10: ( '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"' )
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:128:11: '\"' ( ESC_SEQ |~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:127:15: ( ESC_SEQ | ~ ( '\\\\' | '\"' ) )*
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:128:15: ( ESC_SEQ |~ ( '\\\\' | '\"' ) )*
                     loop20:
                     do {
                         int alt20=3;
@@ -2191,30 +2422,31 @@ public class TemplateLexer extends Lexer {
                         if ( (LA20_0=='\\') ) {
                             alt20=1;
                         }
-                        else if ( ((LA20_0>='\u0000' && LA20_0<='!')||(LA20_0>='#' && LA20_0<='[')||(LA20_0>=']' && LA20_0<='\uFFFF')) ) {
+                        else if ( ((LA20_0 >= '\u0000' && LA20_0 <= '!')||(LA20_0 >= '#' && LA20_0 <= '[')||(LA20_0 >= ']' && LA20_0 <= '\uFFFF')) ) {
                             alt20=2;
                         }
 
 
                         switch (alt20) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:127:17: ESC_SEQ
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:128:17: ESC_SEQ
                     	    {
                     	    mESC_SEQ(); 
+
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:127:27: ~ ( '\\\\' | '\"' )
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:128:27: ~ ( '\\\\' | '\"' )
                     	    {
-                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
+                    	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
                     	        input.consume();
-
                     	    }
                     	    else {
                     	        MismatchedSetException mse = new MismatchedSetException(null,input);
                     	        recover(mse);
-                    	        throw mse;}
+                    	        throw mse;
+                    	    }
 
 
                     	    }
@@ -2225,6 +2457,7 @@ public class TemplateLexer extends Lexer {
                         }
                     } while (true);
 
+
                     match('\"'); 
 
                     }
@@ -2233,13 +2466,14 @@ public class TemplateLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:128:10: ( '\\'' ( ESC_SEQ | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:129:10: ( '\\'' ( ESC_SEQ |~ ( '\\\\' | '\\'' ) )* '\\'' )
                     {
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:128:10: ( '\\'' ( ESC_SEQ | ~ ( '\\\\' | '\\'' ) )* '\\'' )
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:128:11: '\\'' ( ESC_SEQ | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:129:10: ( '\\'' ( ESC_SEQ |~ ( '\\\\' | '\\'' ) )* '\\'' )
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:129:11: '\\'' ( ESC_SEQ |~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:128:16: ( ESC_SEQ | ~ ( '\\\\' | '\\'' ) )*
+
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:129:16: ( ESC_SEQ |~ ( '\\\\' | '\\'' ) )*
                     loop21:
                     do {
                         int alt21=3;
@@ -2248,30 +2482,31 @@ public class TemplateLexer extends Lexer {
                         if ( (LA21_0=='\\') ) {
                             alt21=1;
                         }
-                        else if ( ((LA21_0>='\u0000' && LA21_0<='&')||(LA21_0>='(' && LA21_0<='[')||(LA21_0>=']' && LA21_0<='\uFFFF')) ) {
+                        else if ( ((LA21_0 >= '\u0000' && LA21_0 <= '&')||(LA21_0 >= '(' && LA21_0 <= '[')||(LA21_0 >= ']' && LA21_0 <= '\uFFFF')) ) {
                             alt21=2;
                         }
 
 
                         switch (alt21) {
                     	case 1 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:128:18: ESC_SEQ
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:129:18: ESC_SEQ
                     	    {
                     	    mESC_SEQ(); 
+
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:128:28: ~ ( '\\\\' | '\\'' )
+                    	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:129:28: ~ ( '\\\\' | '\\'' )
                     	    {
-                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
+                    	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
                     	        input.consume();
-
                     	    }
                     	    else {
                     	        MismatchedSetException mse = new MismatchedSetException(null,input);
                     	        recover(mse);
-                    	        throw mse;}
+                    	        throw mse;
+                    	    }
 
 
                     	    }
@@ -2281,6 +2516,7 @@ public class TemplateLexer extends Lexer {
                     	    break loop21;
                         }
                     } while (true);
+
 
                     match('\''); 
 
@@ -2295,6 +2531,7 @@ public class TemplateLexer extends Lexer {
             state.channel = _channel;
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "STRING"
@@ -2302,19 +2539,20 @@ public class TemplateLexer extends Lexer {
     // $ANTLR start "EXPONENT"
     public final void mEXPONENT() throws RecognitionException {
         try {
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:132:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:132:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:134:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:134:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
-
             }
             else {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
-                throw mse;}
+                throw mse;
+            }
 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:132:22: ( '+' | '-' )?
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:134:22: ( '+' | '-' )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -2323,16 +2561,16 @@ public class TemplateLexer extends Lexer {
             }
             switch (alt23) {
                 case 1 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
                     {
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                         input.consume();
-
                     }
                     else {
                         MismatchedSetException mse = new MismatchedSetException(null,input);
                         recover(mse);
-                        throw mse;}
+                        throw mse;
+                    }
 
 
                     }
@@ -2340,23 +2578,32 @@ public class TemplateLexer extends Lexer {
 
             }
 
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:132:33: ( '0' .. '9' )+
+
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:134:33: ( '0' .. '9' )+
             int cnt24=0;
             loop24:
             do {
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( ((LA24_0>='0' && LA24_0<='9')) ) {
+                if ( ((LA24_0 >= '0' && LA24_0 <= '9')) ) {
                     alt24=1;
                 }
 
 
                 switch (alt24) {
             	case 1 :
-            	    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:132:34: '0' .. '9'
+            	    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
             	    {
-            	    matchRange('0','9'); 
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
 
             	    }
             	    break;
@@ -2373,8 +2620,10 @@ public class TemplateLexer extends Lexer {
 
             }
 
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "EXPONENT"
@@ -2382,23 +2631,25 @@ public class TemplateLexer extends Lexer {
     // $ANTLR start "HEX_DIGIT"
     public final void mHEX_DIGIT() throws RecognitionException {
         try {
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:135:11: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:135:13: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:137:11: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:
             {
-            if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f') ) {
+            if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'F')||(input.LA(1) >= 'a' && input.LA(1) <= 'f') ) {
                 input.consume();
-
             }
             else {
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
-                throw mse;}
+                throw mse;
+            }
 
 
             }
 
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "HEX_DIGIT"
@@ -2406,7 +2657,7 @@ public class TemplateLexer extends Lexer {
     // $ANTLR start "ESC_SEQ"
     public final void mESC_SEQ() throws RecognitionException {
         try {
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:139:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | HEX_ESC | UNICODE_ESC )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:141:5: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | HEX_ESC | UNICODE_ESC )
             int alt25=3;
             int LA25_0 = input.LA(1);
 
@@ -2439,6 +2690,7 @@ public class TemplateLexer extends Lexer {
                         new NoViableAltException("", 25, 1, input);
 
                     throw nvae;
+
                 }
 
             }
@@ -2447,42 +2699,48 @@ public class TemplateLexer extends Lexer {
                     new NoViableAltException("", 25, 0, input);
 
                 throw nvae;
+
             }
             switch (alt25) {
                 case 1 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:139:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:141:9: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     {
                     match('\\'); 
+
                     if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
                         input.consume();
-
                     }
                     else {
                         MismatchedSetException mse = new MismatchedSetException(null,input);
                         recover(mse);
-                        throw mse;}
+                        throw mse;
+                    }
 
 
                     }
                     break;
                 case 2 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:140:9: HEX_ESC
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:142:9: HEX_ESC
                     {
                     mHEX_ESC(); 
+
 
                     }
                     break;
                 case 3 :
-                    // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:141:9: UNICODE_ESC
+                    // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:143:9: UNICODE_ESC
                     {
                     mUNICODE_ESC(); 
+
 
                     }
                     break;
 
             }
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "ESC_SEQ"
@@ -2490,18 +2748,25 @@ public class TemplateLexer extends Lexer {
     // $ANTLR start "HEX_ESC"
     public final void mHEX_ESC() throws RecognitionException {
         try {
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:147:5: ( '\\\\' 'x' HEX_DIGIT HEX_DIGIT )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:147:9: '\\\\' 'x' HEX_DIGIT HEX_DIGIT
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:149:5: ( '\\\\' 'x' HEX_DIGIT HEX_DIGIT )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:149:9: '\\\\' 'x' HEX_DIGIT HEX_DIGIT
             {
             match('\\'); 
+
             match('x'); 
+
             mHEX_DIGIT(); 
+
+
             mHEX_DIGIT(); 
+
 
             }
 
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "HEX_ESC"
@@ -2509,495 +2774,581 @@ public class TemplateLexer extends Lexer {
     // $ANTLR start "UNICODE_ESC"
     public final void mUNICODE_ESC() throws RecognitionException {
         try {
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:152:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
-            // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:152:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:154:5: ( '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT )
+            // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:154:9: '\\\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
             {
             match('\\'); 
+
             match('u'); 
+
             mHEX_DIGIT(); 
+
+
             mHEX_DIGIT(); 
+
+
             mHEX_DIGIT(); 
+
+
             mHEX_DIGIT(); 
+
 
             }
 
+
         }
         finally {
+        	// do for sure before leaving
         }
     }
     // $ANTLR end "UNICODE_ESC"
 
     public void mTokens() throws RecognitionException {
-        // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:8: ( TEMPLATE_COMMENT | TEMPLATE_RAW | TEMPLATE_STATEMENT_START | TEMPLATE_STATEMENT_END | TEMPLATE_PRINT_START | TEMPLATE_PRINT_END | IF | FOR | IN | AS | ELSE | ELIF | END | INCLUDE | LIMIT | VAR | CONTINUE | EXTENDS | BLOCK | TRUE | FALSE | NULL | IAND | IOR | AND | OR | NOT | ORDER | BY | TO | EQ | EQEQ | NE | LT | LTE | GT | GTE | PLUS | MINUS | MUL | DIV | MOD | LSQUARE | RSQUARE | LPAREN | RPAREN | DOT | QDOT | DOLLAR | TILDE | LSHIFT | RSHIFT | XOR | COLON | SQUOTE | DQUOTE | SEMI | COMMA | QUESTION | PIPE | ID | INT | INT_HEX | FLOAT | COMMENT | WS | STRING )
-        int alt26=67;
+        // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:8: ( TEMPLATE_COMMENT | TEMPLATE_RAW | TEMPLATE_STATEMENT_START | TEMPLATE_STATEMENT_END | TEMPLATE_PRINT_START | TEMPLATE_PRINT_END | IF | FOR | IN | AS | ELSE | ELIF | END | INCLUDE | LIMIT | VAR | CONTINUE | EXTENDS | BLOCK | JOIN | TRUE | FALSE | NULL | IAND | IOR | AND | OR | NOT | ORDER | BY | TO | EQ | EQEQ | NE | LT | LTE | GT | GTE | PLUS | MINUS | MUL | DIV | MOD | LSQUARE | RSQUARE | LPAREN | RPAREN | DOT | QDOT | DOLLAR | TILDE | LSHIFT | RSHIFT | XOR | COLON | SQUOTE | DQUOTE | SEMI | COMMA | QUESTION | PIPE | ID | INT | INT_HEX | FLOAT | COMMENT | WS | STRING )
+        int alt26=68;
         alt26 = dfa26.predict(input);
         switch (alt26) {
             case 1 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:10: TEMPLATE_COMMENT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:10: TEMPLATE_COMMENT
                 {
                 mTEMPLATE_COMMENT(); 
+
 
                 }
                 break;
             case 2 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:27: TEMPLATE_RAW
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:27: TEMPLATE_RAW
                 {
                 mTEMPLATE_RAW(); 
+
 
                 }
                 break;
             case 3 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:40: TEMPLATE_STATEMENT_START
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:40: TEMPLATE_STATEMENT_START
                 {
                 mTEMPLATE_STATEMENT_START(); 
+
 
                 }
                 break;
             case 4 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:65: TEMPLATE_STATEMENT_END
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:65: TEMPLATE_STATEMENT_END
                 {
                 mTEMPLATE_STATEMENT_END(); 
+
 
                 }
                 break;
             case 5 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:88: TEMPLATE_PRINT_START
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:88: TEMPLATE_PRINT_START
                 {
                 mTEMPLATE_PRINT_START(); 
+
 
                 }
                 break;
             case 6 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:109: TEMPLATE_PRINT_END
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:109: TEMPLATE_PRINT_END
                 {
                 mTEMPLATE_PRINT_END(); 
+
 
                 }
                 break;
             case 7 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:128: IF
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:128: IF
                 {
                 mIF(); 
+
 
                 }
                 break;
             case 8 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:131: FOR
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:131: FOR
                 {
                 mFOR(); 
+
 
                 }
                 break;
             case 9 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:135: IN
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:135: IN
                 {
                 mIN(); 
+
 
                 }
                 break;
             case 10 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:138: AS
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:138: AS
                 {
                 mAS(); 
+
 
                 }
                 break;
             case 11 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:141: ELSE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:141: ELSE
                 {
                 mELSE(); 
+
 
                 }
                 break;
             case 12 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:146: ELIF
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:146: ELIF
                 {
                 mELIF(); 
+
 
                 }
                 break;
             case 13 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:151: END
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:151: END
                 {
                 mEND(); 
+
 
                 }
                 break;
             case 14 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:155: INCLUDE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:155: INCLUDE
                 {
                 mINCLUDE(); 
+
 
                 }
                 break;
             case 15 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:163: LIMIT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:163: LIMIT
                 {
                 mLIMIT(); 
+
 
                 }
                 break;
             case 16 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:169: VAR
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:169: VAR
                 {
                 mVAR(); 
+
 
                 }
                 break;
             case 17 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:173: CONTINUE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:173: CONTINUE
                 {
                 mCONTINUE(); 
+
 
                 }
                 break;
             case 18 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:182: EXTENDS
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:182: EXTENDS
                 {
                 mEXTENDS(); 
+
 
                 }
                 break;
             case 19 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:190: BLOCK
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:190: BLOCK
                 {
                 mBLOCK(); 
+
 
                 }
                 break;
             case 20 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:196: TRUE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:196: JOIN
                 {
-                mTRUE(); 
+                mJOIN(); 
+
 
                 }
                 break;
             case 21 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:201: FALSE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:201: TRUE
                 {
-                mFALSE(); 
+                mTRUE(); 
+
 
                 }
                 break;
             case 22 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:207: NULL
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:206: FALSE
                 {
-                mNULL(); 
+                mFALSE(); 
+
 
                 }
                 break;
             case 23 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:212: IAND
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:212: NULL
                 {
-                mIAND(); 
+                mNULL(); 
+
 
                 }
                 break;
             case 24 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:217: IOR
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:217: IAND
                 {
-                mIOR(); 
+                mIAND(); 
+
 
                 }
                 break;
             case 25 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:221: AND
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:222: IOR
                 {
-                mAND(); 
+                mIOR(); 
+
 
                 }
                 break;
             case 26 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:225: OR
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:226: AND
                 {
-                mOR(); 
+                mAND(); 
+
 
                 }
                 break;
             case 27 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:228: NOT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:230: OR
                 {
-                mNOT(); 
+                mOR(); 
+
 
                 }
                 break;
             case 28 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:232: ORDER
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:233: NOT
                 {
-                mORDER(); 
+                mNOT(); 
+
 
                 }
                 break;
             case 29 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:238: BY
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:237: ORDER
                 {
-                mBY(); 
+                mORDER(); 
+
 
                 }
                 break;
             case 30 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:241: TO
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:243: BY
                 {
-                mTO(); 
+                mBY(); 
+
 
                 }
                 break;
             case 31 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:244: EQ
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:246: TO
                 {
-                mEQ(); 
+                mTO(); 
+
 
                 }
                 break;
             case 32 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:247: EQEQ
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:249: EQ
                 {
-                mEQEQ(); 
+                mEQ(); 
+
 
                 }
                 break;
             case 33 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:252: NE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:252: EQEQ
                 {
-                mNE(); 
+                mEQEQ(); 
+
 
                 }
                 break;
             case 34 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:255: LT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:257: NE
                 {
-                mLT(); 
+                mNE(); 
+
 
                 }
                 break;
             case 35 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:258: LTE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:260: LT
                 {
-                mLTE(); 
+                mLT(); 
+
 
                 }
                 break;
             case 36 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:262: GT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:263: LTE
                 {
-                mGT(); 
+                mLTE(); 
+
 
                 }
                 break;
             case 37 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:265: GTE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:267: GT
                 {
-                mGTE(); 
+                mGT(); 
+
 
                 }
                 break;
             case 38 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:269: PLUS
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:270: GTE
                 {
-                mPLUS(); 
+                mGTE(); 
+
 
                 }
                 break;
             case 39 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:274: MINUS
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:274: PLUS
                 {
-                mMINUS(); 
+                mPLUS(); 
+
 
                 }
                 break;
             case 40 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:280: MUL
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:279: MINUS
                 {
-                mMUL(); 
+                mMINUS(); 
+
 
                 }
                 break;
             case 41 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:284: DIV
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:285: MUL
                 {
-                mDIV(); 
+                mMUL(); 
+
 
                 }
                 break;
             case 42 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:288: MOD
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:289: DIV
                 {
-                mMOD(); 
+                mDIV(); 
+
 
                 }
                 break;
             case 43 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:292: LSQUARE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:293: MOD
                 {
-                mLSQUARE(); 
+                mMOD(); 
+
 
                 }
                 break;
             case 44 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:300: RSQUARE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:297: LSQUARE
                 {
-                mRSQUARE(); 
+                mLSQUARE(); 
+
 
                 }
                 break;
             case 45 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:308: LPAREN
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:305: RSQUARE
                 {
-                mLPAREN(); 
+                mRSQUARE(); 
+
 
                 }
                 break;
             case 46 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:315: RPAREN
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:313: LPAREN
                 {
-                mRPAREN(); 
+                mLPAREN(); 
+
 
                 }
                 break;
             case 47 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:322: DOT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:320: RPAREN
                 {
-                mDOT(); 
+                mRPAREN(); 
+
 
                 }
                 break;
             case 48 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:326: QDOT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:327: DOT
                 {
-                mQDOT(); 
+                mDOT(); 
+
 
                 }
                 break;
             case 49 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:331: DOLLAR
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:331: QDOT
                 {
-                mDOLLAR(); 
+                mQDOT(); 
+
 
                 }
                 break;
             case 50 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:338: TILDE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:336: DOLLAR
                 {
-                mTILDE(); 
+                mDOLLAR(); 
+
 
                 }
                 break;
             case 51 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:344: LSHIFT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:343: TILDE
                 {
-                mLSHIFT(); 
+                mTILDE(); 
+
 
                 }
                 break;
             case 52 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:351: RSHIFT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:349: LSHIFT
                 {
-                mRSHIFT(); 
+                mLSHIFT(); 
+
 
                 }
                 break;
             case 53 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:358: XOR
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:356: RSHIFT
                 {
-                mXOR(); 
+                mRSHIFT(); 
+
 
                 }
                 break;
             case 54 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:362: COLON
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:363: XOR
                 {
-                mCOLON(); 
+                mXOR(); 
+
 
                 }
                 break;
             case 55 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:368: SQUOTE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:367: COLON
                 {
-                mSQUOTE(); 
+                mCOLON(); 
+
 
                 }
                 break;
             case 56 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:375: DQUOTE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:373: SQUOTE
                 {
-                mDQUOTE(); 
+                mSQUOTE(); 
+
 
                 }
                 break;
             case 57 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:382: SEMI
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:380: DQUOTE
                 {
-                mSEMI(); 
+                mDQUOTE(); 
+
 
                 }
                 break;
             case 58 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:387: COMMA
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:387: SEMI
                 {
-                mCOMMA(); 
+                mSEMI(); 
+
 
                 }
                 break;
             case 59 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:393: QUESTION
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:392: COMMA
                 {
-                mQUESTION(); 
+                mCOMMA(); 
+
 
                 }
                 break;
             case 60 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:402: PIPE
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:398: QUESTION
                 {
-                mPIPE(); 
+                mQUESTION(); 
+
 
                 }
                 break;
             case 61 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:407: ID
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:407: PIPE
                 {
-                mID(); 
+                mPIPE(); 
+
 
                 }
                 break;
             case 62 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:410: INT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:412: ID
                 {
-                mINT(); 
+                mID(); 
+
 
                 }
                 break;
             case 63 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:414: INT_HEX
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:415: INT
                 {
-                mINT_HEX(); 
+                mINT(); 
+
 
                 }
                 break;
             case 64 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:422: FLOAT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:419: INT_HEX
                 {
-                mFLOAT(); 
+                mINT_HEX(); 
+
 
                 }
                 break;
             case 65 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:428: COMMENT
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:427: FLOAT
                 {
-                mCOMMENT(); 
+                mFLOAT(); 
+
 
                 }
                 break;
             case 66 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:436: WS
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:433: COMMENT
                 {
-                mWS(); 
+                mCOMMENT(); 
+
 
                 }
                 break;
             case 67 :
-                // /Users/matthew/Documents/twitrants/stencil/src/com/dotspots/templating/Template.g:1:439: STRING
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:441: WS
+                {
+                mWS(); 
+
+
+                }
+                break;
+            case 68 :
+                // /Users/matthew/Documents/twitrants/stencil-git/stencil/src/main/java/net/stencilproject/template/Template.g:1:444: STRING
                 {
                 mSTRING(); 
+
 
                 }
                 break;
@@ -3059,221 +3410,227 @@ public class TemplateLexer extends Lexer {
             this.transition = DFA13_transition;
         }
         public String getDescription() {
-            return "106:1: FLOAT : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT );";
+            return "107:1: FLOAT : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT );";
         }
     }
     static final String DFA26_eotS =
-        "\2\uffff\1\56\1\uffff\13\46\1\105\1\uffff\1\110\1\113\3\uffff\1"+
-        "\115\4\uffff\1\116\1\121\4\uffff\1\123\1\124\4\uffff\2\126\2\uffff"+
-        "\1\130\3\uffff\1\131\1\133\4\46\1\140\10\46\1\152\1\46\1\154\2\46"+
-        "\1\160\26\uffff\1\46\1\uffff\1\46\1\163\1\164\1\46\1\uffff\1\166"+
-        "\2\46\1\171\2\46\1\174\2\46\1\uffff\1\46\1\uffff\1\46\1\u0081\1"+
-        "\46\1\uffff\1\46\1\u0084\2\uffff\1\46\1\uffff\1\u0086\1\u0087\1"+
-        "\uffff\2\46\1\uffff\2\46\1\u008c\1\u008d\1\uffff\2\46\1\uffff\1"+
-        "\u0090\2\uffff\1\46\1\u0092\1\46\1\u0094\2\uffff\1\u0095\1\46\1"+
-        "\uffff\1\46\1\uffff\1\46\2\uffff\1\u0099\1\u009a\1\46\2\uffff\1"+
-        "\u009c\1\uffff";
+        "\2\uffff\1\57\1\uffff\14\47\1\107\1\uffff\1\112\1\115\3\uffff\1"+
+        "\117\4\uffff\1\120\1\123\4\uffff\1\125\1\126\4\uffff\2\130\2\uffff"+
+        "\1\132\3\uffff\1\133\1\135\4\47\1\142\10\47\1\154\2\47\1\157\2\47"+
+        "\1\163\26\uffff\1\47\1\uffff\1\47\1\166\1\167\1\47\1\uffff\1\171"+
+        "\2\47\1\174\2\47\1\177\2\47\1\uffff\2\47\1\uffff\1\47\1\u0085\1"+
+        "\47\1\uffff\1\47\1\u0088\2\uffff\1\47\1\uffff\1\u008a\1\u008b\1"+
+        "\uffff\2\47\1\uffff\2\47\1\u0090\1\u0091\1\u0092\1\uffff\2\47\1"+
+        "\uffff\1\u0095\2\uffff\1\47\1\u0097\1\47\1\u0099\3\uffff\1\u009a"+
+        "\1\47\1\uffff\1\47\1\uffff\1\47\2\uffff\1\u009e\1\u009f\1\47\2\uffff"+
+        "\1\u00a1\1\uffff";
     static final String DFA26_eofS =
-        "\u009d\uffff";
+        "\u00a2\uffff";
     static final String DFA26_minS =
         "\1\11\1\43\1\175\1\uffff\2\141\1\156\1\154\1\151\1\141\1\157\1\154"+
-        "\2\157\1\162\1\75\1\uffff\1\74\1\75\3\uffff\1\52\4\uffff\1\60\1"+
+        "\3\157\1\162\1\75\1\uffff\1\74\1\75\3\uffff\1\52\4\uffff\1\60\1"+
         "\56\4\uffff\2\0\4\uffff\2\56\2\uffff\1\45\3\uffff\2\60\1\156\2\162"+
         "\1\154\1\60\1\144\1\151\1\144\1\164\1\155\1\162\1\156\1\157\1\60"+
-        "\1\165\1\60\1\154\1\164\1\60\26\uffff\1\154\1\uffff\1\144\2\60\1"+
-        "\163\1\uffff\1\60\1\145\1\146\1\60\1\145\1\151\1\60\1\164\1\143"+
-        "\1\uffff\1\145\1\uffff\1\154\1\60\1\145\1\uffff\1\165\1\60\2\uffff"+
-        "\1\145\1\uffff\2\60\1\uffff\1\156\1\164\1\uffff\1\151\1\153\2\60"+
-        "\1\uffff\1\162\1\144\1\uffff\1\60\2\uffff\1\144\1\60\1\156\1\60"+
-        "\2\uffff\1\60\1\145\1\uffff\1\163\1\uffff\1\165\2\uffff\2\60\1\145"+
-        "\2\uffff\1\60\1\uffff";
+        "\1\151\1\165\1\60\1\154\1\164\1\60\26\uffff\1\154\1\uffff\1\144"+
+        "\2\60\1\163\1\uffff\1\60\1\145\1\146\1\60\1\145\1\151\1\60\1\164"+
+        "\1\143\1\uffff\1\156\1\145\1\uffff\1\154\1\60\1\145\1\uffff\1\165"+
+        "\1\60\2\uffff\1\145\1\uffff\2\60\1\uffff\1\156\1\164\1\uffff\1\151"+
+        "\1\153\3\60\1\uffff\1\162\1\144\1\uffff\1\60\2\uffff\1\144\1\60"+
+        "\1\156\1\60\3\uffff\1\60\1\145\1\uffff\1\163\1\uffff\1\165\2\uffff"+
+        "\2\60\1\145\2\uffff\1\60\1\uffff";
     static final String DFA26_maxS =
         "\1\176\1\173\1\175\1\uffff\2\157\1\163\1\170\1\151\1\141\1\157\1"+
-        "\171\1\162\1\165\1\162\1\75\1\uffff\1\75\1\76\3\uffff\1\57\4\uffff"+
-        "\1\71\1\56\4\uffff\2\uffff\4\uffff\1\170\1\145\2\uffff\1\45\3\uffff"+
-        "\2\172\1\156\2\162\1\154\1\172\1\144\1\163\1\144\1\164\1\155\1\162"+
-        "\1\156\1\157\1\172\1\165\1\172\1\154\1\164\1\172\26\uffff\1\154"+
-        "\1\uffff\1\144\2\172\1\163\1\uffff\1\172\1\145\1\146\1\172\1\145"+
-        "\1\151\1\172\1\164\1\143\1\uffff\1\145\1\uffff\1\154\1\172\1\145"+
-        "\1\uffff\1\165\1\172\2\uffff\1\145\1\uffff\2\172\1\uffff\1\156\1"+
-        "\164\1\uffff\1\151\1\153\2\172\1\uffff\1\162\1\144\1\uffff\1\172"+
-        "\2\uffff\1\144\1\172\1\156\1\172\2\uffff\1\172\1\145\1\uffff\1\163"+
-        "\1\uffff\1\165\2\uffff\2\172\1\145\2\uffff\1\172\1\uffff";
+        "\171\1\157\1\162\1\165\1\162\1\75\1\uffff\1\75\1\76\3\uffff\1\57"+
+        "\4\uffff\1\71\1\56\4\uffff\2\uffff\4\uffff\1\170\1\145\2\uffff\1"+
+        "\45\3\uffff\2\172\1\156\2\162\1\154\1\172\1\144\1\163\1\144\1\164"+
+        "\1\155\1\162\1\156\1\157\1\172\1\151\1\165\1\172\1\154\1\164\1\172"+
+        "\26\uffff\1\154\1\uffff\1\144\2\172\1\163\1\uffff\1\172\1\145\1"+
+        "\146\1\172\1\145\1\151\1\172\1\164\1\143\1\uffff\1\156\1\145\1\uffff"+
+        "\1\154\1\172\1\145\1\uffff\1\165\1\172\2\uffff\1\145\1\uffff\2\172"+
+        "\1\uffff\1\156\1\164\1\uffff\1\151\1\153\3\172\1\uffff\1\162\1\144"+
+        "\1\uffff\1\172\2\uffff\1\144\1\172\1\156\1\172\3\uffff\1\172\1\145"+
+        "\1\uffff\1\163\1\uffff\1\165\2\uffff\2\172\1\145\2\uffff\1\172\1"+
+        "\uffff";
     static final String DFA26_acceptS =
-        "\3\uffff\1\6\14\uffff\1\41\2\uffff\1\46\1\47\1\50\1\uffff\1\53\1"+
-        "\54\1\55\1\56\2\uffff\1\61\1\62\1\65\1\66\2\uffff\1\71\1\72\1\74"+
-        "\1\75\2\uffff\1\102\1\1\1\uffff\1\5\1\4\1\52\25\uffff\1\40\1\37"+
-        "\1\43\1\63\1\42\1\45\1\64\1\44\1\101\1\51\1\57\1\100\1\60\1\73\1"+
-        "\103\1\67\1\70\1\77\1\76\1\2\1\3\1\7\1\uffff\1\11\4\uffff\1\12\11"+
-        "\uffff\1\35\1\uffff\1\36\3\uffff\1\32\2\uffff\1\30\1\10\1\uffff"+
-        "\1\31\2\uffff\1\15\2\uffff\1\20\4\uffff\1\33\2\uffff\1\27\1\uffff"+
-        "\1\13\1\14\4\uffff\1\24\1\26\2\uffff\1\25\1\uffff\1\17\1\uffff\1"+
-        "\23\1\34\3\uffff\1\16\1\22\1\uffff\1\21";
+        "\3\uffff\1\6\15\uffff\1\42\2\uffff\1\47\1\50\1\51\1\uffff\1\54\1"+
+        "\55\1\56\1\57\2\uffff\1\62\1\63\1\66\1\67\2\uffff\1\72\1\73\1\75"+
+        "\1\76\2\uffff\1\103\1\1\1\uffff\1\5\1\4\1\53\26\uffff\1\41\1\40"+
+        "\1\44\1\64\1\43\1\46\1\65\1\45\1\102\1\52\1\60\1\101\1\61\1\74\1"+
+        "\104\1\70\1\71\1\100\1\77\1\2\1\3\1\7\1\uffff\1\11\4\uffff\1\12"+
+        "\11\uffff\1\36\2\uffff\1\37\3\uffff\1\33\2\uffff\1\31\1\10\1\uffff"+
+        "\1\32\2\uffff\1\15\2\uffff\1\20\5\uffff\1\34\2\uffff\1\30\1\uffff"+
+        "\1\13\1\14\4\uffff\1\24\1\25\1\27\2\uffff\1\26\1\uffff\1\17\1\uffff"+
+        "\1\23\1\35\3\uffff\1\16\1\22\1\uffff\1\21";
     static final String DFA26_specialS =
-        "\41\uffff\1\0\1\1\172\uffff}>";
+        "\42\uffff\1\0\1\1\176\uffff}>";
     static final String[] DFA26_transitionS = {
-            "\2\51\2\uffff\1\51\22\uffff\1\51\1\20\1\42\1\uffff\1\35\1\2"+
-            "\1\uffff\1\41\1\31\1\32\1\25\1\23\1\44\1\24\1\33\1\26\1\47\11"+
-            "\50\1\40\1\43\1\21\1\17\1\22\1\34\1\uffff\32\46\1\27\1\uffff"+
-            "\1\30\1\37\1\46\1\uffff\1\6\1\13\1\12\1\46\1\7\1\5\2\46\1\4"+
-            "\2\46\1\10\1\46\1\15\1\16\4\46\1\14\1\46\1\11\4\46\1\1\1\45"+
-            "\1\3\1\36",
-            "\1\52\1\uffff\1\53\125\uffff\1\54",
-            "\1\55",
+            "\2\52\2\uffff\1\52\22\uffff\1\52\1\21\1\43\1\uffff\1\36\1\2"+
+            "\1\uffff\1\42\1\32\1\33\1\26\1\24\1\45\1\25\1\34\1\27\1\50\11"+
+            "\51\1\41\1\44\1\22\1\20\1\23\1\35\1\uffff\32\47\1\30\1\uffff"+
+            "\1\31\1\40\1\47\1\uffff\1\6\1\13\1\12\1\47\1\7\1\5\2\47\1\4"+
+            "\1\14\1\47\1\10\1\47\1\16\1\17\4\47\1\15\1\47\1\11\4\47\1\1"+
+            "\1\46\1\3\1\37",
+            "\1\53\1\uffff\1\54\125\uffff\1\55",
+            "\1\56",
             "",
-            "\1\61\4\uffff\1\57\7\uffff\1\60\1\62",
-            "\1\64\15\uffff\1\63",
-            "\1\66\4\uffff\1\65",
-            "\1\67\1\uffff\1\70\11\uffff\1\71",
-            "\1\72",
+            "\1\62\4\uffff\1\60\7\uffff\1\61\1\63",
+            "\1\65\15\uffff\1\64",
+            "\1\67\4\uffff\1\66",
+            "\1\70\1\uffff\1\71\11\uffff\1\72",
             "\1\73",
             "\1\74",
-            "\1\75\14\uffff\1\76",
-            "\1\100\2\uffff\1\77",
-            "\1\102\5\uffff\1\101",
-            "\1\103",
-            "\1\104",
+            "\1\75",
+            "\1\76\14\uffff\1\77",
+            "\1\100",
+            "\1\102\2\uffff\1\101",
+            "\1\104\5\uffff\1\103",
+            "\1\105",
+            "\1\106",
             "",
-            "\1\107\1\106",
-            "\1\111\1\112",
-            "",
-            "",
-            "",
-            "\1\114\4\uffff\1\114",
+            "\1\111\1\110",
+            "\1\113\1\114",
             "",
             "",
             "",
-            "",
-            "\12\117",
-            "\1\120",
+            "\1\116\4\uffff\1\116",
             "",
             "",
             "",
             "",
-            "\0\122",
-            "\0\122",
+            "\12\121",
+            "\1\122",
             "",
             "",
             "",
             "",
-            "\1\117\1\uffff\12\50\13\uffff\1\117\37\uffff\1\117\22\uffff"+
-            "\1\125",
-            "\1\117\1\uffff\12\50\13\uffff\1\117\37\uffff\1\117",
+            "\0\124",
+            "\0\124",
             "",
             "",
+            "",
+            "",
+            "\1\121\1\uffff\12\51\13\uffff\1\121\37\uffff\1\121\22\uffff"+
             "\1\127",
+            "\1\121\1\uffff\12\51\13\uffff\1\121\37\uffff\1\121",
+            "",
+            "",
+            "\1\131",
             "",
             "",
             "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\2\46\1\132\27\46",
-            "\1\134",
-            "\1\135",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\134\27\47",
             "\1\136",
             "\1\137",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\1\140",
             "\1\141",
-            "\1\143\11\uffff\1\142",
-            "\1\144",
-            "\1\145",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\1\143",
+            "\1\145\11\uffff\1\144",
             "\1\146",
             "\1\147",
             "\1\150",
             "\1\151",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\1\152",
             "\1\153",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\155",
             "\1\156",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\3\46\1\157\26\46",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\1\160",
             "\1\161",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\162\26\47",
             "",
-            "\1\162",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\164",
+            "",
             "\1\165",
-            "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "\1\167",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\170",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\172",
             "\1\173",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\175",
             "\1\176",
-            "",
-            "\1\177",
-            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\u0080",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\1\u0081",
+            "",
             "\1\u0082",
-            "",
             "\1\u0083",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "",
+            "\1\u0084",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\1\u0086",
+            "",
+            "\1\u0087",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "",
             "",
-            "\1\u0085",
-            "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "",
-            "\1\u0088",
             "\1\u0089",
             "",
-            "\1\u008a",
-            "\1\u008b",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "",
+            "\1\u008c",
+            "\1\u008d",
             "",
             "\1\u008e",
             "\1\u008f",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "",
-            "",
-            "\1\u0091",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\1\u0093",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\1\u0094",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "",
             "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\1\u0096",
-            "",
-            "\1\u0097",
-            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\u0098",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "",
             "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\1\u009b",
             "",
+            "\1\u009c",
             "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
+            "\1\u009d",
+            "",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\1\u00a0",
+            "",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             ""
     };
 
@@ -3307,29 +3664,30 @@ public class TemplateLexer extends Lexer {
             this.transition = DFA26_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( TEMPLATE_COMMENT | TEMPLATE_RAW | TEMPLATE_STATEMENT_START | TEMPLATE_STATEMENT_END | TEMPLATE_PRINT_START | TEMPLATE_PRINT_END | IF | FOR | IN | AS | ELSE | ELIF | END | INCLUDE | LIMIT | VAR | CONTINUE | EXTENDS | BLOCK | TRUE | FALSE | NULL | IAND | IOR | AND | OR | NOT | ORDER | BY | TO | EQ | EQEQ | NE | LT | LTE | GT | GTE | PLUS | MINUS | MUL | DIV | MOD | LSQUARE | RSQUARE | LPAREN | RPAREN | DOT | QDOT | DOLLAR | TILDE | LSHIFT | RSHIFT | XOR | COLON | SQUOTE | DQUOTE | SEMI | COMMA | QUESTION | PIPE | ID | INT | INT_HEX | FLOAT | COMMENT | WS | STRING );";
+            return "1:1: Tokens : ( TEMPLATE_COMMENT | TEMPLATE_RAW | TEMPLATE_STATEMENT_START | TEMPLATE_STATEMENT_END | TEMPLATE_PRINT_START | TEMPLATE_PRINT_END | IF | FOR | IN | AS | ELSE | ELIF | END | INCLUDE | LIMIT | VAR | CONTINUE | EXTENDS | BLOCK | JOIN | TRUE | FALSE | NULL | IAND | IOR | AND | OR | NOT | ORDER | BY | TO | EQ | EQEQ | NE | LT | LTE | GT | GTE | PLUS | MINUS | MUL | DIV | MOD | LSQUARE | RSQUARE | LPAREN | RPAREN | DOT | QDOT | DOLLAR | TILDE | LSHIFT | RSHIFT | XOR | COLON | SQUOTE | DQUOTE | SEMI | COMMA | QUESTION | PIPE | ID | INT | INT_HEX | FLOAT | COMMENT | WS | STRING );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA26_33 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA26_33>='\u0000' && LA26_33<='\uFFFF')) ) {s = 82;}
-
-                        else s = 83;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA26_34 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA26_34>='\u0000' && LA26_34<='\uFFFF')) ) {s = 82;}
+                        if ( ((LA26_34 >= '\u0000' && LA26_34 <= '\uFFFF')) ) {s = 84;}
 
-                        else s = 84;
+                        else s = 85;
+
+                        if ( s>=0 ) return s;
+                        break;
+
+                    case 1 : 
+                        int LA26_35 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA26_35 >= '\u0000' && LA26_35 <= '\uFFFF')) ) {s = 84;}
+
+                        else s = 86;
 
                         if ( s>=0 ) return s;
                         break;
@@ -3339,6 +3697,7 @@ public class TemplateLexer extends Lexer {
             error(nvae);
             throw nvae;
         }
+
     }
  
 

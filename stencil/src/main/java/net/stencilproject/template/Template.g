@@ -48,6 +48,7 @@ VAR	: 	'var';
 CONTINUE:	'continue';
 EXTENDS	:	'extends';
 BLOCK	:	'block';
+JOIN	:	'join';
 
 TRUE	:	'true';
 FALSE	:	'false';
@@ -152,6 +153,13 @@ UNICODE_ESC
     :   '\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
     ;
 
+id
+	: ID
+	;
+
+id_relaxed
+	: ID | JOIN | ELSE | FOR | CONTINUE;
+
 string
 	: STRING<StringNode>
 	;
@@ -192,7 +200,7 @@ statement
 	: extends_statement | include_statement | var_statement | continue_statement | end_statement | print_statement | assignment_statement;
 
 blocked_statement
-	: if_statement | elif_statement | for_statement | else_statement | block_statement;
+	: if_statement | elif_statement | for_statement | else_statement | block_statement | join_statement;
 
 assignment_statement
 	: assignment_expression;
@@ -201,7 +209,7 @@ print_statement
 	: EQ expression (COMMA expression)* -> ^(PRINT expression+);
 
 var_statement
-	: VAR^ ID (EQ! expression)?;
+	: VAR^ id (EQ! expression)?;
 
 block_statement
 	: BLOCK^ string;
@@ -215,6 +223,9 @@ include_statement
 else_statement
 	: ELSE;
 
+join_statement
+	: JOIN;
+
 elif_statement
 	: ELIF^ expression;
 
@@ -222,7 +233,7 @@ if_statement
 	: IF^ expression;
 
 for_statement
-	: FOR^ ID IN! expression (ORDER BY! expression)? (LIMIT expression)?;
+	: FOR^ id IN! expression (ORDER BY! expression)? (LIMIT expression)?;
 
 continue_statement
 	: CONTINUE;
@@ -241,7 +252,7 @@ list_expressions
 	Atoms are the most basic elements of expressions.
 */
 atom
-	: id=ID -> ^(SCOPE_LOOKUP[$id])
+	: sid=id -> ^(SCOPE_LOOKUP[sid.start])
 	| constant
 	| list
 	| '('! expression^ ')'!
@@ -257,7 +268,7 @@ weakest_binding_expression
 	;
 
 assignment_expression
-	: (ID '='^)* in_expression
+	: (id '='^)* in_expression
 	;
 
 in_expression
@@ -325,28 +336,28 @@ postfix_expression
 		(
 			'[' sliceops ']' -> ^('[' $postfix_expression sliceops)
 		|
-			PIPE ID 
+			PIPE pid=id_relaxed 
 				(
 					'(' (weakest_binding_expression (',' weakest_binding_expression)*)? ')'
-						-> ^(PIPE $postfix_expression ID weakest_binding_expression*)
+						-> ^(PIPE $postfix_expression ID[pid.start] weakest_binding_expression*)
 				|  
-						-> ^(PIPE $postfix_expression ID)
+						-> ^(PIPE $postfix_expression ID[pid.start])
 				) 
 		|
-			QDOT ID 
+			QDOT id 
 				(
 					'(' (weakest_binding_expression (',' weakest_binding_expression)*)? ')'
-						-> ^('(' $postfix_expression ID weakest_binding_expression*)
+						-> ^('(' $postfix_expression id weakest_binding_expression*)
 				|  
-						-> ^(QDOT $postfix_expression ID)
+						-> ^(QDOT $postfix_expression id)
 				) 
 		|
-			DOT ID 
+			DOT id 
 				(
 					'(' (weakest_binding_expression (',' weakest_binding_expression)*)? ')'
-						-> ^('(' $postfix_expression ID weakest_binding_expression*)
+						-> ^('(' $postfix_expression id weakest_binding_expression*)
 				|  
-						-> ^(DOT $postfix_expression ID)
+						-> ^(DOT $postfix_expression id)
 				) 
 		)*
 	;

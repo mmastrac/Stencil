@@ -48,6 +48,11 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 		Label elseBlock;
 
 		/**
+		 * The start of the join block.
+		 */
+		Label joinBlock;
+
+		/**
 		 * The end of the loop.
 		 */
 		Label end;
@@ -134,8 +139,8 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 			try {
 				URL url = new URL(parentUrl, include);
 				TemplateFile templateFile = TemplateFile.fromUrl(url);
-				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, source, tree.getLine(),
-						tree.getCharPositionInLine()), mode, this);
+				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, source,
+						tree.getLine(), tree.getCharPositionInLine()), mode, this);
 				treeBuilder.parse();
 			} catch (MalformedURLException e) {
 				throwParserException(TemplateError.BAD_IMPORT, "Invalid argument to import of " + include, e, tree);
@@ -155,8 +160,8 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 			try {
 				URL url = new URL(parentUrl, extendsTemplate);
 				TemplateFile templateFile = TemplateFile.fromUrl(url);
-				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, source, tree.getLine(),
-						tree.getCharPositionInLine()), mode, this);
+				TemplateContentHandler treeBuilder = new TemplateContentHandler(new TemplateFileSourceInfo(templateFile, source,
+						tree.getLine(), tree.getCharPositionInLine()), mode, this);
 				treeBuilder.parse();
 			} catch (MalformedURLException e) {
 				throwParserException(TemplateError.BAD_EXTENDS, "Invalid argument to extends of " + extendsTemplate, e, tree);
@@ -234,11 +239,13 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 			context.end = program.createLabel();
 			context.elseBlock = program.createLabel();
 			context.loopstart = program.createLabel();
+			context.joinBlock = program.createLabel();
 
 			program.append(Opcode.ITERATOR_NEXT_OR_BRANCH, context.elseBlock);
 			program.append(Opcode.GOTO, context.loopstart);
 			context.loop = program.createLabelHere();
 			program.append(Opcode.ITERATOR_NEXT_OR_BRANCH, context.end);
+			program.append(Opcode.GOTO, context.joinBlock);
 			program.affixLabel(context.loopstart);
 
 			// Store the value of the iterator as a local
@@ -290,7 +297,17 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 					throwParserException(TemplateError.FOR_DUPLICATE_ELSE, "FOR block already has an ELSE block", tree);
 				}
 
-				program.append(Opcode.GOTO, forBlockContext.loop);
+				if (!forBlockContext.joinBlock.isAffixed()) {
+					for (int i = program.size() - 1; i >= 0; i--) {
+						if (program.instructions.get(i).literal == forBlockContext.joinBlock) {
+							program.set(i, Opcode.NOP);
+							break;
+						}
+					}
+					program.append(Opcode.GOTO, forBlockContext.loop);
+				} else {
+					program.append(Opcode.GOTO, forBlockContext.loopstart);
+				}
 				program.affixLabel(forBlockContext.elseBlock);
 				break;
 			} else if (context instanceof IfBlockContext) {
@@ -304,6 +321,32 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 				break;
 			} else {
 				assert false : "Unexpected block: " + context.getClass();
+			}
+			break;
+		}
+		case TemplateParser.JOIN: {
+			if (blockStack.isEmpty()) {
+				throwParserException(TemplateError.JOIN_WITHOUT_FOR, "JOIN without FOR", tree);
+			}
+
+			program.localAllocator.restartBlock();
+			BlockContext context = blockStack.peek();
+			if (context instanceof ForBlockContext) {
+				ForBlockContext forBlockContext = (ForBlockContext) context;
+
+				if (forBlockContext.elseBlock.isAffixed()) {
+					throwParserException(TemplateError.FOR_JOIN_AFTER_ELSE, "JOIN block must appear before ELSE in a FOR block", tree);
+				}
+
+				if (forBlockContext.joinBlock.isAffixed()) {
+					throwParserException(TemplateError.FOR_DUPLICATE_JOIN, "FOR block already has an JOIN block", tree);
+				}
+
+				program.append(Opcode.GOTO, forBlockContext.loop);
+				program.affixLabel(forBlockContext.joinBlock);
+				break;
+			} else {
+				throwParserException(TemplateError.JOIN_WITHOUT_FOR, "JOIN without a FOR block", tree);
 			}
 			break;
 		}
@@ -354,8 +397,22 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 
 				ForBlockContext forBlockContext = (ForBlockContext) context;
 
+				// If no else or join blocks
+				if (!forBlockContext.joinBlock.isAffixed()) {
+					for (int i = program.size() - 1; i >= 0; i--) {
+						if (program.instructions.get(i).literal == forBlockContext.joinBlock) {
+							program.set(i, Opcode.NOP);
+							break;
+						}
+					}
+				}
+
 				if (!forBlockContext.elseBlock.isAffixed()) {
-					program.append(Opcode.GOTO, forBlockContext.loop);
+					if (forBlockContext.joinBlock.isAffixed()) {
+						program.append(Opcode.GOTO, forBlockContext.loopstart);
+					} else {
+						program.append(Opcode.GOTO, forBlockContext.loop);
+					}
 				}
 
 				program.affixLabel(forBlockContext.end);

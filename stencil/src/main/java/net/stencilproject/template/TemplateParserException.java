@@ -22,6 +22,12 @@ public class TemplateParserException extends Exception {
 		IF_DUPLICATE_ELSE,
 		/* FOR already has ELSE */
 		FOR_DUPLICATE_ELSE,
+		/* FOR already has JOIN */
+		FOR_DUPLICATE_JOIN,
+		/* JOIN must appear after ELSE */
+		FOR_JOIN_AFTER_ELSE,
+		/* JOIN without FOR */
+		JOIN_WITHOUT_FOR,
 		/* ELSE without IF/FOR */
 		ELSE_WITHOUT_BLOCK,
 		/* END without IF/FOR */

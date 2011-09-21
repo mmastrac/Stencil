@@ -5,6 +5,11 @@ package net.stencilproject.template;
 
 enum Opcode {
 	/**
+	 * No-operattion ( -> )
+	 */
+	NOP,
+
+	/**
 	 * Drops an item from the stack. (x -> )
 	 */
 	DROP,
@@ -75,14 +80,16 @@ enum Opcode {
 	ITERATOR_START_ORDER_BY,
 
 	/**
-	 * Part of the hacky order-by support. Adds a value and sort-key to the internal order-by builder.
+	 * Part of the hacky order-by support. Adds a value and sort-key to the
+	 * internal order-by builder.
 	 * 
 	 * (value sort_key -> )
 	 */
 	ITERATOR_PROCESS_ORDER_BY,
 
 	/**
-	 * Part of the hacky order-by support. Eats the iterator off the stack and replaces it with an ordered version.
+	 * Part of the hacky order-by support. Eats the iterator off the stack and
+	 * replaces it with an ordered version.
 	 * 
 	 * (iterator -> ordered_iterator)
 	 */

@@ -20,19 +20,51 @@ else
   <empty>
 end
 
-ITERATOR y
-HAS_NEXT
-BRANCH_FALSE else:
-GOTO loopstart:
+SCOPE_LOOKUP "y"
+ITERATOR
+ITERATOR_NEXT_OR_BRANCH else:
+GOTO start:
 loop:
-HAS_NEXT
-BRANCH_FALSE end:
-loopstart:
-PRINT <item>
-GOTO loop
+ITERATOR_NEXT_OR_BRANCH end:
+start:
+LOCAL_STORE 0
+LOCAL_LOAD 0
+PRINT
+GOTO loop:
 else:
-PRINT <empty>
+PRINT_LITERAL "<empty>"
 end:
+DROP 2
+
+
+for x in y
+  <item>
+join
+   ,
+else
+  <empty>
+end
+
+SCOPE_LOOKUP "y"
+ITERATOR
+ITERATOR_NEXT_OR_BRANCH else:
+GOTO start:
+loop:
+ITERATOR_NEXT_OR_BRANCH end:
+GOTO join:
+start:
+LOCAL_STORE 0
+LOCAL_LOAD 0
+PRINT
+GOTO loop:
+join:
+PRINT_LITERAL ","
+GOTO start:
+else:
+PRINT_LITERAL "<empty>"
+end:
+DROP 2
+
 
 
 if x

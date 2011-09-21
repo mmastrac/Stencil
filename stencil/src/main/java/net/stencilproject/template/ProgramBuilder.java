@@ -59,6 +59,10 @@ class ProgramBuilder {
 		this.column = column;
 	}
 
+	public void set(int i, Opcode opcode) {
+		instructions.set(i, new Instruction(source, line, column, opcode));
+	}
+
 	public void append(Opcode opcode) {
 		instructions.add(new Instruction(source, line, column, opcode));
 	}

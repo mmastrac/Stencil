@@ -48,7 +48,7 @@ class Instruction implements SourceInfo {
 			return opcode + " " + '"' + literal + '"';
 		}
 
-		if (opcode == Opcode.GOTO || opcode == Opcode.BRANCH_FALSE) {
+		if (opcode == Opcode.GOTO || opcode == Opcode.BRANCH_FALSE || opcode == Opcode.ITERATOR_NEXT_OR_BRANCH) {
 			return opcode + " " + address((Integer) literal, addr);
 		}
 
