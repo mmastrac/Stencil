@@ -549,6 +549,9 @@ public class TemplateBuilder extends BaseParser implements TemplateBuilderEvents
 		case TemplateParser.XOR:
 			program.append(Opcode.XOR);
 			break;
+		case TemplateParser.MOD:
+			program.append(Opcode.MOD);
+			break;
 		case TemplateParser.TRUE:
 			program.append(Opcode.TRUE);
 			break;

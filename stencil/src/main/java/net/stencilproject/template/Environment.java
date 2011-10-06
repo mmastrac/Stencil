@@ -140,7 +140,12 @@ class Environment {
 				a = pop();
 				push(Ops.div(ctx, a, b));
 				break;
+			case MOD:
+				b = pop();
+				a = pop();
+				push(Ops.mod(ctx, a, b));
 
+				break;
 			case LT:
 				b = pop();
 				a = pop();

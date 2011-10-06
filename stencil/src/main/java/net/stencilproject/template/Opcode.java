@@ -131,6 +131,11 @@ enum Opcode {
 	DIV,
 
 	/**
+	 * (x y -> x%y)
+	 */
+	MOD,
+
+	/**
 	 * (x y -> x>y)
 	 */
 	GT,

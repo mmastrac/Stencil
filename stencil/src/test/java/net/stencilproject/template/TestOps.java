@@ -122,6 +122,7 @@ public class TestOps {
 		assertEquals(10L * 86400L * 1000000L, Ops.mul(null, Ops.mul(null, 10, 86400), 1000000));
 		assertEquals(0x100000000L / 0x1000L, Ops.div(null, 0x100000000L, 0x1000));
 		assertEquals(0x100000000L ^ 0x1000L, Ops.xor(null, 0x100000000L, 0x1000));
+		assertEquals(0x100000000L % 0x999L, Ops.mod(null, 0x100000000L, 0x999));
 	}
 
 	@Test

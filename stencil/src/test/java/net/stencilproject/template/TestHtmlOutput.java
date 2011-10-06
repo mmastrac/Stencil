@@ -16,7 +16,6 @@ public class TestHtmlOutput extends AbstractTemplateTest {
 	@Test
 	public void testBrTags() throws TemplateParserException, IOException {
 		Template template = parseHtml("Break tags rock<br/>Just kidding");
-		System.out.println(template);
 
 		assertEquals("Break tags rock<br />Just kidding", template.process(null));
 	}
@@ -28,8 +27,6 @@ public class TestHtmlOutput extends AbstractTemplateTest {
 	public void testScriptCDATAInHtml() throws TemplateParserException {
 		Template template = parseHtml("<script><![CDATA[alert('a&b');]]></script>");
 
-		System.out.println(template);
-
 		assertEquals("<script>alert('a&b');</script>", template.process(null));
 	}
 
@@ -39,8 +36,6 @@ public class TestHtmlOutput extends AbstractTemplateTest {
 	@Test
 	public void testCDATAInHtml() throws TemplateParserException {
 		Template template = parseHtml("<p><![CDATA[a&b]]></p>");
-
-		System.out.println(template);
 
 		assertEquals("<p>a&amp;b</p>", template.process(null));
 	}

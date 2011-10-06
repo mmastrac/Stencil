@@ -82,6 +82,18 @@ public class Ops {
 		return Types.toLong(ctx, value1) * Types.toLong(ctx, value2);
 	}
 
+	public static Object mod(TemplateContext ctx, Object value1, final Object value2) {
+		TypeCode type1 = Types.getTypeCode(ctx, value1);
+		TypeCode type2 = Types.getTypeCode(ctx, value2);
+
+		// Promote to double
+		if (type1 == TypeCode.DOUBLE || type2 == TypeCode.DOUBLE) {
+			return Types.toDouble(ctx, value1) % Types.toDouble(ctx, value2);
+		}
+
+		return Types.toLong(ctx, value1) % Types.toLong(ctx, value2);
+	}
+
 	public static Object binaryPlus(TemplateContext ctx, Object value1, final Object value2) {
 		TypeCode type1 = Types.getTypeCode(ctx, value1);
 		TypeCode type2 = Types.getTypeCode(ctx, value2);

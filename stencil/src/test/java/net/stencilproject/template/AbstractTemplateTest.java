@@ -5,8 +5,8 @@ import java.io.IOException;
 public abstract class AbstractTemplateTest {
 	private TemplateOptions getTemplateOptions() {
 		TemplateOptions options = new TemplateOptions();
-		options.setDumpTemplate(true);
-		options.setTraceExecution(true);
+		options.setDumpTemplate(false);
+		options.setTraceExecution(false);
 		return options;
 	}
 

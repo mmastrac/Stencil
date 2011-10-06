@@ -4,40 +4,40 @@
 <h1>Stencil: Simple Templating for Java</h1>
 
 <ol>
-	<li><a href="#introduction">Introduction</a></li>
-	<li><a href="#basics">Basics</a></li>
-	<ol>
-		<li><a href="#print-blocks">Print blocks</a></li>
-		<li><a href="#statement-blocks">Statement blocks</a></li>
-		<li><a href="#comment-blocks">Comment blocks</a></li>
-		<li><a href="#escaping">Escaping</a></li>
-	</ol>
-	<li><a href="#xml">XML Templates</a></li>
-	<li><a href="#expressions">Expressions</a></li>
-	<ol>
-		<li><a href="#numbers">Numbers</a></li>
-		<li><a href="#strings">Strings</a></li>
-		<li><a href="#lists">Lists</a></li>
-		<li><a href="#maps">Maps</a></li>
-		<li><a href="#ranges">Ranges</a></li>
-		<li><a href="#properties">Properties</a></li>
-		<li><a href="#filters">Filters</a></li>
-		<li><a href="#math-operators">Math Operators</a></li>
-		<li><a href="#boolean-operators">Boolean Operators</a></li>
-		<li><a href="#bitwise-operators">Bitwise Operators</a></li>
-		<li><a href="#comparison-operators">Comparison Operators</a></li>
-		<li><a href="#conditional-operator">Conditional Operator</a></li>
-		<li><a href="#in-operator">In Operator</a></li>
-	</ol>
-	<li><a href="#statements">Statements</a></li>
-	<ol>
-		<li><a href="#if">if</a></li>
-		<li><a href="#for">for</a></li>
-		<li><a href="#var">var</a></li>
-		<li><a href="#assignment">Assignment</a></li>
-		<li><a href="#print">Print</a></li>
-	</ol>
-	<li><a href="#variables">Variables</a></li>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#basics">Basics</a></li>
+    <ol>
+        <li><a href="#print-blocks">Print blocks</a></li>
+        <li><a href="#statement-blocks">Statement blocks</a></li>
+        <li><a href="#comment-blocks">Comment blocks</a></li>
+        <li><a href="#escaping">Escaping</a></li>
+    </ol>
+    <li><a href="#xml">XML Templates</a></li>
+    <li><a href="#expressions">Expressions</a></li>
+    <ol>
+        <li><a href="#numbers">Numbers</a></li>
+        <li><a href="#strings">Strings</a></li>
+        <li><a href="#lists">Lists</a></li>
+        <li><a href="#maps">Maps</a></li>
+        <li><a href="#ranges">Ranges</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#filters">Filters</a></li>
+        <li><a href="#math-operators">Math Operators</a></li>
+        <li><a href="#boolean-operators">Boolean Operators</a></li>
+        <li><a href="#bitwise-operators">Bitwise Operators</a></li>
+        <li><a href="#comparison-operators">Comparison Operators</a></li>
+        <li><a href="#conditional-operator">Conditional Operator</a></li>
+        <li><a href="#in-operator">In Operator</a></li>
+    </ol>
+    <li><a href="#statements">Statements</a></li>
+    <ol>
+        <li><a href="#if">if</a></li>
+        <li><a href="#for">for</a></li>
+        <li><a href="#var">var</a></li>
+        <li><a href="#assignment">Assignment</a></li>
+        <li><a href="#print">Print</a></li>
+    </ol>
+    <li><a href="#variables">Variables</a></li>
 </ol>
 
 <h2 id="introduction">Introduction</h2>
@@ -64,16 +64,16 @@ commands in specially delimited blocks. There are four kinds of blocks:
 </p>
 
 <ol>
-	<li><a href="#print-blocks">Print blocks</a>, surrounded by <code>{{</code>
-	and <code>}}</code>, which are used to print values into the output.</li>
-	<li><a href="#statement-blocks">Statement blocks</a>, surrounded
-	by <code>{%</code> and <code>%}</code>, which are used to control the
-	flow of execution in the template.</li>
-	<li><a href="#comment-blocks">Comment blocks</a>, surrounded by <code>{#</code>
-	and <code>#}</code>, which are ignored in the final output.</li>
-	<li><a href="#escaping">Escape blocks</a>, surrounded by <code>{%%%</code>
-	and <code>%%%}</code>, which are used to escape blocks that contain
-	content that looks like special Stencil syntax</li>
+    <li><a href="#print-blocks">Print blocks</a>, surrounded by <code>{{</code>
+    and <code>}}</code>, which are used to print values into the output.</li>
+    <li><a href="#statement-blocks">Statement blocks</a>, surrounded
+    by <code>{%</code> and <code>%}</code>, which are used to control the
+    flow of execution in the template.</li>
+    <li><a href="#comment-blocks">Comment blocks</a>, surrounded by <code>{#</code>
+    and <code>#}</code>, which are ignored in the final output.</li>
+    <li><a href="#escaping">Escape blocks</a>, surrounded by <code>{%%%</code>
+    and <code>%%%}</code>, which are used to escape blocks that contain
+    content that looks like special Stencil syntax</li>
 </ol>
 
 <h3 id="print-blocks">Print Blocks</h3>
@@ -237,62 +237,62 @@ quotes are used for the string and vice-versa:</p>
 backslash itself:</p>
 
 <table>
-	<tr>
-		<th>Escape Code</th>
-		<th>Equivalent</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>\\</td>
-		<td>\</td>
-		<td>Backslash</td>
-	</tr>
-	<tr>
-		<td>\"</td>
-		<td>"</td>
-		<td>Double quote</td>
-	</tr>
-	<tr>
-		<td>\'</td>
-		<td>'</td>
-		<td>Single quote</td>
-	</tr>
+    <tr>
+        <th>Escape Code</th>
+        <th>Equivalent</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>\\</td>
+        <td>\</td>
+        <td>Backslash</td>
+    </tr>
+    <tr>
+        <td>\"</td>
+        <td>"</td>
+        <td>Double quote</td>
+    </tr>
+    <tr>
+        <td>\'</td>
+        <td>'</td>
+        <td>Single quote</td>
+    </tr>
 </table>
 
 
 <p>Control characters may also be specified using shortcuts:</p>
 
 <table>
-	<tr>
-		<th>Escape Code</th>
-		<th>Equivalent</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>\b</td>
-		<td>\u0008</td>
-		<td>Horizontal backspace</td>
-	</tr>
-	<tr>
-		<td>\t</td>
-		<td>\u0009</td>
-		<td>Horizontal tab</td>
-	</tr>
-	<tr>
-		<td>\n</td>
-		<td>\u000a</td>
-		<td>Linefeed</td>
-	</tr>
-	<tr>
-		<td>\f</td>
-		<td>\u000c</td>
-		<td>Form feed</td>
-	</tr>
-	<tr>
-		<td>\r</td>
-		<td>\u000d</td>
-		<td>Carriage return</td>
-	</tr>
+    <tr>
+        <th>Escape Code</th>
+        <th>Equivalent</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>\b</td>
+        <td>\u0008</td>
+        <td>Horizontal backspace</td>
+    </tr>
+    <tr>
+        <td>\t</td>
+        <td>\u0009</td>
+        <td>Horizontal tab</td>
+    </tr>
+    <tr>
+        <td>\n</td>
+        <td>\u000a</td>
+        <td>Linefeed</td>
+    </tr>
+    <tr>
+        <td>\f</td>
+        <td>\u000c</td>
+        <td>Form feed</td>
+    </tr>
+    <tr>
+        <td>\r</td>
+        <td>\u000d</td>
+        <td>Carriage return</td>
+    </tr>
 </table>
 
 <p>Strings containing many escape characters may use the alternative
@@ -385,7 +385,7 @@ Item at index 4
 
 <p>Stencil allows you to specify a list literal directly in the code
 using the list syntax. The list literals can be used with the <a
-	href="#for">for</a> statement:</p>
+    href="#for">for</a> statement:</p>
 
 <pre class="example">
 <pre class="source">
@@ -514,62 +514,62 @@ filter to invoke.</p>
 strings and more.</p>
 
 <table>
-	<tr>
-		<th>Name</th>
-		<th>Description</th>
-		<th>Example</th>
-	</tr>
-	<tr>
-		<td>raw</td>
-		<td>Converts the input into a raw string, bypassing HTML escaping</td>
-		<td><code>"&amp;nbsp;"|raw</code></td>
-	</tr>
-	<tr>
-		<td>escape</td>
-		<td>Converts the input into a raw string, HTML escaping along the
-		way</td>
-		<td><code>"&lt;div&gt;"|escape</code></td>
-	</tr>
-	<tr>
-		<td>urlencode</td>
-		<td>URL-encodes the given string</td>
-		<td><code>'urlunsafe%#'|urlencode</code></td>
-	</tr>
-	<tr>
-		<td>string</td>
-		<td>Converts the input into a regular string</td>
-		<td><code>1234|string</code></td>
-	</tr>
-	<tr>
-		<td>int</td>
-		<td>Converts the input into an integer, or null if it can't be
-		converted</td>
-		<td><code>"1234"|int</code></td>
-	</tr>
-	<tr>
-		<td>float</td>
-		<td>Converts the input into a float, or null if it can't be
-		converted</td>
-		<td><code>"1234.1"|float</code></td>
-	</tr>
-	<tr>
-		<td>size</td>
-		<td>Retrieves the size of the input (string or array length)</td>
-		<td><code>[1,2,3]|size</code></td>
-	</tr>
-	<tr>
-		<td>join</td>
-		<td>Joins a collection of items together</td>
-		<td><code>[1,2,3]|join</code></td>
-	</tr>
-	<tr>
-		<td>format</td>
-		<td>Formats a string from the passed array or singular object
-		using the <a
-			href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Formatter.html">Java
-		formatting rules</a></td>
-		<td><code>[1,2,'a']|format("%d/%d: %s")</code></td>
-	</tr>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>raw</td>
+        <td>Converts the input into a raw string, bypassing HTML escaping</td>
+        <td><code>"&amp;nbsp;"|raw</code></td>
+    </tr>
+    <tr>
+        <td>escape</td>
+        <td>Converts the input into a raw string, HTML escaping along the
+        way</td>
+        <td><code>"&lt;div&gt;"|escape</code></td>
+    </tr>
+    <tr>
+        <td>urlencode</td>
+        <td>URL-encodes the given string</td>
+        <td><code>'urlunsafe%#'|urlencode</code></td>
+    </tr>
+    <tr>
+        <td>string</td>
+        <td>Converts the input into a regular string</td>
+        <td><code>1234|string</code></td>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td>Converts the input into an integer, or null if it can't be
+        converted</td>
+        <td><code>"1234"|int</code></td>
+    </tr>
+    <tr>
+        <td>float</td>
+        <td>Converts the input into a float, or null if it can't be
+        converted</td>
+        <td><code>"1234.1"|float</code></td>
+    </tr>
+    <tr>
+        <td>size</td>
+        <td>Retrieves the size of the input (string or array length)</td>
+        <td><code>[1,2,3]|size</code></td>
+    </tr>
+    <tr>
+        <td>join</td>
+        <td>Joins a collection of items together</td>
+        <td><code>[1,2,3]|join</code></td>
+    </tr>
+    <tr>
+        <td>format</td>
+        <td>Formats a string from the passed array or singular object
+        using the <a
+            href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Formatter.html">Java
+        formatting rules</a></td>
+        <td><code>[1,2,'a']|format("%d/%d: %s")</code></td>
+    </tr>
 </table>
 
 <h3 id="math-operators">Math Operators</h3>
@@ -584,31 +584,31 @@ TODO
 performing the operations.</p>
 
 <table>
-	<tr>
-		<th>Symbol</th>
-		<th>Description</th>
-		<th>Example</th>
-	</tr>
-	<tr>
-		<td>and</td>
-		<td>Boolean AND</td>
-		<td>true and true</td>
-	</tr>
-	<tr>
-		<td>or</td>
-		<td>Boolean OR</td>
-		<td>true or false</td>
-	</tr>
-	<tr>
-		<td>^</td>
-		<td>Boolean XOR</td>
-		<td>true ^ false</td>
-	</tr>
-	<tr>
-		<td>not</td>
-		<td>Boolean NOT</td>
-		<td>not false</td>
-	</tr>
+    <tr>
+        <th>Symbol</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>and</td>
+        <td>Boolean AND</td>
+        <td>true and true</td>
+    </tr>
+    <tr>
+        <td>or</td>
+        <td>Boolean OR</td>
+        <td>true or false</td>
+    </tr>
+    <tr>
+        <td>^</td>
+        <td>Boolean XOR</td>
+        <td>true ^ false</td>
+    </tr>
+    <tr>
+        <td>not</td>
+        <td>Boolean NOT</td>
+        <td>not false</td>
+    </tr>
 </table>
 
 <h3 id="bitwise-operators">Bitwise Operators</h3>
@@ -617,41 +617,41 @@ performing the operations.</p>
 performing the operations.</p>
 
 <table>
-	<tr>
-		<th>Symbol</th>
-		<th>Description</th>
-		<th>Example</th>
-	</tr>
-	<tr>
-		<td>and</td>
-		<td>Bitwise AND</td>
-		<td>1234 and 7</td>
-	</tr>
-	<tr>
-		<td>or</td>
-		<td>Bitwise OR</td>
-		<td>1234 or 7</td>
-	</tr>
-	<tr>
-		<td>^</td>
-		<td>Bitwise XOR</td>
-		<td>1234 ^ 7</td>
-	</tr>
-	<tr>
-		<td>~</td>
-		<td>Bitwise ones-compliment</td>
-		<td>~1234</td>
-	</tr>
-	<tr>
-		<td>&lt;&lt;</td>
-		<td>Bitwise left-shift</td>
-		<td>1234 &lt;&lt; 2</td>
-	</tr>
-	<tr>
-		<td>&gt;&gt;</td>
-		<td>Bitwise right-shift</td>
-		<td>1234 &gt;&gt; 2</td>
-	</tr>
+    <tr>
+        <th>Symbol</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>and</td>
+        <td>Bitwise AND</td>
+        <td>1234 and 7</td>
+    </tr>
+    <tr>
+        <td>or</td>
+        <td>Bitwise OR</td>
+        <td>1234 or 7</td>
+    </tr>
+    <tr>
+        <td>^</td>
+        <td>Bitwise XOR</td>
+        <td>1234 ^ 7</td>
+    </tr>
+    <tr>
+        <td>~</td>
+        <td>Bitwise ones-compliment</td>
+        <td>~1234</td>
+    </tr>
+    <tr>
+        <td>&lt;&lt;</td>
+        <td>Bitwise left-shift</td>
+        <td>1234 &lt;&lt; 2</td>
+    </tr>
+    <tr>
+        <td>&gt;&gt;</td>
+        <td>Bitwise right-shift</td>
+        <td>1234 &gt;&gt; 2</td>
+    </tr>
 </table>
 
 
@@ -662,39 +662,39 @@ values. For all comparisons, a set of conversions will happen
 internally:</p>
 
 <ul>
-	<li>A null value will always compare less than any other value and
-	equal to another null value</li>
-	<li>If one of the arguments is a string, the two arguments are
-	compared using their string equivalents</li>
-	<li>Otherwise, the two arguments are compared as floats</li>
+    <li>A null value will always compare less than any other value and
+    equal to another null value</li>
+    <li>If one of the arguments is a string, the two arguments are
+    compared using their string equivalents</li>
+    <li>Otherwise, the two arguments are compared as floats</li>
 </ul>
 
 <table>
-	<tr>
-		<th>Symbol</th>
-		<th>Description</th>
-		<th>Example</th>
-	</tr>
-	<tr>
-		<td>&lt;</td>
-		<td>Less-than</td>
-		<td>2 &lt; 3</td>
-	</tr>
-	<tr>
-		<td>&gt;</td>
-		<td>Greater-than</td>
-		<td>3 &gt; 2</td>
-	</tr>
-	<tr>
-		<td>==</td>
-		<td>Equals</td>
-		<td>2 == 2</td>
-	</tr>
-	<tr>
-		<td>==</td>
-		<td>Not-equals</td>
-		<td>3 != 2</td>
-	</tr>
+    <tr>
+        <th>Symbol</th>
+        <th>Description</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td>&lt;</td>
+        <td>Less-than</td>
+        <td>2 &lt; 3</td>
+    </tr>
+    <tr>
+        <td>&gt;</td>
+        <td>Greater-than</td>
+        <td>3 &gt; 2</td>
+    </tr>
+    <tr>
+        <td>==</td>
+        <td>Equals</td>
+        <td>2 == 2</td>
+    </tr>
+    <tr>
+        <td>==</td>
+        <td>Not-equals</td>
+        <td>3 != 2</td>
+    </tr>
 </table>
 
 <h3 id="conditional-operator">Conditional Operator</h3>
@@ -778,6 +778,15 @@ execution of the template based on values of the input.</p>
 
 <h3 id="if">if</h3>
 
+Syntax:
+<pre class="syntax">
+{% if <span class="placeholder">expression</span></span> 
+[{% elif %} ...]
+[{% elif %} ...]
+[{% else %} ...]
+{% end %}
+</pre>
+
 <p>An <code>if</code> block will optionally render a part of the
 template, based on a condition expression. The result of the condition
 expression is coerced to a boolean.</p>
@@ -834,6 +843,28 @@ What's wrong?
 </pre>
 </pre>
 
+<p>An if block test will fail if you pass an empty list. This is useful for rendering lists
+with empty alternatives:
+
+<pre class="example">
+<pre class="source">
+{% if person.emailAddresses %}
+    &lt;ul&gt;
+        {% for x in person.emailAddresses %}
+             &lt;li&gt;{{ x }}&lt;/li&gt;
+        {% else %}
+             &lt;li&gt;Nothing!&lt;/li&gt;
+        {% end %}
+    &lt;/ul&gt;
+{% else %}
+&lt;p&gt;No email addresses&lt;/p&gt;
+{% end %}
+</pre>
+<pre class="output">
+No email addresses
+</pre>
+</pre>
+
 <h2 id="for">for</h2>
 
 <p>A <code>for</code> block can be used to loop over a collection of
@@ -845,6 +876,9 @@ Syntax:
     [where <span class="placeholder">where_expression</span>] 
     [order by <span class="placeholder">order_expression</span>] 
     [limit <span class="placeholder">limit_expression</span>] %}
+[{% join %} ...]
+[{% else %} ...]
+{% end %}
 </pre>
 
 <pre class="example">
@@ -874,6 +908,17 @@ Hello, {% for x in person.name %}[{{ x }}]{% end %}!
 </pre>
 <pre class="output">
 Hello, [B][o][b]!
+</pre>
+</pre>
+
+<p>Use the join block to specify a pattern to fill in between items:</p>
+
+<pre class="example">
+<pre class="source">
+Hello, {% for x in people %}{{ x }}{% join %}, {% end %}!
+</pre>
+<pre class="output">
+Hello, Bob, Mary, Judy, Anna!
 </pre>
 </pre>
 
