@@ -355,8 +355,15 @@ public class Ops {
 			if (childKey != null && !StringUtils.isEmpty(childKey)) {
 				final Class<? extends Object> clazz = target.getClass();
 
-				final String methodName = "get" + Character.toUpperCase(childKey.charAt(0)) + childKey.substring(1);
-				CachedMethodInfo method = ReflectionCache.INSTANCE.getMethod(clazz, methodName);
+				// TODO: Save these class/property hits in a weak/soft cache
+
+				String camelCased = Character.toUpperCase(childKey.charAt(0)) + childKey.substring(1);
+				CachedMethodInfo method = ReflectionCache.INSTANCE.getMethod(clazz, "get" + camelCased);
+				if (method != null) {
+					return safeInvoke(ctx, method, target);
+				}
+
+				method = ReflectionCache.INSTANCE.getMethod(clazz, "is" + camelCased);
 				if (method != null) {
 					return safeInvoke(ctx, method, target);
 				}
@@ -369,7 +376,6 @@ public class Ops {
 					}
 					return ctx.processObject(field.get(target));
 				}
-
 			}
 
 			if (ReflectionCache.INSTANCE.getMethod(target.getClass(), childKey) != null) {

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 
+import net.stencilproject.template.otherpackage.BooleanPropertyObject;
 import net.stencilproject.template.otherpackage.NonPublicObjectFactory;
 
 import org.junit.Test;
@@ -11,6 +12,15 @@ import org.junit.Test;
 import com.google.common.collect.Maps;
 
 public class TestReflection extends AbstractTemplateTest {
+	@Test
+	public void testBooleanProperties() throws TemplateParserException {
+		Template template = parse("{{ x.boolean1 }} {{ x.boolean2 }} {{ x.boolean3 }}");
+
+		HashMap<String, Object> mapModel = Maps.newHashMap();
+		mapModel.put("x", new BooleanPropertyObject());
+		assertEquals("true true true", template.process(mapModel));
+	}
+
 	@Test
 	public void testPackageProtectedObject() throws TemplateParserException {
 		Template template = parse("{{ x.value }} {{ x.field }} {{ x.privateField }}");
