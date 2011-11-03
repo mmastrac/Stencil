@@ -48,38 +48,36 @@ public class TemplateParserException extends Exception {
 		EXTENDS_LOCATION,
 	}
 
-	public TemplateParserException(TemplateError error, URL file) {
-		super();
-		this.error = error;
-		this.file = file;
-	}
-
-	public TemplateParserException(TemplateError error, String message, Throwable cause, URL file) {
-		super(message, cause);
-		this.error = error;
-		this.file = file;
-	}
-
 	public TemplateParserException(TemplateError error, String message, URL file) {
-		super(message);
+		super(getUrlString(file) + ' ' + message);
 		this.error = error;
 		this.file = file;
 	}
 
 	public TemplateParserException(TemplateError error, Throwable cause, URL file) {
-		super(cause);
+		super(getUrlString(file) + " exception", cause);
+		this.error = error;
+		this.file = file;
+	}
+
+	public TemplateParserException(TemplateError error, Throwable cause, String message, URL file) {
+		super(getUrlString(file) + ' ' + message, cause);
 		this.error = error;
 		this.file = file;
 	}
 
 	public TemplateParserException(TemplateError error, String message, URL file, int line, int charPositionInLine) {
-		this(error, getUrlString(file) + line + ':' + charPositionInLine + ' ' + message, file);
+		super(getUrlString(file) + line + ':' + charPositionInLine + ' ' + message);
+		this.error = error;
+		this.file = file;
 		this.line = line;
 		this.charPositionInLine = charPositionInLine;
 	}
 
 	public TemplateParserException(TemplateError error, Exception e, String message, URL file, int line, int charPositionInLine) {
-		this(error, getUrlString(file) + line + ':' + charPositionInLine + ' ' + message, e, file);
+		super(getUrlString(file) + line + ':' + charPositionInLine + ' ' + message, e);
+		this.error = error;
+		this.file = file;
 		this.line = line;
 		this.charPositionInLine = charPositionInLine;
 	}

@@ -15,7 +15,7 @@ public class TestHtmlOutput extends AbstractTemplateTest {
 	 */
 	@Test
 	public void testBrTags() throws TemplateParserException, IOException {
-		Template template = parseHtml("Break tags rock<br/>Just kidding");
+		Template template = parseHtml("Break tags rock<br />Just kidding");
 
 		assertEquals("Break tags rock<br />Just kidding", template.process(null));
 	}

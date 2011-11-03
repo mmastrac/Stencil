@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.stencilproject.template.TemplateParserException.TemplateError;
+import net.stencilproject.template.xml.NotWellFormedException;
 
 import org.antlr.runtime.MismatchedTokenException;
 import org.antlr.runtime.RecognitionException;
@@ -52,6 +53,10 @@ abstract class BaseParser {
 			}
 
 			throw new TemplateParserException(error, e, message, rootUrl, line, charPositionInLine);
+		}
+
+		if (e instanceof NotWellFormedException) {
+			throw new TemplateParserException(error, e, e.getMessage(), rootUrl);
 		}
 
 		throw new TemplateParserException(error, e, rootUrl);
